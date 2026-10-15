@@ -63,7 +63,7 @@ const D=[
 const $=s=>document.querySelector(s);
 const ZH={ui:{h1:"✈️ 我們去哪裡？2026年12月5–13日",sub:"從紐華克（EWR）出發的來回行程。12月5日（週六）出發，當地停留7整天（12月6–12日），12月13日（週日）返程。",cmp:"快速比較",
 note:"天氣為12月上旬的典型平均值，並非天氣預報，請臨近出發時再查看。機票按鈕會開啟 Google Flights 的12月5–13日來回票價即時搜尋（1位乘客）。預訂前請確認票價包含1件隨身行李；部分最便宜的票價不含（例如漢莎集團的 Economy Basic，以及法荷航部分歐洲航線的 Basic 票價，包括布拉格和維也納）。布拉格＋維也納的按鈕搜尋的是布拉格來回；若要布拉格入境、維也納出境，請使用 Google Flights 的多城市功能。",
-rows:["典型天氣","特色"],live:"✈️ 搜尋12月5–13日即時票價 →",pros:"優點",cons:"缺點",it:"7天行程",attr:"著名景點與體驗"},
+rows:["典型天氣","特色"],live:"搜尋12月5–13日即時票價 →",pros:"優點",cons:"缺點",it:"7天行程",attr:"著名景點與體驗"},
 dest:{
 lyon:{name:"法國里昂",vibe:"美食之都、燈光節、適合步行的老城",wx:"最高約45°F（7°C），最低約34°F（1°C）。偏涼，常有霧或細雨。",
 pros:["歐洲頂級美食城市：傳統小酒館（bouchon）、保羅·博古斯大廳市場","燈光節通常在12月8日前後舉行，請確認日期","城市緊湊、適合步行，方便一日遊（安納西、薄酒萊、佩魯日）","冬季遊客較少"],
@@ -87,7 +87,7 @@ days:["週六/週日：抵達布拉格，老城廣場市集","布拉格城堡與
 links:[["布拉格城堡","城堡建築群"],["布拉格聖誕市集","布拉格旅遊局"],["美泉宮","皇家宮殿"],["維也納聖誕市集","維也納旅遊局"],["美景宮","宮殿與藝術博物館"]]}}};
 const EN={h1:$("#h1").textContent,sub:$("#sub").textContent,cmp:$("#cmpt").textContent,
 note:"Weather = typical early-December averages, not a forecast; check closer to the trip. The fare buttons open a live Google Flights round-trip search for Dec 5–13 (1 passenger). Before booking, confirm the fare includes 1 carry-on bag; some of the cheapest fares don't (for example Lufthansa Group's Economy Basic and Air France-KLM's Basic fare on some European routes, including Prague and Vienna). The Prague + Vienna button searches a Prague round trip; for Prague in, Vienna out, use Google Flights' multi-city option.",
-rows:["Typical weather","Vibe"],live:"✈️ Search live fares for Dec 5–13 →",pros:"Pros",cons:"Cons",it:"7-day itinerary",attr:"Notable attractions & things to do"};
+rows:["Typical weather","Vibe"],live:"Search live fares for Dec 5–13 →",pros:"Pros",cons:"Cons",it:"7-day itinerary",attr:"Notable attractions & things to do"};
 let L="en";
 const tr=d=>{if(L!=="zh")return d;const z=ZH.dest[d.id];return {...d,...z,links:d.links.map((l,i)=>[z.links[i][0],z.links[i][1],l[2]])}};
 function render(){
@@ -100,9 +100,9 @@ function render(){
 <div class="hero" style="background:${d.bg}" role="img" aria-label="${d.name}">${d.emoji}</div>
 <h2>${d.name}</h2><p class="sub" style="margin:0 0 8px">${d.vibe}</p>
 <span class="chip">🌤️ ${d.wx}</span>
-<p><a class="live" href="${d.flight}" target="_blank" rel="noopener">${u.live}</a></p>
+<p class="livewrap"><span class="plane" aria-hidden="true">✈️</span><a class="live" href="${d.flight}" target="_blank" rel="noopener">${u.live}</a></p>
 <div class="grid"><div><h3>${u.pros}</h3><ul class="pro">${d.pros.map(x=>`<li>${x}</li>`).join("")}</ul></div><div><h3>${u.cons}</h3><ul class="con">${d.cons.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>
-<details><summary>📅 ${u.it}</summary><ol>${d.days.map(x=>`<li>${x}</li>`).join("")}</ol></details>
+<details><summary><span><span class="cal">📅</span>${u.it}</span></summary><ol>${d.days.map(x=>`<li>${x}</li>`).join("")}</ol></details>
 <h3>${u.attr}</h3><div class="attr">${d.links.map(l=>`<a href="${l[2]}" target="_blank" rel="noopener">${l[0]} ↗<span>${l[1]}</span></a>`).join("")}</div>
 </article>`).join("");
 }
