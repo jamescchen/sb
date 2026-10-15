@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dec 5–13 Trip Options from Newark (EWR)</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>✈️</text></svg>">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main>
+<h1 id="h1">✈️ Where should we go? Dec 5–13, 2026</h1>
+<p class="sub" id="sub">Round trip from Newark (EWR). Fly out Sat Dec 5, 7 full days on the ground (Dec 6–12), fly home Sun Dec 13.</p>
+
+<section class="card">
+  <div class="lang" role="group" aria-label="Language"><button id="l-en" type="button">English</button><button id="l-zh" type="button">繁體中文</button></div>
+</section>
+
+<section class="card">
+  <h2 id="cmpt">Quick comparison</h2>
+  <div class="scroll"><table id="cmp"></table></div>
+  <p class="note" id="cnote">Weather = typical early-December averages, not a forecast; check closer to the trip. Fares = lowest recent round-trip sightings from EWR on aggregator sites (Kayak, Expedia, Travelocity, Skyscanner and similar), not quotes for Dec 5–13 exactly. Prices move daily, so use the live-search links. All fares are round trip, per person, and assume 1 carry-on bag plus a personal item. Most transatlantic fares include a carry-on, but some of the cheapest fares don't (for example Lufthansa Group's Economy Basic and Air France-KLM's Basic fare on some European routes, including Prague and Vienna), so confirm a carry-on is included before booking and add the bag fee if it isn't.</p>
+</section>
+
+<div id="dest"></div>
+</main>
+
+<script>
+const D=[
+{id:"lyon",name:"Lyon, France",emoji:"🇫🇷 🍷 🕯️",bg:"linear-gradient(135deg,#f6d365,#fda085)",
+ vibe:"Food capital, lights festival, and a walkable old town",
+ wx:"Highs ~45°F (7°C), lows ~34°F (1°C). Cool, often foggy or drizzly.",
+ flight:"https://www.google.com/travel/flights?q=Flights%20from%20EWR%20to%20LYS%20on%202026-12-05%20through%202026-12-13",
+ pros:["Among the best food cities in Europe: bouchons, Les Halles market","Fête des Lumières (festival of lights) usually runs around Dec 8; confirm dates","Compact and walkable; easy day trips (Annecy, Beaujolais, Pérouges)","Fewer tourists in winter"],
+ cons:["Chilly, grey, damp weather","No nonstop flights","Fewer headline landmarks than the other options","Lights festival crowds can spike prices"],
+ days:["Sat/Sun: Arrive, Presqu'île stroll, dinner at a bouchon","Vieux Lyon & traboules, Fourvière basilica","Les Halles Paul Bocuse market + cooking class","Fête des Lumières evening (if dates align)","Day trip: Annecy lakeside old town","Day trip: Beaujolais wine villages","Croix-Rousse silk district, museums, farewell dinner"],
+ links:[["Fête des Lumières","Festival of lights, usually around Dec 8","https://www.fetedeslumieres.lyon.fr"],["Basilique Notre-Dame de Fourvière","Hilltop basilica with city views","https://www.fourviere.org"],["Les Halles de Lyon Paul Bocuse","Indoor food market","https://www.halles-de-lyon-paulbocuse.com"],["Visit Lyon","Official tourism site","https://www.lyon-france.com"]]},
+{id:"belize",name:"Belize",emoji:"🇧🇿 🐠 🌴",bg:"linear-gradient(135deg,#43e97b,#38f9d7)",
+ vibe:"Reef, jungle ruins and warm-weather escape",
+ wx:"Highs ~82°F (28°C), lows ~70°F (21°C). Start of dry season; some passing showers.",
+ flight:"https://www.google.com/travel/flights?q=Flights%20from%20EWR%20to%20BZE%20on%202026-12-05%20through%202026-12-13",
+ pros:["Only warm-weather option: beach, snorkeling, diving","Nonstop flight available from Newark (about 4 hours)","Mayan ruins, cave tubing, jungle wildlife","English is the official language"],
+ cons:["December is peak season: higher fares and lodging","Local transfers and tours add cost","Less city culture and nightlife","Check health and entry requirements"],
+ days:["Sat/Sun: Arrive Belize City, transfer to Caye Caulker","Snorkel Hol Chan & Shark Ray Alley","Island day: Caye Caulker's Split, kayaking","Water taxi to the mainland, cave tubing near San Ignacio","Xunantunich Mayan ruins & zipline","Chocolate and jungle wildlife tour","Beach day, early flight prep"],
+ links:[["Travel Belize","Official tourism board","https://www.travelbelize.org"],["Great Blue Hole tours","Famed dive and flyover site","https://www.travelbelize.org/things-to-do/"],["Xunantunich","Mayan ceremonial center","https://www.travelbelize.org/things-to-do/"],["Caye Caulker","Laid-back island","https://www.travelbelize.org/destinations/"]]},
+{id:"andalusia",name:"Southern Spain (Andalusia)",emoji:"🇪🇸 🏰 🍊",bg:"linear-gradient(135deg,#ffecd2,#fcb69f)",
+ vibe:"Moorish palaces, tapas and mild winter sun",
+ wx:"Highs ~61–63°F (16–17°C), lows ~43–46°F (6–8°C). Mild, mostly sunny; Granada cooler.",
+ flight:"https://www.google.com/travel/flights?q=Flights%20from%20EWR%20to%20AGP%20on%202026-12-05%20through%202026-12-13",
+ pros:["Best winter weather in Europe, with sunshine","Alhambra, Seville Alcázar, Córdoba Mezquita","Excellent tapas and affordable dining","Trains link Málaga–Córdoba–Seville–Granada"],
+ cons:["Alhambra tickets can sell out; book early","Ground travel between cities eats time","Some nights are chilly","Many sights close early or on certain days"],
+ days:["Sat/Sun: Arrive Málaga, old town and Picasso Museum","Málaga: Alcazaba, tapas crawl","Train to Granada: Alhambra & Albaicín","Granada to Córdoba: Mezquita-Catedral","Córdoba to Seville: Alcázar & cathedral","Seville: Triana, flamenco show","Optional day trip to Ronda; evening flight prep"],
+ links:[["Alhambra, Granada","Book tickets well ahead","https://www.alhambra-patronato.es"],["Real Alcázar de Sevilla","Royal palace","https://www.alcazarsevilla.org"],["Mezquita-Catedral de Córdoba","Mosque-cathedral","https://mezquita-catedraldecordoba.es"],["Andalucía tourism","Official regional site","https://www.andalucia.org"]]},
+{id:"praguevienna",name:"Prague + Vienna",emoji:"🇨🇿 🇦🇹 🎄",bg:"linear-gradient(135deg,#a1c4fd,#c2e9fb)",
+ vibe:"Christmas markets, castles, coffeehouses and opera",
+ wx:"Prague highs ~37°F (3°C), lows ~28°F (-2°C); Vienna highs ~39°F (4°C), lows ~30°F (-1°C). Cold, grey, occasional snow.",
+ flight:"https://www.google.com/travel/flights?q=Flights%20from%20EWR%20to%20PRG%20on%202026-12-05%20through%202026-12-13",
+ pros:["Christmas markets are open in both cities","Two capitals, rich architecture and music","Two very different capitals in one trip","Train Prague to Vienna is about 4 hours"],
+ cons:["Coldest option; pack real winter gear","Dark by ~4:30pm","Christmas-market crowds on weekends","Splitting the week means a travel day"],
+ days:["Sat/Sun: Arrive Prague, Old Town Square market","Prague Castle & Charles Bridge","Josefov, Letná, beer hall dinner","Morning train to Vienna, Christmas market at the Rathaus","Schönbrunn Palace","Belvedere & Kunsthistorisches Museum","Coffeehouse, State Opera, final stroll"],
+ links:[["Prague Castle","Castle complex","https://www.hrad.cz"],["Prague Christmas Markets","Visit Prague","https://www.prague.eu"],["Schönbrunn Palace","Imperial palace","https://www.schoenbrunn.at"],["Vienna Christmas Markets","Vienna tourism","https://www.wien.info"],["Belvedere","Palace and art museum","https://www.belvedere.at"]]}
+];
+const $=s=>document.querySelector(s);
+const ZH={ui:{h1:"✈️ 我們去哪裡？2026年12月5–13日",sub:"從紐華克（EWR）出發的來回行程。12月5日（週六）出發，當地停留7整天（12月6–12日），12月13日（週日）返程。",cmp:"快速比較",
+note:"天氣為12月上旬的典型平均值，並非天氣預報，請臨近出發時再查看。機票按鈕會開啟 Google Flights 的12月5–13日來回票價即時搜尋（1位乘客）。預訂前請確認票價包含1件隨身行李；部分最便宜的票價不含（例如漢莎集團的 Economy Basic，以及法荷航部分歐洲航線的 Basic 票價，包括布拉格和維也納）。布拉格＋維也納的按鈕搜尋的是布拉格來回；若要布拉格入境、維也納出境，請使用 Google Flights 的多城市功能。",
+rows:["典型天氣","特色"],live:"✈️ 搜尋12月5–13日即時票價 →",pros:"優點",cons:"缺點",it:"7天行程",attr:"著名景點與體驗"},
+dest:{
+lyon:{name:"法國里昂",vibe:"美食之都、燈光節、適合步行的老城",wx:"最高約45°F（7°C），最低約34°F（1°C）。偏涼，常有霧或細雨。",
+pros:["歐洲頂級美食城市：傳統小酒館（bouchon）、保羅·博古斯大廳市場","燈光節通常在12月8日前後舉行，請確認日期","城市緊湊、適合步行，方便一日遊（安納西、薄酒萊、佩魯日）","冬季遊客較少"],
+cons:["天氣寒冷、陰沉、潮濕","沒有直飛航班","知名地標比其他選項少","燈光節期間人多，價格可能上漲"],
+days:["週六/週日：抵達，漫步半島區，在傳統小酒館晚餐","里昂老城與傳統暗廊，富維耶聖母院","保羅·博古斯大廳市場＋烹飪課","燈光節夜晚（如日期吻合）","一日遊：安納西湖畔老城","一日遊：薄酒萊葡萄酒村莊","紅十字山絲綢區、博物館、告別晚餐"],
+links:[["燈光節","通常在12月8日前後舉行的燈光節"],["富維耶聖母院","山頂聖殿，可俯瞰全城"],["保羅·博古斯里昂大廳","室內美食市場"],["里昂旅遊局","官方旅遊網站"]]},
+belize:{name:"貝里斯",vibe:"珊瑚礁、叢林遺跡與溫暖的度假勝地",wx:"最高約82°F（28°C），最低約70°F（21°C）。旱季開始，偶有陣雨。",
+pros:["唯一的溫暖選項：海灘、浮潛、潛水","紐華克有直飛航班（約4小時）","馬雅遺跡、洞穴漂流、叢林野生動物","官方語言為英語"],
+cons:["12月是旺季：機票和住宿更貴","當地接送和遊覽增加開銷","城市文化和夜生活較少","請確認健康與入境要求"],
+days:["週六/週日：抵達貝里斯城，轉往卡克島（Caye Caulker）","在霍爾陳海洋保護區和鯊魚魟魚灣浮潛","海島日：卡克島 The Split、划獨木舟","搭水上計程車回大陸，聖伊格納西奧附近洞穴漂流","Xunantunich 馬雅遺址與高空滑索","巧克力與叢林野生動物之旅","海灘日，準備返程"],
+links:[["貝里斯旅遊","官方旅遊局"],["大藍洞之旅","著名的潛水和飛越景點"],["Xunantunich","馬雅祭祀中心"],["卡克島","悠閒的小島"]]},
+andalusia:{name:"西班牙南部（安達魯西亞）",vibe:"摩爾式宮殿、塔帕斯與溫暖的冬日陽光",wx:"最高約61–63°F（16–17°C），最低約43–46°F（6–8°C）。溫和，多晴天；格拉納達更冷。",
+pros:["歐洲冬季最佳天氣，陽光充足","阿爾罕布拉宮、塞維亞王宮、哥多華清真寺","塔帕斯美食出色，用餐實惠","火車連接馬拉加–哥多華–塞維亞–格拉納達"],
+cons:["阿爾罕布拉宮門票可能售罄，需提前預訂","城市間交通耗時","部分夜晚較冷","許多景點關門早或特定日期閉館"],
+days:["週六/週日：抵達馬拉加，老城和畢卡索博物館","馬拉加：阿爾卡薩瓦城堡，塔帕斯美食巡遊","搭火車到格拉納達：阿爾罕布拉宮和阿爾拜辛區","格拉納達到哥多華：清真寺大教堂","哥多華到塞維亞：王宮和大教堂","塞維亞：特里亞納區，佛朗明哥演出","可選：隆達一日遊；傍晚準備返程"],
+links:[["格拉納達阿爾罕布拉宮","請提前訂票"],["塞維亞王宮","皇家宮殿"],["哥多華清真寺大教堂","清真寺兼大教堂"],["安達魯西亞旅遊","地區官方網站"]]},
+praguevienna:{name:"布拉格＋維也納",vibe:"聖誕市集、城堡、咖啡館與歌劇",wx:"布拉格最高約37°F（3°C），最低約28°F（-2°C）；維也納最高約39°F（4°C），最低約30°F（-1°C）。寒冷陰沉，偶有降雪。",
+pros:["兩座城市的聖誕市集均已開放","兩座首都，建築與音樂底蘊深厚","一趟旅行，兩座風格迥異的首都","布拉格到維也納搭火車約4小時"],
+cons:["最冷的選項，需要真正的冬裝","下午約4:30天就黑了","週末聖誕市集人多","一週分兩地，要多一個交通日"],
+days:["週六/週日：抵達布拉格，老城廣場市集","布拉格城堡與查理大橋","猶太區、萊特納公園，啤酒館晚餐","上午搭火車到維也納，市政廳聖誕市集","美泉宮","美景宮和藝術史博物館","咖啡館、國家歌劇院，最後漫步"],
+links:[["布拉格城堡","城堡建築群"],["布拉格聖誕市集","布拉格旅遊局"],["美泉宮","皇家宮殿"],["維也納聖誕市集","維也納旅遊局"],["美景宮","宮殿與藝術博物館"]]}}};
+const EN={h1:$("#h1").textContent,sub:$("#sub").textContent,cmp:$("#cmpt").textContent,
+note:"Weather = typical early-December averages, not a forecast; check closer to the trip. The fare buttons open a live Google Flights round-trip search for Dec 5–13 (1 passenger). Before booking, confirm the fare includes 1 carry-on bag; some of the cheapest fares don't (for example Lufthansa Group's Economy Basic and Air France-KLM's Basic fare on some European routes, including Prague and Vienna). The Prague + Vienna button searches a Prague round trip; for Prague in, Vienna out, use Google Flights' multi-city option.",
+rows:["Typical weather","Vibe"],live:"✈️ Search live fares for Dec 5–13 →",pros:"Pros",cons:"Cons",it:"7-day itinerary",attr:"Notable attractions & things to do"};
+let L="en";
+const tr=d=>{if(L!=="zh")return d;const z=ZH.dest[d.id];return {...d,...z,links:d.links.map((l,i)=>[z.links[i][0],z.links[i][1],l[2]])}};
+function render(){
+ const u=L==="zh"?ZH.ui:EN,T=["lyon","belize","praguevienna","andalusia"].map(id=>tr(D.find(d=>d.id===id)));
+ document.documentElement.lang=L==="zh"?"zh-Hant":"en";
+ $("#h1").textContent=u.h1;$("#sub").textContent=u.sub;$("#cmpt").textContent=u.cmp;$("#cnote").textContent=u.note;
+ $("#l-en").setAttribute("aria-pressed",L==="en");$("#l-zh").setAttribute("aria-pressed",L==="zh");
+ $("#cmp").innerHTML="<tr><th></th>"+T.map(d=>`<th>${d.name}</th>`).join("")+"</tr>"+[["wx",0],["vibe",1]].map(([k,i])=>`<tr><th>${u.rows[i]}</th>${T.map(d=>`<td>${d[k]}</td>`).join("")}</tr>`).join("");
+ $("#dest").innerHTML=T.map(d=>`<article class="card" id="${d.id}">
+<div class="hero" style="background:${d.bg}" role="img" aria-label="${d.name}">${d.emoji}</div>
+<h2>${d.name}</h2><p class="sub" style="margin:0 0 8px">${d.vibe}</p>
+<span class="chip">🌤️ ${d.wx}</span>
+<p><a class="live" href="${d.flight}" target="_blank" rel="noopener">${u.live}</a></p>
+<div class="grid"><div><h3>${u.pros}</h3><ul class="pro">${d.pros.map(x=>`<li>${x}</li>`).join("")}</ul></div><div><h3>${u.cons}</h3><ul class="con">${d.cons.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>
+<details><summary>📅 ${u.it}</summary><ol>${d.days.map(x=>`<li>${x}</li>`).join("")}</ol></details>
+<h3>${u.attr}</h3><div class="attr">${d.links.map(l=>`<a href="${l[2]}" target="_blank" rel="noopener">${l[0]} ↗<span>${l[1]}</span></a>`).join("")}</div>
+</article>`).join("");
+}
+$("#l-en").onclick=()=>{L="en";render()};$("#l-zh").onclick=()=>{L="zh";render()};
+render();
+</script>
+</body>
+</html>
