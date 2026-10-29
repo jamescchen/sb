@@ -13,12 +13,19 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 1.25rem; /* Increased font size for enhanced readability (~20px base) */
     }
+    /* Smooth transition for auto-hiding header on mobile */
+    .header-nav {
+      transition: transform 0.3s ease-in-out;
+    }
+    .header-nav.hide-header {
+      transform: translateY(-100%);
+    }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-full flex flex-col">
 
-  <!-- TOP BAR / HEADER (Lighter Clean Aesthetic) -->
-  <header class="sticky top-0 z-50 bg-slate-800/95 backdrop-blur-md border-b border-slate-700 shadow-xl">
+  <!-- TOP BAR / HEADER (Auto-hiding on mobile scroll) -->
+  <header id="main-header" class="header-nav sticky top-0 z-50 bg-slate-800/95 backdrop-blur-md border-b border-slate-700 shadow-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="flex items-center space-x-3 w-full md:w-auto justify-between md:justify-start">
         <div class="flex items-center space-x-3">
@@ -547,6 +554,28 @@
 
     // Initialize
     renderActiveItinerary();
+
+    // Scroll direction detector for mobile auto-hiding header
+    let lastScrollTop = 0;
+    const header = document.getElementById('main-header');
+    
+    window.addEventListener('scroll', function() {
+      // Only apply auto-hide behavior on mobile/smaller screens (width < 768px)
+      if (window.innerWidth < 768) {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop && scrollTop > 60) {
+          // Scrolling down -> hide header
+          header.classList.add('hide-header');
+        } else {
+          // Scrolling up -> show header
+          header.classList.remove('hide-header');
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      } else {
+        // Ensure header is always visible on tablet/desktop view
+        header.classList.remove('hide-header');
+      }
+    }, { passive: true });
   </script>
 </body>
 </html>
