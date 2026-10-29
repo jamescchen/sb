@@ -11,7 +11,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.985rem; /* Slightly increased font size (~15.75px) */
+      font-size: 1.15rem; /* Increased font size for optimal enhanced legibility (~18px) */
     }
   </style>
 </head>
@@ -146,142 +146,142 @@
     const data = {
       southwest: {
         hero: {
-          badge: { en: "Outbound: EWR ✈️ ELP | Return: SLC ✈️ EWR", zh: "去程：Newark ✈️ El Paso | 回程：Salt Lake City ✈️ Newark" },
-          title: { en: "US Southwest Grand National Parks Road Trip", zh: "美國西南四大國家公園壯麗公路之旅" },
+          badge: { en: "Outbound: EWR ✈️ SLC | Return: ELP ✈️ EWR", zh: "去程：Newark ✈️ 鹽湖城 | 回程：El Paso ✈️ Newark" },
+          title: { en: "US Southwest Grand National Parks Road Trip (Arches to White Sands)", zh: "美國西南國家公園壯麗公路之旅（由北向南：拱門至白沙）" },
           desc: {
-            en: "An iconic 9-day road trip starting in El Paso, traversing White Sands, Saguaro, Antelope Canyon, and concluding with 2 full days at Arches National Park before flying home from Salt Lake City.",
-            zh: "為期 9 天的經典西部公路之旅，從埃爾帕索（El Paso）出發，穿梭白沙、薩瓜羅、羚羊峽谷，並在拱門國家公園享有整整兩天深度遊覽，最後由鹽湖城搭機返家。"
+            en: "A magnificent 9-day road trip starting with flights into Salt Lake City to explore Arches and Moab first, traversing through Antelope Canyon and Page, and concluding south at White Sands National Park before flying home from El Paso.",
+            zh: "為期 9 天的經典西部公路之旅，改由鹽湖城（SLC）進出先造訪拱門國家公園與摩押，一路向南探索羚羊峽谷與佩吉市，最終抵達白沙國家公園，並由埃爾帕索（ELP）搭機返家。"
           },
-          stops: { en: "White Sands • Saguaro • Antelope Canyon • Arches NP", zh: "白沙 • 薩瓜羅 • 羚羊峽谷 • 拱門國家公園" }
+          stops: { en: "Arches NP • Canyonlands • Antelope Canyon • White Sands", zh: "拱門國家公園 • 峽谷地 • 羚羊峽谷 • 白沙" }
         },
         pros: [
-          { en: "<strong>Optimal Flight Setup:</strong> Flying into El Paso (ELP) saves ~3.5 hours drive compared to Phoenix, putting you just 1.5 hrs from White Sands NP.", zh: "<strong>最佳航班安排：</strong> 直飛或轉機至埃爾帕索（ELP），比鳳凰城節省約 3.5 小時車程，距離白沙國家公園僅需 1.5 小時。" },
-          { en: "<strong>Dedicated Antelope Canyon Day:</strong> Extra day added for both Upper & Lower Antelope Canyon tours plus Horseshoe Bend without rushing.", zh: "<strong>羚羊峽谷完整體驗：</strong> 安排整整一天時間，可輕鬆參觀上/下羚羊峽谷與馬蹄灣，無須倉促趕路。" },
-          { en: "<strong>2 Full Days in Arches NP:</strong> Ample time for Delicate Arch sunset, Devils Garden hike, and Canyonlands NP.", zh: "<strong>拱門國家公園整整 2 天：</strong> 充足時間挑戰精緻拱門日落、魔鬼花園步道，並可順道遊覽峽谷地國家公園。" },
-          { en: "<strong>Winter Magic:</strong> Mild crisp temperatures in Southwest deserts without summer heat or extreme crowds.", zh: "<strong>冬季獨特氣候：</strong> 氣溫舒適涼爽，避開夏季酷暑與擁擠人潮。" }
+          { en: "<strong>Strategic Weather Flow:</strong> Starting in Utah (Arches) and ending in southern New Mexico (White Sands) moves you progressively warmer as the week advances.", zh: "<strong>氣候漸暖的完美動線：</strong> 從較冷的猶他州（拱門）出發，一路向南移動至氣溫較溫暖的新墨西哥州（白沙），行程越走越舒適。" },
+          { en: "<strong>3 Full Days in Moab / Arches:</strong> Ultimate flexibility for Delicate Arch, Devils Garden, and Canyonlands National Park right at the start.", zh: "<strong>摩押與拱門整整 3 天：</strong> 行程剛開始即享有充足時間造訪精緻拱門、魔鬼花園與峽谷地國家公園。" },
+          { en: "<strong>Dedicated Antelope Canyon Experience:</strong> Unhurried mid-trip stops in Page for Upper and Lower Antelope Canyon tours.", zh: "<strong>羚羊峽谷充裕停留：</strong> 旅程中段於佩吉市悠閒安排上/下羚羊峽谷與馬蹄灣導覽。" },
+          { en: "<strong>Convenient Bookend Airports:</strong> Fly into Salt Lake City (SLC) and out of El Paso (ELP) with well-connected EWR routes.", zh: "<strong>便利起訖機場：</strong> 飛入鹽湖城（SLC）並由埃爾帕索（ELP）返航，航班選擇多元且順暢。" }
         ],
         cons: [
-          { en: "<strong>Long Driving Leg:</strong> Day 3 involves a long ~6.5 hr (390 mi) transit from Saguaro/Tucson to Page, AZ.", zh: "<strong>單日拉車距離較長：</strong> 第 3 天從薩瓜羅/圖森開車至佩吉市需約 6.5 小時（390 英里）。" },
-          { en: "<strong>One-Way Rental Drop Fee:</strong> Picking up rental car in ELP and dropping off in SLC incurs a one-way fee.", zh: "<strong>異地還車費用：</strong> 埃爾帕索（ELP）租車、鹽湖城（SLC）還車會產生異地還車費。" },
-          { en: "<strong>Chilly Nights:</strong> Desert winter nights can dip close to freezing; warm layers required.", zh: "<strong>沙漠夜間偏冷：</strong> 12 月沙漠地區夜間氣溫接近冰點，需準備保暖衣物。" }
+          { en: "<strong>One-Way Rental Drop Fee:</strong> Picking up rental car in SLC and dropping off in ELP incurs a one-way drop fee.", zh: "<strong>異地還車費用：</strong> 於鹽湖城（SLC）租車、埃爾帕索（ELP）還車會產生一筆異地還車費。" },
+          { en: "<strong>Chilly Desert Start:</strong> Utah mornings in early December can be crisp and cold; heavy coats needed early in the trip.", zh: "<strong>初期沙漠清晨較冷：</strong> 12 月初的猶他州清晨氣溫偏低，行程前半段需準備禦寒衣物。" },
+          { en: "<strong>Long Southern Driving Leg:</strong> Driving from Page down through Albuquerque to Alamogordo takes ~6 hours.", zh: "<strong>中南部拉車較長：</strong> 從佩吉市經新墨西哥州開往阿拉莫戈多需約 6 小時車程。" }
         ],
         days: [
           {
-            day: 1, date: "Dec 5, 2026 (Sat)", title: { en: "Arrive in El Paso (ELP) ➔ Drive to White Sands NP", zh: "抵達埃爾帕索 (ELP) ➔ 開車前往白沙國家公園" },
-            drive: { en: "🚗 ~1.5 hrs (85 miles / 137 km)", zh: "🚗 約 1.5 小時（85 英里 / 137 公里）" },
+            day: 1, date: "Dec 5, 2026 (Sat)", title: { en: "Arrive in Salt Lake City (SLC) ➔ Drive to Moab, UT", zh: "抵達鹽湖城 (SLC) ➔ 開車前往猶他州摩押" },
+            drive: { en: "🚗 ~3.8 hrs (235 miles / 378 km)", zh: "🚗 約 3.8 小時（235 英里 / 378 公里）" },
             weather: {
-              en: "☀️ Sunny & Crisp: High 59°F / Low 34°F (15°C / 1°C). Bring sunglasses & windbreaker.",
-              zh: "☀️ 晴朗涼爽：最高 15°C / 最低 1°C。建議攜帶太陽眼鏡與防風外衣。"
+              en: "❄️ Cold Northern Utah: High 38°F / Low 25°F (3°C / -4°C). Clear scenic interstate drive.",
+              zh: "❄️ 北猶他寒冷：最高 3°C / 最低 -4°C。沿途州際公路晴朗好開。"
             },
             desc: {
-              en: "Fly morning/midday from EWR to El Paso (ELP). Pick up rental SUV. Drive 1.5 hours to White Sands NP for a stunning gypsum sand sunset. Be sure to rent plastic sleds at the gift shop or a nearby gas station for dune sliding! For dinner, try authentic New Mexican green chile dishes in Alamogordo.",
-              zh: "上午/中午從 EWR 飛抵埃爾帕索 (ELP)。提領 SUV 租車後開車 1.5 小時直達白沙國家公園，欣賞絕美的石膏沙丘日落。別忘了在禮品店或途經加油站租用塑膠滑沙板體驗滑沙樂趣！晚餐可在 Alamogordo 品嚐道地的新墨西哥州綠辣椒料理。"
+              en: "Fly morning/midday from EWR to Salt Lake City (SLC). Pick up rental SUV and drive southeast on I-15 and US-191 toward Moab, UT. Arrive in the evening to settle into your basecamp for the first 3 nights.",
+              zh: "上午/中午從 EWR 飛抵鹽湖城（SLC）。提領 SUV 租車後沿 I-15 與 US-191 向東南開往猶他州摩押（Moab）。傍晚抵達並入住飯店，準備迎接前 3 晚的國家公園冒險。"
             },
-            highlight: { en: "White Sands Sunset & Sledding", zh: "白沙公園日落與滑沙" }
+            highlight: { en: "Scenic Interstate Drive to Moab", zh: "通往摩押的高原景觀公路" }
           },
           {
-            day: 2, date: "Dec 6, 2026 (Sun)", title: { en: "Alamogordo ➔ Saguaro National Park (Tucson, AZ)", zh: "阿拉莫戈多 ➔ 薩瓜羅國家公園（圖森，亞利桑那州）" },
-            drive: { en: "🚗 ~4.5 hrs (315 miles / 507 km)", zh: "🚗 約 4.5 小時（315 英里 / 507 公里）" },
+            day: 2, date: "Dec 6, 2026 (Sun)", title: { en: "Arches National Park — Day 1 (Windows & Balanced Rock)", zh: "拱門國家公園 — 第一天（窗戶區與平衡石）" },
+            drive: { en: "🚗 Local driving (~1 hr total)", zh: "🚗 當地短途（總計約 1 小時）" },
             weather: {
-              en: "🌤️ Mild Desert Sun: High 68°F / Low 42°F (20°C / 5°C). Ideal hiking weather.",
-              zh: "🌤️ 溫和晴朗：最高 20°C / 最低 5°C。非常適合戶外健行的舒適天氣。"
+              en: "☀️ Bright & Crisp: High 42°F / Low 22°F (6°C / -5°C). Excellent visibility for photography.",
+              zh: "☀️ 晴朗冷冽：最高 6°C / 最低 -5°C。能見度極佳，拍照效果絕佳。"
             },
             desc: {
-              en: "Morning scenic drive west into Arizona along I-10. Explore Saguaro NP West (Tucson Mountain District) among iconic giant cacti and take the Signal Hill trail to view ancient Native American petroglyphs. Stop for a famous Sonoran hot dog at El Guero Canelo in Tucson for dinner.",
-              zh: "早晨沿 I-10 向西橫跨新墨西哥州進入亞利桑那州。下午漫步薩瓜羅國家公園西區，近距離觀賞巨大的巨柱仙人掌群，並造訪 Signal Hill 步道欣賞印第安古老岩畫。晚上前往圖森知名的 El Guero Canelo 品嚐索諾拉熱狗（Sonoran Hot Dog）。"
+              en: "First full day dedicated to Arches National Park. Explore the Windows Section (North and South Window, Turret Arch) and Double Arch on foot. Afternoon visit to Balanced Rock and enjoy sunset views across the La Sal Mountains.",
+              zh: "拱門國家公園深度遊第 1 天。深入造訪 Windows 區域（南北拱門與 Turret Arch）及壯觀的雙拱門。下午造訪平衡石（Balanced Rock），欣賞夕陽餘暉灑在遠方雪白的拉薩爾山脈（La Sal Mountains）。"
             },
-            highlight: { en: "Giant Cactus Trails & Petroglyphs", zh: "巨柱仙人掌步道與印第安岩畫" }
+            highlight: { en: "Windows Section & Double Arch", zh: "窗戶區拱門群與雙拱門" }
           },
           {
-            day: 3, date: "Dec 7, 2026 (Mon)", title: { en: "Transit Day: Tucson ➔ Page, AZ (Minimal Stops)", zh: "長途拉車日：圖森 ➔ 佩吉市（中途少停靠）" },
-            drive: { en: "🚗 ~6.5 hrs (390 miles / 628 km)", zh: "🚗 約 6.5 小時（390 英里 / 628 公里）" },
+            day: 3, date: "Dec 7, 2026 (Mon)", title: { en: "Arches National Park — Day 2 (Delicate Arch Hike)", zh: "拱門國家公園 — 第二天（精緻拱門日落健行）" },
+            drive: { en: "🚗 Local driving (~1 hr total)", zh: "🚗 當地短途（總計約 1 小時）" },
             weather: {
-              en: "🌥️ Cooling Northward: High 52°F / Low 30°F (11°C / -1°C). Expect colder air in Northern AZ.",
-              zh: "🌥️ 愈往北愈冷：最高 11°C / 最低 -1°C。北亞利桑那州氣溫顯著下降。"
+              en: "🌤️ Brisk Desert Air: High 43°F / Low 23°F (6°C / -5°C). Clear winter skies.",
+              zh: "🌤️ 高原清爽：最高 6°C / 最低 -5°C。冬日晴空萬里。"
             },
             desc: {
-              en: "Dedicated driving day heading north across Arizona with minimal rest stops. Stop in Sedona or Flagstaff for a quick lunch break and coffee refuel while admiring the changing mountain landscapes. Arrive early evening in Page, AZ to rest up for canyon explorations.",
-              zh: "專用長途開車日，沿 I-17 / US-89 向北縱貫亞利桑那州。中途可於 Sedona 或 Flagstaff 稍作休息享用午餐與咖啡，順便欣賞高山地貌變幻。傍晚早早抵達佩吉市（Page）補給休息，為次日的峽谷之旅做足準備。"
+              en: "Second full day in Arches NP. Spend the morning exploring Park Avenue and Fiery Furnace viewpoint. In the afternoon, embark on the 3-mile roundtrip trail up to the world-famous Delicate Arch for an unforgettable golden hour sunset.",
+              zh: "拱門國家公園深度遊第 2 天。上午漫步大道（Park Avenue）觀景點。午後挑戰 3 英里往返步道，親眼目睹世界聞名的精緻拱門（Delicate Arch）在金黃夕陽下的壯麗景致。"
             },
-            highlight: { en: "Northern AZ Scenic Highway Drive", zh: "亞利桑那州北部公路風光" }
+            highlight: { en: "Delicate Arch Sunset Hike", zh: "精緻拱門日落健行" }
           },
           {
-            day: 4, date: "Dec 8, 2026 (Tue)", title: { en: "Full Day in Antelope Canyon & Horseshoe Bend", zh: "全天遊覽羚羊峽谷與馬蹄灣" },
-            drive: { en: "🚗 Local driving only (~0.5 hrs total)", zh: "🚗 僅當地短途車程（總計約 0.5 小時）" },
+            day: 4, date: "Dec 8, 2026 (Tue)", title: { en: "Arches National Park — Day 3 (Devils Garden & Canyonlands)", zh: "拱門國家公園 — 第三天（魔鬼花園與峽谷地）" },
+            drive: { en: "🚗 Local driving (~1.5 hrs total)", zh: "🚗 當地短途（總計約 1.5 小時）" },
             weather: {
-              en: "☀️ Crisp & Clear: High 48°F / Low 28°F (9°C / -2°C). Layer heavily for wind in slot canyons.",
+              en: "❄️ Cold Clear Day: High 41°F / Low 21°F (5°C / -6°C). Dress warmly for exposed trails.",
+              zh: "❄️ 晴冷天候：最高 5°C / 最低 -6°C。空曠步道風大，請加強保暖。"
+            },
+            desc: {
+              en: "Third full day in Moab. Tackle the rugged Devils Garden trail to see Landscape Arch and Double O Arch in Arches NP. Afterward, take a quick afternoon trip to Canyonlands National Park (Island in the Sky) for breathtaking vistas over Mesa Arch.",
+              zh: "摩押與國家公園深度探索第 3 天。挑戰魔鬼花園步道（Devils Garden），欣賞景觀拱門與雙O拱門。午後前往附近的峽谷地國家公園（Canyonlands / 天空之島區），在著名的梅薩拱門（Mesa Arch）捕捉懸崖峭壁上的日落奇景。"
+            },
+            highlight: { en: "Devils Garden & Mesa Arch (Canyonlands)", zh: "魔鬼花園與峽谷地梅薩拱門" }
+          },
+          {
+            day: 5, date: "Dec 9, 2026 (Wed)", title: { en: "Moab ➔ Monument Valley ➔ Page, AZ", zh: "摩押 ➔ 紀念碑谷 ➔ 佩吉市（亞利桑那州）" },
+            drive: { en: "🚗 ~4.5 hrs (270 miles / 435 km)", zh: "🚗 約 4.5 小時（270 英里 / 435 公里）" },
+            weather: {
+              en: "⛅ Chilly High Desert: High 45°F / Low 25°F (7°C / -4°C). Stunning red rock photography.",
+              zh: "⛅ 高原晴朗：最高 7°C / 最低 -4°C。紅岩地貌攝影光線絕佳。"
+            },
+            desc: {
+              en: "Drive southwest from Moab through iconic Monument Valley. Take photos at Forrest Gump Point on US-163 where the highway stretches toward the towering mittens. Arrive in Page, AZ by late afternoon to relax by Lake Powell.",
+              zh: "從摩押向西南行駛，途經經典的紀念碑谷。特別在 US-163 的阿甘正傳打卡點（Forrest Gump Point）駐足拍照。傍晚抵達亞利桑那州佩吉市，準備欣賞隔天的峽谷美景。"
+            },
+            highlight: { en: "Monument Valley & Forrest Gump Point", zh: "紀念碑谷與公路打卡點" }
+          },
+          {
+            day: 6, date: "Dec 10, 2026 (Thu)", title: { en: "Full Day in Antelope Canyon & Horseshoe Bend", zh: "全天深入遊覽羚羊峽谷與馬蹄灣" },
+            drive: { en: "🚗 Local driving (~0.5 hrs total)", zh: "🚗 僅當地短途車程（總計約 0.5 小時）" },
+            weather: {
+              en: "☀️ Crisp & Clear: High 48°F / Low 28°F (9°C / -2°C). Layer heavily for slot canyons.",
               zh: "☀️ 晴朗微寒：最高 9°C / 最低 -2°C。狹縫峽谷內風大，請穿著多層保暖衣物。"
             },
             desc: {
-              en: "Enjoy a full day exploring both Upper and Lower Antelope Canyon timed for best lighting with certified Navajo guides. Take the short paved trail out to Horseshoe Bend overlooking the glowing 1,000 ft Colorado River meander at sunset. Enjoy slow-cooked Navajo tacos or smoked brisket in town for dinner.",
-              zh: "享有整整一天。由印第安導覽帶領，一口氣遊覽光影絕倫的上羚羊峽谷與下羚羊峽谷。傍晚步行前往馬蹄灣，俯瞰 1,000 英尺深的科羅拉多河壯麗彎道落日。晚餐可在鎮上品嚐印第安塔可（Navajo Tacos）或美式燻烤牛肉。"
+              en: "Enjoy an unhurried, full day in Page. Take guided tours of both Upper and Lower Antelope Canyon to marvel at the undulating sandstone wave patterns and light beams. Afternoon hike to Horseshoe Bend overlooking the emerald Colorado River loop.",
+              zh: "在佩吉市享有充裕悠閒的一天。安排導覽深入參觀上羚羊峽谷與下羚羊峽谷，讚嘆大自然雕琢的光影流線。下午漫步至馬蹄灣俯瞰翠綠的科羅拉多河大轉彎。夜宿 Page。"
             },
-            highlight: { en: "Upper & Lower Antelope Canyon + Horseshoe Bend", zh: "上/下羚羊峽谷 + 馬蹄灣" }
+            highlight: { en: "Upper/Lower Antelope Canyon & Horseshoe Bend", zh: "上/下羚羊峽谷與馬蹄灣" }
           },
           {
-            day: 5, date: "Dec 9, 2026 (Wed)", title: { en: "Page, AZ ➔ Monument Valley ➔ Moab, UT", zh: "佩吉市 ➔ 紀念碑谷 ➔ 摩押（猶他州）" },
-            drive: { en: "🚗 ~4.5 hrs (270 miles / 435 km)", zh: "🚗 約 4.5 小時（270 英里 / 435 公里）" },
+            day: 7, date: "Dec 11, 2026 (Fri)", title: { en: "Page, AZ ➔ Scenic Transit to Alamogordo, NM", zh: "佩吉市 ➔ 景觀公路南下至阿拉莫戈多" },
+            drive: { en: "🚗 ~6.0 hrs (380 miles / 611 km)", zh: "🚗 約 6.0 小時（380 英里 / 611 公里）" },
             weather: {
-              en: "⛅ Chilly High Desert: High 44°F / Low 24°F (7°C / -4°C). Freezing night/early morning.",
-              zh: "⛅ 高原寒冷：最高 7°C / 最低 -4°C。夜間與清晨氣溫降至冰點以下。"
+              en: "🌥️ Warming Trend: High 54°F / Low 30°F (12°C / -1°C). Weather improves heading south.",
+              zh: "🌥️ 氣溫回暖：最高 12°C / 最低 -1°C。一路向南行駛，氣候逐漸暖和。"
             },
             desc: {
-              en: "Drive northeast into Utah, passing through scenic Monument Valley. Pull over at Forrest Gump Point on US-163 for iconic highway photos before continuing north. Check into your Moab hotel and enjoy hearty pasta or microbrews at the Moab Brewery.",
-              zh: "向東北開進入猶他州，途經壯麗的紀念碑谷。特別安排在 US-163 上的阿甘正傳打卡點（Forrest Gump Point）停靠拍下經典公路大片。傍晚入住 Moab 飯店，可至當地的 Moab Brewery 啤酒廠餐廳享用豐盛美式晚餐。"
+              en: "Scenic driving day heading southeast from northern Arizona through New Mexico towards Alamogordo. Enjoy changing desert landscapes as you approach the Tularosa Basin. Arrive in evening for a restful night.",
+              zh: "早晨從佩吉市出發，向東南行駛穿越亞利桑那州北部與新墨西哥州前往阿拉莫戈多。沿途欣賞沙漠地貌逐漸轉為廣袤盆地。傍晚抵達並充分休息。"
             },
-            highlight: { en: "Monument Valley & Forrest Gump Point", zh: "紀念碑谷與阿甘打卡點" }
+            highlight: { en: "Desert Highway Scenic Transit", zh: "沙漠景觀公路縱貫" }
           },
           {
-            day: 6, date: "Dec 10, 2026 (Thu)", title: { en: "Arches National Park — Day 1", zh: "拱門國家公園 — 第一天" },
+            day: 8, date: "Dec 12, 2026 (Sat)", title: { en: "White Sands National Park — Full Day & Sunset Sledding", zh: "白沙國家公園全天深度遊與日落滑沙" },
             drive: { en: "🚗 Local driving (~1 hr total)", zh: "🚗 當地短途（總計約 1 小時）" },
             weather: {
-              en: "☀️ Bright & Cold: High 42°F / Low 22°F (6°C / -5°C). Excellent visibility; wear sturdy boots.",
-              zh: "☀️ 晴朗冷冽：最高 6°C / 最低 -5°C。能見度極佳，請穿著防滑登山靴。"
+              en: "☀️ Mild & Sunny: High 61°F / Low 36°F (16°C / 2°C). Wonderful warm desert afternoon sun.",
+              zh: "☀️ 晴朗溫暖：最高 16°C / 最低 2°C。午後沙漠陽光舒適宜人。"
             },
             desc: {
-              en: "First full day in Arches NP. Hike to Balanced Rock, Windows Section, and Double Arch early before crowds gather. Embark on the 3-mile roundtrip hike up to the world-famous Delicate Arch in late afternoon to catch golden hour light illuminating the red rock.",
-              zh: "拱門國家公園深度遊第 1 天。清晨趁人少先造訪平衡石（Balanced Rock）、雙拱門（Double Arch）與雙車窗拱門。午後挑戰 3 英里往返步道，親眼目睹精緻拱門（Delicate Arch）在夕陽照射下發出的耀眼紅金光芒。"
+              en: "Dedicate the entire day to White Sands National Park. Hike the Alkali Flat Trail or Interdune Boardwalk across the shimmering white gypsum dunes. Rent plastic sleds to glide down the slopes and stay for a breathtaking pastel sunset over the dunes.",
+              zh: "整天深度暢玩白沙國家公園。漫步於 Alkali Flat 步道或 Interdune Boardwalk，欣賞閃閃發光的純白石膏沙丘。在禮品店租用滑沙板體驗極速滑沙，並留下來欣賞沙丘上絕美的粉嫩色系日落。夜宿 Alamogordo 或 Las Cruces。"
             },
-            highlight: { en: "Delicate Arch Sunset Hike", zh: "精緻拱門日落徒步" }
+            highlight: { en: "White Sands Gypsum Dunes & Sunset Sledding", zh: "純白石膏沙丘與日落滑沙" }
           },
           {
-            day: 7, date: "Dec 11, 2026 (Fri)", title: { en: "Arches National Park — Day 2 (or Canyonlands)", zh: "拱門國家公園 — 第二天（或峽谷地國家公園）" },
-            drive: { en: "🚗 Local driving (~1.5 hrs total)", zh: "🚗 當地短途（總計約 1.5 小時）" },
+            day: 9, date: "Dec 13, 2026 (Sun)", title: { en: "El Paso (ELP) ✈️ Fly Home to EWR", zh: "埃爾帕索 (ELP) ✈️ 搭機返回 Newark (EWR)" },
+            drive: { en: "🚗 ~1.5 hrs from Alamogordo to ELP Airport", zh: "🚗 從阿拉莫戈多開車約 1.5 小時至 ELP 機場" },
             weather: {
-              en: "🌤️ Brisk Desert Air: High 43°F / Low 23°F (6°C / -5°C). Clear skies expected.",
-              zh: "🌤️ 高原清爽：最高 6°C / 最低 -5°C。預計為晴朗好天氣。"
+              en: "☀️ Sunny Southern Border: High 63°F / Low 38°F (17°C / 3°C). Clear departure weather.",
+              zh: "☀️ 南部晴朗：最高 17°C / 最低 3°C。出發日天氣晴朗穩定。"
             },
             desc: {
-              en: "Second full day in Moab. Tackle the iconic Devils Garden trail to view Landscape Arch—one of the world's longest stone arches. Optionally head over to Island in the Sky at Canyonlands NP for panoramic views over Shafer Canyon and Green River Overlook.",
-              zh: "拱門國家公園深度遊第 2 天。前往魔鬼花園步道（Devils Garden）欣賞全球最長天然石拱之一的景觀拱門（Landscape Arch）。下午亦可順遊附近的峽谷地國家公園（Canyonlands），在 Shafer Canyon 觀景台俯瞰壯麗宏偉的峽谷地貌。"
+              en: "Morning drive from Alamogordo down to El Paso International Airport (ELP) (~1.5 hours). Return rental SUV and catch your flight back home to EWR, concluding an incredible 9-day southwest national parks road trip from north to south.",
+              zh: "早晨從阿拉莫戈多開車前往埃爾帕索國際機場（ELP，約 1.5 小時）。歸還租車後搭乘航班返回 Newark (EWR)，帶著滿滿的由北向南壯麗美景回憶順利返家。"
             },
-            highlight: { en: "Devils Garden Trail & Landscape Arch", zh: "魔鬼花園與景觀拱門" }
-          },
-          {
-            day: 8, date: "Dec 12, 2026 (Sat)", title: { en: "Moab ➔ Salt Lake City (SLC)", zh: "摩押 ➔ 鹽湖城 (SLC)" },
-            drive: { en: "🚗 ~3.8 hrs (235 miles / 378 km)", zh: "🚗 約 3.8 小時（235 英里 / 378 公里）" },
-            weather: {
-              en: "❄️ Cold Northern Utah: High 38°F / Low 25°F (3°C / -4°C). Possible light snow flurries in mountains.",
-              zh: "❄️ 北猶他寒冷：最高 3°C / 最低 -4°C。山區可能出現零星雪花。"
-            },
-            desc: {
-              en: "Relaxed morning in Moab with an optional quick detour to Corona Arch. Drive north on US-191 & I-15 to Salt Lake City. Stroll around winter lights at Temple Square and enjoy a warm dinner at Valter's Osteria or Red Iguana in downtown SLC.",
-              zh: "早晨於摩押輕鬆享用早餐，可順道造訪拱門公園外圍的 Corona Arch 步道。沿 I-15 北上直達鹽湖城。傍晚參觀裝飾著璀璨聖誕燈飾的聖殿廣場（Temple Square），晚餐享用當地知名墨式料理 Red Iguana 或義式餐館。"
-            },
-            highlight: { en: "Temple Square Winter Lights & SLC Dining", zh: "聖殿廣場璀璨夜燈與鹽湖城美食" }
-          },
-          {
-            day: 9, date: "Dec 13, 2026 (Sun)", title: { en: "Salt Lake City (SLC) ✈️ Fly Home to EWR", zh: "鹽湖城 (SLC) ✈️ 搭機返回 Newark (EWR)" },
-            drive: { en: "🚗 ~0.3 hrs to Airport", zh: "🚗 約 20 分鐘至機場" },
-            weather: {
-              en: "⛅ Freezing Morning: High 36°F / Low 22°F (2°C / -5°C). Airport roads well cleared.",
-              zh: "⛅ 清晨寒冷：最高 2°C / 最低 -5°C。機場主要道路清雪良好。"
-            },
-            desc: {
-              en: "Drop off rental car at Salt Lake City International Airport (SLC) and catch your non-stop or connection flight back home to EWR, ending an unforgettable 9-day Southwest road trip.",
-              zh: "於鹽湖城國際機場（SLC）歸還租車，搭乘直飛或轉機航班返回 Newark (EWR)，帶著滿滿美西照片順利返抵家門，結束精彩的 9 天國家公園公路之旅。"
-            },
-            highlight: { en: "Return Flight Home", zh: "返程航班" }
+            highlight: { en: "Return Flight Home from ELP", zh: "由 ELP 機場返程航班" }
           }
         ]
       },
