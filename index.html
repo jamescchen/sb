@@ -39,11 +39,11 @@
         
         <!-- Itinerary Tab Selector -->
         <div class="bg-slate-900 p-1.5 rounded-2xl flex items-center border-2 border-amber-400/80 shadow-xl w-full sm:w-auto justify-center">
-          <button id="tab-southwest" onclick="switchItinerary('southwest')" class="flex-1 sm:flex-none px-3.5 py-2 rounded-xl font-extrabold text-xs flex items-center justify-center gap-2 transition-all duration-200 bg-amber-400 text-slate-950 shadow-md">
+          <button id="tab-southwest" onclick="switchItinerary('southwest')" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl font-extrabold text-sm flex items-center justify-center gap-2 transition-all duration-200 bg-amber-400 text-slate-950 shadow-md">
             <i class="fa-solid fa-sun"></i>
             <span id="label-sw-btn">US Southwest</span>
           </button>
-          <button id="tab-europe" onclick="switchItinerary('europe')" class="flex-1 sm:flex-none px-3.5 py-2 rounded-xl font-bold text-xs text-slate-300 hover:text-white flex items-center justify-center gap-2 transition-all duration-200">
+          <button id="tab-europe" onclick="switchItinerary('europe')" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl font-bold text-sm text-slate-300 hover:text-white flex items-center justify-center gap-2 transition-all duration-200">
             <i class="fa-solid fa-chess-rook"></i>
             <span id="label-eu-btn">Prague & Vienna</span>
           </button>
@@ -51,12 +51,12 @@
 
         <!-- Prominent Language Toggle -->
         <div class="bg-slate-900 p-1.5 rounded-2xl flex items-center border-2 border-cyan-400 shadow-xl w-full sm:w-auto justify-center">
-          <button id="btn-en" onclick="setLanguage('en')" class="flex-1 sm:flex-none px-3.5 py-2 rounded-xl font-extrabold text-xs flex items-center justify-center gap-2 transition-all duration-200 bg-cyan-500 text-slate-950 shadow-md">
-            <span class="text-sm">🇺🇸</span>
+          <button id="btn-en" onclick="setLanguage('en')" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl font-extrabold text-sm flex items-center justify-center gap-2 transition-all duration-200 bg-cyan-500 text-slate-950 shadow-md">
+            <span class="text-base">🇺🇸</span>
             <span>English</span>
           </button>
-          <button id="btn-zh" onclick="setLanguage('zh')" class="flex-1 sm:flex-none px-3.5 py-2 rounded-xl font-bold text-xs text-slate-300 hover:text-white flex items-center justify-center gap-2 transition-all duration-200">
-            <span class="text-sm">🇹🇼</span>
+          <button id="btn-zh" onclick="setLanguage('zh')" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl font-bold text-sm text-slate-300 hover:text-white flex items-center justify-center gap-2 transition-all duration-200">
+            <span class="text-base">🇹🇼</span>
             <span>繁體中文</span>
           </button>
         </div>
@@ -442,11 +442,11 @@
       const btnEn = document.getElementById('btn-en');
       const btnZh = document.getElementById('btn-zh');
       if (lang === 'en') {
-        btnEn.className = 'px-3.5 py-2 rounded-xl font-extrabold text-xs flex items-center gap-2 transition-all duration-200 bg-cyan-500 text-slate-950 shadow-md';
-        btnZh.className = 'px-3.5 py-2 rounded-xl font-bold text-xs text-slate-300 hover:text-white flex items-center gap-2 transition-all duration-200';
+        btnEn.className = 'px-4 py-2.5 rounded-xl font-extrabold text-sm flex items-center gap-2 transition-all duration-200 bg-cyan-500 text-slate-950 shadow-md';
+        btnZh.className = 'px-4 py-2.5 rounded-xl font-bold text-sm text-slate-300 hover:text-white flex items-center gap-2 transition-all duration-200';
       } else {
-        btnZh.className = 'px-3.5 py-2 rounded-xl font-extrabold text-xs flex items-center gap-2 transition-all duration-200 bg-cyan-500 text-slate-950 shadow-md';
-        btnEn.className = 'px-3.5 py-2 rounded-xl font-bold text-xs text-slate-300 hover:text-white flex items-center gap-2 transition-all duration-200';
+        btnZh.className = 'px-4 py-2.5 rounded-xl font-extrabold text-sm flex items-center gap-2 transition-all duration-200 bg-cyan-500 text-slate-950 shadow-md';
+        btnEn.className = 'px-4 py-2.5 rounded-xl font-bold text-sm text-slate-300 hover:text-white flex items-center gap-2 transition-all duration-200';
       }
 
       // Update static UI Labels
@@ -473,11 +473,11 @@
       const tabEU = document.getElementById('tab-europe');
 
       if (itineraryKey === 'southwest') {
-        tabSW.className = 'px-3.5 py-2 rounded-xl font-extrabold text-xs flex items-center gap-2 transition-all duration-200 bg-amber-400 text-slate-950 shadow-md';
-        tabEU.className = 'px-3.5 py-2 rounded-xl font-bold text-xs text-slate-300 hover:text-white flex items-center gap-2 transition-all duration-200';
+        tabSW.className = 'px-4 py-2.5 rounded-xl font-extrabold text-sm flex items-center gap-2 transition-all duration-200 bg-amber-400 text-slate-950 shadow-md';
+        tabEU.className = 'px-4 py-2.5 rounded-xl font-bold text-sm text-slate-300 hover:text-white flex items-center gap-2 transition-all duration-200';
       } else {
-        tabEU.className = 'px-3.5 py-2 rounded-xl font-extrabold text-xs flex items-center gap-2 transition-all duration-200 bg-indigo-500 text-white shadow-md';
-        tabSW.className = 'px-3.5 py-2 rounded-xl font-bold text-xs text-slate-300 hover:text-white flex items-center gap-2 transition-all duration-200';
+        tabEU.className = 'px-4 py-2.5 rounded-xl font-extrabold text-sm flex items-center gap-2 transition-all duration-200 bg-indigo-500 text-white shadow-md';
+        tabSW.className = 'px-4 py-2.5 rounded-xl font-bold text-sm text-slate-300 hover:text-white flex items-center gap-2 transition-all duration-200';
       }
 
       renderActiveItinerary();
