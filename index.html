@@ -1,581 +1,1295 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Itinerary Comparison | Dec 5–13, 2026</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome Icons for reliable icon rendering -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.25rem; /* Increased font size for enhanced readability (~20px base) */
-    }
-    /* Smooth transition for auto-hiding header on mobile */
-    .header-nav {
-      transition: transform 0.3s ease-in-out;
-    }
-    .header-nav.hide-header {
-      transform: translateY(-100%);
-    }
-  </style>
-</head>
-<body class="bg-slate-950 text-slate-100 min-h-full flex flex-col">
-
-  <!-- TOP BAR / HEADER (Auto-hiding on mobile scroll) -->
-  <header id="main-header" class="header-nav sticky top-0 z-50 bg-slate-800/95 backdrop-blur-md border-b border-slate-700 shadow-xl">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col md:flex-row items-center justify-between gap-4">
-      <div class="flex items-center space-x-3 w-full md:w-auto justify-between md:justify-start">
-        <div class="flex items-center space-x-3">
-          <div class="p-2.5 bg-amber-400 rounded-xl shadow-lg shadow-amber-400/20 text-slate-950">
-            <i class="fa-solid fa-compass text-xl font-black"></i>
-          </div>
-          <div>
-            <h1 class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
-              <span id="title-text">Dec 5–13, 2026 Vacation Comparison</span>
-            </h1>
-            <p id="subtitle-text" class="text-xs text-amber-300 font-bold tracking-wide">Origin: EWR (Newark Liberty) • 9 Days Trip</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ITINERARY SELECTOR + LANGUAGE SWITCHER (Stacked vertically on mobile) -->
-      <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto justify-center">
-        
-        <!-- Itinerary Tab Selector -->
-        <div class="bg-slate-900 p-1.5 rounded-2xl flex items-center border-2 border-amber-400/80 shadow-xl w-full sm:w-auto justify-center">
-          <button id="tab-southwest" onclick="switchItinerary('southwest')" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl font-extrabold text-sm flex items-center justify-center gap-2 transition-all duration-200 bg-amber-400 text-slate-950 shadow-md">
-            <i class="fa-solid fa-sun"></i>
-            <span id="label-sw-btn">US Southwest</span>
-          </button>
-          <button id="tab-europe" onclick="switchItinerary('europe')" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl font-bold text-sm text-slate-300 hover:text-white flex items-center justify-center gap-2 transition-all duration-200">
-            <i class="fa-solid fa-chess-rook"></i>
-            <span id="label-eu-btn">Prague & Vienna</span>
-          </button>
-        </div>
-
-        <!-- Prominent Language Toggle -->
-        <div class="bg-slate-900 p-1.5 rounded-2xl flex items-center border-2 border-cyan-400 shadow-xl w-full sm:w-auto justify-center">
-          <button id="btn-en" onclick="setLanguage('en')" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl font-extrabold text-sm flex items-center justify-center gap-2 transition-all duration-200 bg-cyan-500 text-slate-950 shadow-md">
-            <span class="text-base">🇺🇸</span>
-            <span>English</span>
-          </button>
-          <button id="btn-zh" onclick="setLanguage('zh')" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl font-bold text-sm text-slate-300 hover:text-white flex items-center justify-center gap-2 transition-all duration-200">
-            <span class="text-base">🇹🇼</span>
-            <span>繁體中文</span>
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </header>
-
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-
-    <!-- HERO TRIP SUMMARY BANNER -->
-    <section class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border-2 border-indigo-500/40 p-6 shadow-2xl">
-      <div id="hero-bg-accent" class="absolute -right-16 -bottom-16 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-      
-      <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-        <div class="space-y-2 max-w-2xl">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs font-bold">
-            <i class="fa-solid fa-plane-departure"></i>
-            <span id="hero-badge">Flight Route: EWR ✈️ Destination</span>
-          </div>
-          <h2 id="hero-title" class="text-2xl font-black text-white"></h2>
-          <p id="hero-desc" class="text-slate-200 leading-relaxed text-base"></p>
-        </div>
-
-        <div class="flex flex-wrap md:flex-col gap-2 min-w-[200px]">
-          <div class="bg-slate-900/90 backdrop-blur border border-slate-700 p-3.5 rounded-xl flex items-center gap-3">
-            <i class="fa-solid fa-calendar-days text-amber-400 text-lg"></i>
-            <div>
-              <div class="text-[11px] text-slate-400 uppercase tracking-wider font-bold" id="lbl-duration">Duration</div>
-              <div class="font-black text-sm text-slate-100" id="val-duration">9 Days (Dec 5 - 13, 2026)</div>
-            </div>
-          </div>
-          <div class="bg-slate-900/90 backdrop-blur border border-slate-700 p-3.5 rounded-xl flex items-center gap-3">
-            <i class="fa-solid fa-location-dot text-emerald-400 text-lg"></i>
-            <div>
-              <div class="text-[11px] text-slate-400 uppercase tracking-wider font-bold" id="lbl-stops">Key Highlights</div>
-              <div class="font-black text-sm text-slate-100" id="val-stops"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROS & CONS SECTION -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- PROS -->
-      <div class="bg-slate-900/80 border-2 border-emerald-500/40 rounded-2xl p-6 backdrop-blur-sm shadow-xl relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
-        <h3 class="text-base font-extrabold text-emerald-400 flex items-center gap-2.5 mb-4">
-          <i class="fa-solid fa-thumbs-up text-lg"></i>
-          <span id="lbl-pros">Trip Advantages (Pros)</span>
-        </h3>
-        <ul id="list-pros" class="space-y-3 text-slate-200 text-base"></ul>
-      </div>
-
-      <!-- CONS -->
-      <div class="bg-slate-900/80 border-2 border-rose-500/40 rounded-2xl p-6 backdrop-blur-sm shadow-xl relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 rounded-full blur-2xl pointer-events-none"></div>
-        <h3 class="text-base font-extrabold text-rose-400 flex items-center gap-2.5 mb-4">
-          <i class="fa-solid fa-thumbs-down text-lg"></i>
-          <span id="lbl-cons">Potential Challenges (Cons)</span>
-        </h3>
-        <ul id="list-cons" class="space-y-3 text-slate-200 text-base"></ul>
-      </div>
-    </section>
-
-    <!-- ITINERARY TIMELINE & DETAIL -->
-    <section class="space-y-4">
-      <div class="flex items-center justify-between">
-        <h3 class="text-xl font-black text-white flex items-center gap-2.5">
-          <i class="fa-solid fa-route text-amber-400"></i>
-          <span id="lbl-schedule-title">Day-by-Day Detailed Itinerary</span>
-        </h3>
-        <span class="text-xs text-slate-400 font-bold" id="lbl-timezone-note">All times are local time</span>
-      </div>
-
-      <div id="itinerary-timeline" class="space-y-5"></div>
-    </section>
-
-  </main>
-
-  <footer class="border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-400">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
-      <div class="font-bold">Dec 5–13, 2026 Travel Planning • EWR Departure</div>
-      <div id="footer-note">Designed for side-by-side comparison with dual EN/ZH translation</div>
-    </div>
-  </footer>
-
-  <script>
-    // DATA DICTIONARY FOR BOTH ITINERARIES AND LANGUAGES
-    const data = {
-      southwest: {
-        hero: {
-          badge: { en: "Outbound: EWR ✈️ SLC | Return: ELP ✈️ EWR", zh: "去程：Newark ✈️ 鹽湖城 | 回程：El Paso ✈️ Newark" },
-          title: { en: "US Southwest Grand National Parks Road Trip (Arches to White Sands)", zh: "美國西南國家公園壯麗公路之旅（由北向南：拱門至白沙）" },
-          desc: {
-            en: "A magnificent 9-day road trip starting with flights into Salt Lake City to explore Arches and Moab first, traversing through an expanded two-day stay in Antelope Canyon and Page, and concluding south at White Sands National Park before flying home from El Paso.",
-            zh: "為期 9 天的經典西部公路之旅，改由鹽湖城（SLC）進出先造訪拱門國家公園與摩押，隨後在羚羊峽谷與佩吉市享有加碼的兩天深度停留，最終抵達白沙國家公園，並由埃爾帕索（ELP）搭機返家。"
-          },
-          stops: { en: "Arches NP • Canyonlands • Antelope Canyon (2 Days) • White Sands", zh: "拱門國家公園 • 峽谷地 • 羚羊峽谷（兩天深度） • 白沙" }
-        },
-        pros: [
-          { en: "<strong>Strategic Weather Flow:</strong> Starting in Utah (Arches) and ending in southern New Mexico (White Sands) moves you progressively warmer as the week advances.", zh: "<strong>氣候漸暖的完美動線：</strong> 從較冷的猶他州（拱門）出發，一路向南移動至氣溫較溫暖的新墨西哥州（白沙），行程越走越舒適。" },
-          { en: "<strong>2 Full Days in Moab / Arches:</strong> Great balance for Delicate Arch, Windows, and Canyonlands National Park right at the start.", zh: "<strong>摩押與拱門精華 2 天：</strong> 剛開始享有充裕時間造訪精緻拱門、窗戶區與峽谷地國家公園。" },
-          { en: "<strong>Extended Antelope Canyon Experience:</strong> A full 2 days in Page allows unhurried photography tours of Upper/Lower canyons, Lake Powell, and Toadstool Hoodoos.", zh: "<strong>羚羊峽谷深度 2 天：</strong> 在佩吉市有整整兩天時間，可從容安排上/下羚羊峽谷攝影導覽、鮑威爾湖與蕈狀岩健行。" },
-          { en: "<strong>Convenient Bookend Airports:</strong> Fly into Salt Lake City (SLC) and out of El Paso (ELP) with well-connected EWR routes.", zh: "<strong>便利起訖機場：</strong> 飛入鹽湖城（SLC）並由埃爾帕索（ELP）返航，航班選擇多元且順暢。" }
-        ],
-        cons: [
-          { en: "<strong>One-Way Rental Drop Fee:</strong> Picking up rental car in SLC and dropping off in ELP incurs a one-way drop fee.", zh: "<strong>異地還車費用：</strong> 於鹽湖城（SLC）租車、埃爾帕索（ELP）還車會產生一筆異地還車費。" },
-          { en: "<strong>Chilly Desert Start:</strong> Utah mornings in early December can be crisp and cold; heavy coats needed early in the trip.", zh: "<strong>初期沙漠清晨較冷：</strong> 12 月初的猶他州清晨氣溫偏低，行程前半段需準備禦寒衣物。" },
-          { en: "<strong>Long Southern Driving Leg:</strong> Driving from Page down through Albuquerque to Alamogordo takes ~6 hours.", zh: "<strong>中南部拉車較長：</strong> 從佩吉市經新墨西哥州開往阿拉莫戈多需約 6 小時車程。" }
-        ],
-        days: [
-          {
-            day: 1, date: "Dec 5, 2026 (Sat)", title: { en: "Arrive in Salt Lake City (SLC) ➔ Drive to Moab, UT", zh: "抵達鹽湖城 (SLC) ➔ 開車前往猶他州摩押" },
-            drive: { en: "🚗 ~3.8 hrs (235 miles / 378 km)", zh: "🚗 約 3.8 小時（235 英里 / 378 公里）" },
-            weather: {
-              en: "❄️ Cold Northern Utah: High 38°F / Low 25°F (3°C / -4°C). Clear scenic interstate drive.",
-              zh: "❄️ 北猶他寒冷：最高 3°C / 最低 -4°C。沿途州際公路晴朗好開。"
-            },
-            desc: {
-              en: "Fly morning/midday from EWR to Salt Lake City (SLC). Pick up rental SUV and drive southeast on I-15 and US-191 toward Moab, UT. Arrive in the evening to settle into your basecamp for the first 2 nights.",
-              zh: "上午/中午從 EWR 飛抵鹽湖城（SLC）。提領 SUV 租車後沿 I-15 與 US-191 向東南開往猶他州摩押（Moab）。傍晚抵達並入住飯店，準備迎接前 2 晚的國家公園冒險。"
-            },
-            highlight: { en: "Scenic Interstate Drive to Moab", zh: "通往摩押的高原景觀公路" }
-          },
-          {
-            day: 2, date: "Dec 6, 2026 (Sun)", title: { en: "Arches National Park — Day 1 (Windows & Balanced Rock)", zh: "拱門國家公園 — 第一天（窗戶區與平衡石）" },
-            drive: { en: "🚗 Local driving (~1 hr total)", zh: "🚗 當地短途（總計約 1 小時）" },
-            weather: {
-              en: "☀️ Bright & Crisp: High 42°F / Low 22°F (6°C / -5°C). Excellent visibility for photography.",
-              zh: "☀️ 晴朗冷冽：最高 6°C / 最低 -5°C。能見度極佳，拍照效果絕佳。"
-            },
-            desc: {
-              en: "First full day dedicated to Arches National Park. Explore the Windows Section (North and South Window, Turret Arch) and Double Arch on foot. Afternoon visit to Balanced Rock and enjoy sunset views across the La Sal Mountains.",
-              zh: "拱門國家公園深度遊第 1 天。深入造訪 Windows 區域（南北拱門與 Turret Arch）及壯觀的雙拱門。下午造訪平衡石（Balanced Rock），欣賞夕陽餘暉灑在遠方雪白的拉薩爾山脈（La Sal Mountains）。"
-            },
-            highlight: { en: "Windows Section & Double Arch", zh: "窗戶區拱門群與雙拱門" }
-          },
-          {
-            day: 3, date: "Dec 7, 2026 (Mon)", title: { en: "Arches National Park — Day 2 (Delicate Arch Hike) ➔ Canyonlands", zh: "拱門國家公園 — 第二天（精緻拱門日落健行）➔ 峽谷地" },
-            drive: { en: "🚗 Local driving (~1.5 hrs total)", zh: "🚗 當地短途（總計約 1.5 小時）" },
-            weather: {
-              en: "🌤️ Brisk Desert Air: High 43°F / Low 23°F (6°C / -5°C). Clear winter skies.",
-              zh: "🌤️ 高原清爽：最高 6°C / 最低 -5°C。冬日晴空萬里。"
-            },
-            desc: {
-              en: "Second full day in Moab. Spend the morning visiting Canyonlands National Park (Island in the Sky) for breathtaking Mesa Arch vistas. In the afternoon, embark on the 3-mile roundtrip trail up to the world-famous Delicate Arch for an unforgettable golden hour sunset.",
-              zh: "摩押與拱門深度遊第 2 天。上午造訪峽谷地國家公園（天空之島區）欣賞壯麗的梅薩拱門。午後挑戰 3 英里往返步道，親眼目睹世界聞名的精緻拱門（Delicate Arch）在金黃夕陽下的壯麗景致。"
-            },
-            highlight: { en: "Canyonlands Mesa Arch & Delicate Arch Sunset", zh: "峽谷地梅薩拱門與精緻拱門日落" }
-          },
-          {
-            day: 4, date: "Dec 8, 2026 (Tue)", title: { en: "Moab ➔ Monument Valley ➔ Page, AZ", zh: "摩押 ➔ 紀念碑谷 ➔ 佩吉市（亞利桑那州）" },
-            drive: { en: "🚗 ~4.5 hrs (270 miles / 435 km)", zh: "🚗 約 4.5 小時（270 英里 / 435 公里）" },
-            weather: {
-              en: "⛅ Chilly High Desert: High 45°F / Low 25°F (7°C / -4°C). Stunning red rock photography.",
-              zh: "⛅ 高原晴朗：最高 7°C / 最低 -4°C。紅岩地貌攝影光線絕佳。"
-            },
-            desc: {
-              en: "Drive southwest from Moab through iconic Monument Valley. Take photos at Forrest Gump Point on US-163 where the highway stretches toward the towering mittens. Arrive in Page, AZ by late afternoon to settle in for your 2-night stay.",
-              zh: "從摩押向西南行駛，途經經典的紀念碑谷。特別在 US-163 的阿甘正傳打卡點（Forrest Gump Point）駐足拍照。傍晚抵達亞利桑那州佩吉市，準備展開連續 2 晚的舒適停留。"
-            },
-            highlight: { en: "Monument Valley & Forrest Gump Point", zh: "紀念碑谷與公路打卡點" }
-          },
-          {
-            day: 5, date: "Dec 9, 2026 (Wed)", title: { en: "Antelope Canyon — Day 1 (Upper & Lower Slot Canyons)", zh: "羚羊峽谷 — 第一天（上與下狹縫峽谷導覽）" },
-            drive: { en: "🚗 Local driving (~0.5 hrs total)", zh: "🚗 僅當地短途車程（總計約 0.5 小時）" },
-            weather: {
-              en: "☀️ Crisp & Clear: High 48°F / Low 28°F (9°C / -2°C). Layer heavily for slot canyons.",
-              zh: "☀️ 晴朗微寒：最高 9°C / 最低 -2°C。狹縫峽谷內風大，請穿著多層保暖衣物。"
-            },
-            desc: {
-              en: "First full day in Page dedicated entirely to Antelope Canyon. Take morning guided tours of Upper Antelope Canyon to see the famous sunlight beams, followed by an afternoon exploration of the twisting staircases in Lower Antelope Canyon.",
-              zh: "在佩吉市展開全天候羚羊峽谷深度探索第 1 天。上午參加上羚羊峽谷導覽，欣賞夢幻的金色光束；下午前往下羚羊峽谷，穿梭於雕刻般的奇幻彎曲岩壁與鐵梯之間。"
-            },
-            highlight: { en: "Upper & Lower Antelope Canyon Guided Tours", zh: "上/下羚羊峽谷專業導覽" }
-          },
-          {
-            day: 6, date: "Dec 10, 2026 (Thu)", title: { en: "Antelope Canyon — Day 2 (Horseshoe Bend & Toadstool Hoodoos)", zh: "羚羊峽谷 — 第二天（馬蹄灣與蕈狀奇石健行）" },
-            drive: { en: "🚗 Local driving (~1 hr total)", zh: "🚗 當地短途（總計約 1 小時）" },
-            weather: {
-              en: "☀️ Sunny & Serene: High 50°F / Low 29°F (10°C / -1°C). Great weather for desert walks.",
-              zh: "☀️ 晴朗舒適：最高 10°C / 最低 -1°C。非常適合進行戶外沙漠健行。"
-            },
-            desc: {
-              en: "Second full day in Page. Morning hike to the rim of Horseshoe Bend overlooking the emerald Colorado River loop. In the afternoon, take a scenic drive north to explore the surreal geological rock formations at Toadstool Hoodoos. Relaxing evening in Page.",
-              zh: "佩吉市與羚羊峽谷周邊深度探索第 2 天。早晨漫步至馬蹄灣俯瞰翠綠的科羅拉多河大轉彎。午後向北開車前往探索奇幻的蕈狀岩（Toadstool Hoodoos）獨特地質景觀。夜宿 Page。"
-            },
-            highlight: { en: "Horseshoe Bend & Toadstool Hoodoos", zh: "馬蹄灣與蕈狀奇石健行" }
-          },
-          {
-            day: 7, date: "Dec 11, 2026 (Fri)", title: { en: "Page, AZ ➔ Scenic Transit to Alamogordo, NM", zh: "佩吉市 ➔ 景觀公路南下至阿拉莫戈多" },
-            drive: { en: "🚗 ~6.0 hrs (380 miles / 611 km)", zh: "🚗 約 6.0 小時（380 英里 / 611 公里）" },
-            weather: {
-              en: "🌥️ Warming Trend: High 54°F / Low 30°F (12°C / -1°C). Weather improves heading south.",
-              zh: "🌥️ 氣溫回暖：最高 12°C / 最低 -1°C。一路向南行駛，氣候逐漸暖和。"
-            },
-            desc: {
-              en: "Scenic driving day heading southeast from northern Arizona through New Mexico towards Alamogordo. Enjoy changing desert landscapes as you approach the Tularosa Basin. Arrive in evening for a restful night.",
-              zh: "早晨從佩吉市出發，向東南行駛穿越亞利桑那州北部與新墨西哥州前往阿拉莫戈多。沿途欣賞沙漠地貌逐漸轉為廣袤盆地。傍晚抵達並充分休息。"
-            },
-            highlight: { en: "Desert Highway Scenic Transit", zh: "沙漠景觀公路縱貫" }
-          },
-          {
-            day: 8, date: "Dec 12, 2026 (Sat)", title: { en: "White Sands National Park — Full Day & Sunset Sledding", zh: "白沙國家公園全天深度遊與日落滑沙" },
-            drive: { en: "🚗 Local driving (~1 hr total)", zh: "🚗 當地短途（總計約 1 小時）" },
-            weather: {
-              en: "☀️ Mild & Sunny: High 61°F / Low 36°F (16°C / 2°C). Wonderful warm desert afternoon sun.",
-              zh: "☀️ 晴朗溫暖：最高 16°C / 最低 2°C。午後沙漠陽光舒適宜人。"
-            },
-            desc: {
-              en: "Dedicate the entire day to White Sands National Park. Hike the Alkali Flat Trail or Interdune Boardwalk across the shimmering white gypsum dunes. Rent plastic sleds to glide down the slopes and stay for a breathtaking pastel sunset over the dunes.",
-              zh: "整天深度暢玩白沙國家公園。漫步於 Alkali Flat 步道或 Interdune Boardwalk，欣賞閃閃發光的純白石膏沙丘。在禮品店租用滑沙板體驗極速滑沙，並留下來欣賞沙丘上絕美的粉嫩色系日落。夜宿 Alamogordo 或 Las Cruces。"
-            },
-            highlight: { en: "White Sands Gypsum Dunes & Sunset Sledding", zh: "純白石膏沙丘與日落滑沙" }
-          },
-          {
-            day: 9, date: "Dec 13, 2026 (Sun)", title: { en: "El Paso (ELP) ✈️ Fly Home to EWR", zh: "埃爾帕索 (ELP) ✈️ 搭機返回 Newark (EWR)" },
-            drive: { en: "🚗 ~1.5 hrs from Alamogordo to ELP Airport", zh: "🚗 從阿拉莫戈多開車約 1.5 小時至 ELP 機場" },
-            weather: {
-              en: "☀️ Sunny Southern Border: High 63°F / Low 38°F (17°C / 3°C). Clear departure weather.",
-              zh: "☀️ 南部晴朗：最高 17°C / 最低 3°C。出發日天氣晴朗穩定。"
-            },
-            desc: {
-              en: "Morning drive from Alamogordo down to El Paso International Airport (ELP) (~1.5 hours). Return rental SUV and catch your flight back home to EWR, concluding an incredible 9-day southwest national parks road trip from north to south.",
-              zh: "早晨從阿拉莫戈多開車前往埃爾帕索國際機場（ELP，約 1.5 小時）。歸還租車後搭乘航班返回 Newark (EWR)，帶著滿滿的由北向南壯麗美景回憶順利返家。"
-            },
-            highlight: { en: "Return Flight Home from ELP", zh: "由 ELP 機場返程航班" }
-          }
-        ]
-      },
-      europe: {
-        hero: {
-          badge: { en: "Outbound: EWR ✈️ PRG | Return: VIE ✈️ EWR", zh: "去程：Newark ✈️ 布拉格 | 回程：維也納 ✈️ Newark" },
-          title: { en: "Prague & Vienna Winter Imperial Cities Trip", zh: "布拉格與維也納冬日中歐帝國雙城之旅" },
-          desc: {
-            en: "A mesmerizing 9-day European cultural getaway during the peak Christmas market season. Spend 4 days exploring fairy-tale Prague, take a smooth scenic train to Austria, and spend 4 days discovering imperial Vienna.",
-            zh: "在聖誕市集溫馨浪漫的 12 月，展開為期 9 天的中歐文化雙城之旅。4 天深度感受童話布拉格、搭乘舒適景觀火車，再於維也納享受 4 天帝國宮殿與音樂藝術饗宴。"
-          },
-          stops: { en: "Prague Old Town • Charles Bridge • Railjet Express • Vienna Palaces", zh: "布拉格老城 • 查理大橋 • 高鐵景觀列車 • 美泉宮與維也納市集" }
-        },
-        pros: [
-          { en: "<strong>Magical Christmas Markets:</strong> Early December is prime season for world-renowned Prague & Vienna Advent/Christmas markets.", zh: "<strong>夢幻聖誕市集：</strong> 12 月初正是世界聞名的布拉格與維也納聖誕市集最熱鬧浪漫的時節。" },
-          { en: "<strong>No Rental Car Driving:</strong> Relax on seamless high-speed trains (ÖBB Railjet) without driving in winter conditions.", zh: "<strong>無須自駕開車：</strong> 搭乘舒適方便的高鐵火車（ÖBB Railjet），免去冬季雪地駕車壓力與負擔。" },
-          { en: "<strong>Direct Flight Convenience:</strong> Non-stop United flight available back from Vienna (VIE) directly into EWR.", zh: "<strong>直飛航班優勢：</strong> 維也納 (VIE) 有 United 聯合航空直飛 Newark (EWR) 的便利航班。" },
-          { en: "<strong>Rich Culture & Cuisine:</strong> World-class classical music, historic castles, hearty Central European comfort food & festive wine.", zh: "<strong>深厚人文歷史：</strong> 世界級音樂會、百年古典城堡、熱氣騰騰的中歐美食與熱紅酒（Glühwein）。" }
-        ],
-        cons: [
-          { en: "<strong>Transatlantic Flight & Jet Lag:</strong> ~8-hour overnight flight with 6-hour time difference.", zh: "<strong>長途飛行與時差：</strong> 跨大西洋約 8 小時夜間飛行，並有 6 小時時差需要適應。" },
-          { en: "<strong>Cold Winter Weather:</strong> Daytime temps around 35–42°F (2–6°C); requires thick winter coats, gloves, and boots.", zh: "<strong>冬季氣溫偏低：</strong> 日間氣溫約 2–6°C，需要準備厚羽絨衣、帽子與保暖靴子。" },
-          { en: "<strong>Shorter Daylight Hours:</strong> Sunset occurs early around 4:15 PM in December.", zh: "<strong>日照時間較短：</strong> 12 月北半球高緯度地區下午 4:15 左右即落日。" }
-        ],
-        days: [
-          {
-            day: 1, date: "Dec 5, 2026 (Sat)", title: { en: "Depart EWR ✈️ Overnight Flight to Prague (PRG)", zh: "從 Newark (EWR) 出發 ✈️ 夜宿機上前往布拉格 (PRG)" },
-            drive: { en: "✈️ Overnight transatlantic flight", zh: "✈️ 跨大西洋夜航" },
-            weather: {
-              en: "✈️ In-Flight Air: Comfortable cabin temperature. Pack noise-canceling headphones & eye mask.",
-              zh: "✈️ 機艙環境：溫控舒適。建議準備抗噪耳機與舒眠眼罩。"
-            },
-            desc: {
-              en: "Board evening transatlantic flight from EWR to Prague (PRG) via European hub connection (Frankfurt/Zurich). Enjoy dinner service and get a good night's sleep on board so you land energized.",
-              zh: "傍晚於 Newark (EWR) 搭乘跨大西洋航班，經歐洲樞紐轉機（如法蘭克福或蘇黎世）飛往布拉格。享用晚餐後在機上充份休息，為明天的歐洲探險補足體力。"
-            },
-            highlight: { en: "Flight Outbound", zh: "展開歐洲之旅" }
-          },
-          {
-            day: 2, date: "Dec 6, 2026 (Sun)", title: { en: "Arrive in Prague ➔ Old Town Square & Christmas Markets", zh: "抵達布拉格 ➔ 老城廣場與聖誕市集" },
-            drive: { en: "🚖 Airport transfer ~30 mins", zh: "🚖 機場接駁約 30 分鐘" },
-            weather: {
-              en: "❄️ Chilly Central Europe: High 39°F / Low 30°F (4°C / -1°C). Damp air; wear heavy winter coat.",
-              zh: "❄️ 中歐寒冷：最高 4°C / 最低 -1°C。空氣較為濕冷，請著厚羽絨大衣。"
-            },
-            desc: {
-              en: "Arrive at Prague Airport (PRG) around midday. Take a quick private taxi to your Old Town hotel. Evening stroll through Old Town Square under the giant illuminated Christmas Tree, sipping steaming spiced wine (Svařák) and eating warm cinnamon-dusted Trdelník pastry.",
-              zh: "中午抵達布拉格機場 (PRG)，搭乘接駁車至老城區飯店 Check-in。傍晚漫步老城廣場，在巨型聖誕樹下品嚐熱紅酒（Svařák）與現烤捷克肉桂捲（Trdelník），感受無與倫比的冬日童話氛圍。"
-            },
-            highlight: { en: "Old Town Christmas Tree & Astronomical Clock", zh: "老城廣場聖誕樹與天文鐘" }
-          },
-          {
-            day: 3, date: "Dec 7, 2026 (Mon)", title: { en: "Prague Castle, St. Vitus & Mala Strana", zh: "布拉格城堡、聖維特大教堂與小城區" },
-            drive: { en: "🚶 Walking & Tram local", zh: "🚶 徒步與電車" },
-            weather: {
-              en: "☁️ Overcast & Cold: High 37°F / Low 28°F (3°C / -2°C). Gloves & scarf essential.",
-              zh: "☁️ 多雲陰冷：最高 3°C / 最低 -2°C。手套、圍巾為戶外活動必備。"
-            },
-            desc: {
-              en: "Walk across historic Charles Bridge at sunrise to avoid tourist crowds. Explore the vast Prague Castle complex, St. Vitus Cathedral, and Golden Lane. Have lunch at Cafe Imperial for classic Czech beef sirloin with cream sauce (Svíčková).",
-              zh: "清晨趁遊客稀少時走過清幽的查理大橋。參觀雄偉的布拉格城堡群、聖維特大教堂與黃金巷。午餐推薦在華麗的 Cafe Imperial 帝國咖啡館品嚐經典捷克燉牛柳（Svíčková）。"
-            },
-            highlight: { en: "Prague Castle & Imperial Cafe Lunch", zh: "布拉格城堡群與帝國咖啡館晚餐" }
-          },
-          {
-            day: 4, date: "Dec 8, 2026 (Tue)", title: { en: "Jewels of Prague: Jewish Quarter & Vyšehrad Citadel", zh: "布拉格精華：猶太區與高堡" },
-            drive: { en: "🚶 Walking & Metro local", zh: "🚶 徒步與地鐵" },
-            weather: {
-              en: "🌤️ Cold & Crisp: High 38°F / Low 29°F (3°C / -2°C). Possibility of light snow.",
-              zh: "🌤️ 寒冷清爽：最高 3°C / 最低 -2°C。可能飄有微量雪花。"
-            },
-            desc: {
-              en: "Morning tour of the historic Jewish Quarter (Josefov) and the stunning Spanish Synagogue interior. Afternoon visit to Vyšehrad Citadel perched high on the hill for breathtaking panoramic river views over the Vltava. Dine at Lokál for fresh Pilsner Urquell beer and dumplings.",
-              zh: "上午探索具深厚歷史的猶太區與雕飾華麗的西班牙會堂。下午登上高堡（Vyšehrad）俯瞰伏爾塔瓦河與布拉格百塔之城的壯麗全景。晚間於熱鬧的 Lokál 酒館享用新鮮皮爾森啤酒與傳統捷克饅頭（Knedlíky）。"
-            },
-            highlight: { en: "Vyšehrad Panoramic Views & Spanish Synagogue", zh: "高堡河岸全景與西班牙會堂" }
-          },
-          {
-            day: 5, date: "Dec 9, 2026 (Wed)", title: { en: "Scenic Train to Vienna ➔ Evening in Imperial City", zh: "觀光高鐵前往維也納 ➔ 帝國之都浪漫夜景" },
-            drive: { en: "🚆 ÖBB Railjet Train (~4 hrs direct)", zh: "🚆 ÖBB 歐鐵高鐵（約 4 小時直達）" },
-            weather: {
-              en: "☁️ Crisp Austrian Air: High 41°F / Low 32°F (5°C / 0°C). Comfortable indoor train rides.",
-              zh: "☁️ 奧地利清寒：最高 5°C / 最低 0°C。高鐵車廂內暖氣充足舒適。"
-            },
-            desc: {
-              en: "Board a comfortable ÖBB Railjet high-speed train from Prague Main Station directly to Vienna Hbf (4 hrs) with onboard Wi-Fi and bistro car. Check into your Vienna hotel and spend the evening at Rathausplatz—Austria's grandest Christmas Market in front of the City Hall.",
-              zh: "上午於布拉格中央車站搭乘舒適的 ÖBB 高鐵直達維也納中央車站（約 4 小時），車上配有免費 Wi-Fi 與餐車。入住飯店後，傍晚前往市政廳廣場感受全奧地利規模最盛大的帝國聖誕市集。"
-            },
-            highlight: { en: "First-Class Railjet Train & Rathausplatz Market", zh: "高鐵景觀列車與市政廳聖誕市集" }
-          },
-          {
-            day: 6, date: "Dec 10, 2026 (Thu)", title: { en: "Schönbrunn Palace & Hofburg Imperial Treasury", zh: "美泉宮（夏宮）與霍夫堡皇宮" },
-            drive: { en: "🚇 U-Bahn Metro local (~15 mins)", zh: "🚇 捷運 U-Bahn（約 15 分鐘）" },
-            weather: {
-              en: "🌥️ Winter Chilly: High 40°F / Low 31°F (4°C / -1°C). Ideal for palace interiors.",
-              zh: "🌥️ 冬日嚴寒：最高 4°C / 最低 -1°C。極適合安排室內宮殿巡禮。"
-            },
-            desc: {
-              en: "Grand tour of Schönbrunn Palace (Habsburg summer residence) and its artisan Christmas market. Afternoon tour of Hofburg Palace and the Sisi Museum in the heart of Vienna. In the evening, attend a classical Mozart & Strauss concert in a historic gilded concert hall.",
-              zh: "上午參觀哈布斯堡王朝奢華的美泉宮及其皇宮聖誕市集。下午造訪霍夫堡皇宮與茜茜公主博物館（Sisi Museum）。晚上安排至古典音樂廳聆聽一場精彩的莫札特與施特勞斯古典交響音樂會。"
-            },
-            highlight: { en: "Schönbrunn Palace & Classical Concert", zh: "美泉宮巡禮與古典音樂會" }
-          },
-          {
-            day: 7, date: "Dec 11, 2026 (Fri)", title: { en: "Belvedere Palace (Klimt) & St. Stephen's Cathedral", zh: "美景宮（克林姆金箔畫）與聖史蒂芬大教堂" },
-            drive: { en: "🚶 Walking & Tram local", zh: "🚶 徒步與電車" },
-            weather: {
-              en: "🌤️ Cold with Sunny Spells: High 42°F / Low 33°F (6°C / 1°C). Great photography light.",
-              zh: "🌤️ 寒冷晴朗：最高 6°C / 最低 1°C。陽光普照，極適合街拍攝影。"
-            },
-            desc: {
-              en: "Visit Upper Belvedere Museum to view Gustav Klimt's iconic gold-leaf masterpiece 'The Kiss'. Walk down the elegant Graben and Kärntner Straße shopping avenues to St. Stephen's Cathedral. Take a break at Cafe Sacher for a slice of world-renowned original Sacher-Torte chocolate cake.",
-              zh: "參觀美景宮（Belvedere）欣賞克林姆知名金箔畫作《吻》。漫步格拉本大街與卡爾特大街至聖史蒂芬大教堂，並在百年 Cafe Sacher 咖啡館品嚐最經典的正宗薩赫巧克力蛋糕（Sacher-Torte）。"
-            },
-            highlight: { en: "Belvedere Palace & Famous Cafe Sacher", zh: "美景宮名畫《吻》與薩赫蛋糕" }
-          },
-          {
-            day: 8, date: "Dec 12, 2026 (Sat)", title: { en: "Vienna Art History Museum & Stephansplatz Evening", zh: "維也納藝術史博物館與聖史蒂芬廣場" },
-            drive: { en: "🚶 Walking & Tram local", zh: "🚶 徒步與電車" },
-            weather: {
-              en: "☁️ Cold Winter Air: High 39°F / Low 30°F (4°C / -1°C). Bundle up for night markets.",
-              zh: "☁️ 寒氣逼人：最高 4°C / 最低 -1°C。晚上逛市集請特別注重頭部與足部保暖。"
-            },
-            desc: {
-              en: "Explore the world-class Kunsthistorisches Museum (Art History Museum) and enjoy coffee inside its stunning dome cafe. Shop for Austrian chocolates (Mozartkugeln) as souvenirs, and enjoy a farewell dinner featuring crispy golden Wiener Schnitzel at Figlmüller.",
-              zh: "探索世界級的維也納藝術史博物館，並在其宮殿般的中庭穹頂咖啡廳享用咖啡。購買著名的莫札特巧克力（Mozartkugeln）做為伴手禮，晚間於百年老店 Figlmüller 享用金黃酥脆的炸牛排（Wiener Schnitzel）歡送晚宴。"
-            },
-            highlight: { en: "Kunsthistorisches Museum & Figlmüller Schnitzel", zh: "藝術史博物館與百年炸牛排晚餐" }
-          },
-          {
-            day: 9, date: "Dec 13, 2026 (Sun)", title: { en: "Vienna (VIE) ✈️ Non-Stop Flight Back to EWR", zh: "維也納 (VIE) ✈️ 直飛航班返抵 Newark (EWR)" },
-            drive: { en: "🚕 CAT Train / Taxi ~25 mins", zh: "🚕 機場快線 CAT 約 25 分鐘" },
-            weather: {
-              en: "⛅ Crisp European Departure: High 38°F / Low 28°F (3°C / -2°C). Smooth airport transfers.",
-              zh: "⛅ 返程天氣：最高 3°C / 最低 -2°C。機場快線行駛順暢。"
-            },
-            desc: {
-              en: "Take the City Airport Train (CAT) directly to Vienna International Airport (VIE). Board your non-stop United Airlines flight back home to Newark (EWR), arriving same evening with wonderful European winter memories.",
-              zh: "搭乘 CAT 機場快線直達維也納國際機場 (VIE)，搭乘 United 聯合航空直飛航班返回 Newark (EWR)，傍晚順利抵達家門，為浪漫的中歐聖誕雙城之旅劃下完美句點。"
-            },
-            highlight: { en: "Non-Stop UA Flight VIE ➔ EWR", zh: "聯合航空維也納直飛返紐" }
-          }
-        ]
-      }
-    };
-
-    let currentItinerary = 'southwest';
-    let currentLang = 'en';
-
-    function setLanguage(lang) {
-      currentLang = lang;
-
-      // Update toggle buttons with high-visibility styles
-      const btnEn = document.getElementById('btn-en');
-      const btnZh = document.getElementById('btn-zh');
-      if (lang === 'en') {
-        btnEn.className = 'px-4 py-2.5 rounded-xl font-extrabold text-sm flex items-center gap-2 transition-all duration-200 bg-cyan-500 text-slate-950 shadow-md';
-        btnZh.className = 'px-4 py-2.5 rounded-xl font-bold text-sm text-slate-300 hover:text-white flex items-center gap-2 transition-all duration-200';
-      } else {
-        btnZh.className = 'px-4 py-2.5 rounded-xl font-extrabold text-sm flex items-center gap-2 transition-all duration-200 bg-cyan-500 text-slate-950 shadow-md';
-        btnEn.className = 'px-4 py-2.5 rounded-xl font-bold text-sm text-slate-300 hover:text-white flex items-center gap-2 transition-all duration-200';
-      }
-
-      // Update static UI Labels
-      document.getElementById('title-text').textContent = lang === 'en' ? 'Dec 5–13, 2026 Vacation Comparison' : '2026年12月5–13日 假期行程比較';
-      document.getElementById('subtitle-text').textContent = lang === 'en' ? 'Origin: EWR (Newark Liberty) • 9 Days Trip' : '出發地：紐華克機場 (EWR) • 9天行程';
-      document.getElementById('label-sw-btn').textContent = lang === 'en' ? 'US Southwest' : '美國西南國家公園';
-      document.getElementById('label-eu-btn').textContent = lang === 'en' ? 'Prague & Vienna' : '布拉格 & 維也納';
-      document.getElementById('lbl-duration').textContent = lang === 'en' ? 'Duration' : '行程總長';
-      document.getElementById('val-duration').textContent = lang === 'en' ? '9 Days (Dec 5 - 13, 2026)' : '9 天（2026年12月5日–13日）';
-      document.getElementById('lbl-stops').textContent = lang === 'en' ? 'Key Highlights' : '核心亮點';
-      document.getElementById('lbl-pros').textContent = lang === 'en' ? 'Trip Advantages (Pros)' : '行程優點 (Pros)';
-      document.getElementById('lbl-cons').textContent = lang === 'en' ? 'Potential Challenges (Cons)' : '需要考量之處 (Cons)';
-      document.getElementById('lbl-schedule-title').textContent = lang === 'en' ? 'Day-by-Day Detailed Itinerary' : '每日詳細行程規劃';
-      document.getElementById('lbl-timezone-note').textContent = lang === 'en' ? 'All times are local time' : '所有時間均為當地時間';
-      document.getElementById('footer-note').textContent = lang === 'en' ? 'Designed for side-by-side comparison with dual EN/ZH translation' : '提供兩大方案比較與中英雙語對照切換';
-
-      renderActiveItinerary();
-    }
-
-    function switchItinerary(itineraryKey) {
-      currentItinerary = itineraryKey;
-
-      const tabSW = document.getElementById('tab-southwest');
-      const tabEU = document.getElementById('tab-europe');
-
-      if (itineraryKey === 'southwest') {
-        tabSW.className = 'px-4 py-2.5 rounded-xl font-extrabold text-sm flex items-center gap-2 transition-all duration-200 bg-amber-400 text-slate-950 shadow-md';
-        tabEU.className = 'px-4 py-2.5 rounded-xl font-bold text-sm text-slate-300 hover:text-white flex items-center gap-2 transition-all duration-200';
-      } else {
-        tabEU.className = 'px-4 py-2.5 rounded-xl font-extrabold text-sm flex items-center gap-2 transition-all duration-200 bg-indigo-500 text-white shadow-md';
-        tabSW.className = 'px-4 py-2.5 rounded-xl font-bold text-sm text-slate-300 hover:text-white flex items-center gap-2 transition-all duration-200';
-      }
-
-      renderActiveItinerary();
-    }
-
-    function renderActiveItinerary() {
-      const activeData = data[currentItinerary];
-
-      // Hero Render
-      document.getElementById('hero-badge').textContent = activeData.hero.badge[currentLang];
-      document.getElementById('hero-title').textContent = activeData.hero.title[currentLang];
-      document.getElementById('hero-desc').textContent = activeData.hero.desc[currentLang];
-      document.getElementById('val-stops').textContent = activeData.hero.stops[currentLang];
-
-      // Pros List
-      const prosList = document.getElementById('list-pros');
-      prosList.innerHTML = activeData.pros.map(item => `
-        <li class="flex items-start gap-3">
-          <i class="fa-solid fa-circle-check text-emerald-400 text-lg shrink-0 mt-0.5"></i>
-          <span>${item[currentLang]}</span>
-        </li>
-      `).join('');
-
-      // Cons List
-      const consList = document.getElementById('list-cons');
-      consList.innerHTML = activeData.cons.map(item => `
-        <li class="flex items-start gap-3">
-          <i class="fa-solid fa-circle-exclamation text-rose-400 text-lg shrink-0 mt-0.5"></i>
-          <span>${item[currentLang]}</span>
-        </li>
-      `).join('');
-
-      // Days Timeline
-      const timeline = document.getElementById('itinerary-timeline');
-      timeline.innerHTML = activeData.days.map(day => `
-        <div class="bg-slate-900/90 border-2 border-slate-700/80 rounded-2xl p-5 transition-all hover:border-amber-400/60 shadow-xl">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b-2 border-slate-800 pb-3.5 mb-4">
-            <div class="flex items-center gap-3.5">
-              <span class="px-3 py-1.5 bg-indigo-600 text-white font-black text-xs rounded-xl shadow-md">
-                Day ${day.day}
-              </span>
-              <div>
-                <h4 class="font-extrabold text-white text-lg">${day.title[currentLang]}</h4>
-                <div class="text-xs text-amber-300 font-bold mt-0.5">${day.date}</div>
-              </div>
-            </div>
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-950 text-amber-300 border border-amber-500/40 rounded-xl text-xs font-bold self-start sm:self-auto shadow-inner">
-              <i class="fa-regular fa-clock"></i>
-              <span>${day.drive[currentLang]}</span>
-            </div>
-          </div>
-          
-          <!-- Weather Prediction Badge -->
-          <div class="mb-4 px-3.5 py-2 bg-sky-950/60 border border-sky-500/40 rounded-xl text-sm font-semibold text-sky-200 flex items-center gap-2.5 shadow-sm">
-            <i class="fa-solid fa-cloud-sun text-sky-400 text-base shrink-0"></i>
-            <span><strong>${currentLang === 'en' ? 'Forecast & Climate:' : '天氣預報與穿搭推薦：'}</strong> ${day.weather[currentLang]}</span>
-          </div>
-
-          <p class="text-slate-200 text-base leading-relaxed mb-4">${day.desc[currentLang]}</p>
-          <div class="flex items-center gap-2 text-xs font-extrabold text-emerald-300 bg-emerald-950/60 border border-emerald-700/60 px-3.5 py-2 rounded-xl w-fit shadow-sm">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <span>${currentLang === 'en' ? 'Highlight:' : '核心特色：'} ${day.highlight[currentLang]}</span>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // Initialize
-    renderActiveItinerary();
-
-    // Scroll direction detector for mobile auto-hiding header
-    let lastScrollTop = 0;
-    const header = document.getElementById('main-header');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerary Comparison: Texas & New Mexico vs. Sicily (Dec 5–13, 2026)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     
-    window.addEventListener('scroll', function() {
-      // Only apply auto-hide behavior on mobile/smaller screens (width < 768px)
-      if (window.innerWidth < 768) {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop > lastScrollTop && scrollTop > 60) {
-          // Scrolling down -> hide header
-          header.classList.add('hide-header');
-        } else {
-          // Scrolling up -> show header
-          header.classList.remove('hide-header');
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', '"Noto Sans TC"', 'sans-serif'],
+                        serif: ['"Playfair Display"', '"Noto Sans TC"', 'serif'],
+                    },
+                    colors: {
+                        texas: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            500: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                            rust: '#c85a32',
+                            sand: '#e8d8c8',
+                        },
+                        sicily: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
         }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-      } else {
-        // Ensure header is always visible on tablet/desktop view
-        header.classList.remove('hide-header');
-      }
-    }, { passive: true });
-  </script>
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .tab-transition {
+            transition: all 0.25s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-amber-100 selection:text-amber-900 min-h-screen flex flex-col">
+
+    <!-- Header Section -->
+    <header class="bg-slate-900 text-white pt-6 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <!-- Background mesh -->
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-amber-600 blur-3xl"></div>
+            <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-sky-600 blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <!-- Top Bar: Dates Badge & Large High-Visibility Language Toggle -->
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-slate-800 pb-6 mb-6">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/90 border border-slate-700 text-amber-400 text-sm font-bold tracking-wide uppercase shadow-md">
+                    <i class="fa-regular fa-calendar-days text-base"></i> <span data-i18n="dates_badge">Dec 5 – Dec 13, 2026 (9 Days)</span>
+                </div>
+
+                <!-- Prominent, High-Contrast Large Language Switcher -->
+                <div class="flex items-center bg-slate-950/90 border-2 border-amber-400/80 rounded-2xl p-1.5 shadow-2xl ring-4 ring-amber-500/20">
+                    <div class="px-3 text-amber-400 text-base font-extrabold flex items-center gap-1.5 hidden md:flex">
+                        <i class="fa-solid fa-globe text-lg animate-pulse"></i>
+                        <span class="text-xs uppercase tracking-wider text-slate-300">Language:</span>
+                    </div>
+                    <button id="lang-en-btn" onclick="setLanguage('en')" class="px-5 py-2.5 rounded-xl text-sm font-black transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow-lg scale-105">
+                        <span class="text-lg">🇺🇸</span> English
+                    </button>
+                    <button id="lang-zh-btn" onclick="setLanguage('zh')" class="px-5 py-2.5 rounded-xl text-sm font-black transition-all duration-300 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800">
+                        <span class="text-lg">🇹🇼</span> 繁體中文
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center max-w-3xl mx-auto">
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-serif text-white mb-4" data-i18n="page_title">
+                    December Travel Showdown
+                </h1>
+                <p class="text-slate-300 text-base sm:text-lg" data-i18n="page_subtitle">
+                    Comparing two unique 9-day winter break itineraries: A Southwest US linear road trip (Austin in, El Paso out) vs. a Sicilian island loop (Palermo round-trip with bus to Catania).
+                </p>
+
+                <!-- Mobile View Toggle Controls -->
+                <div class="mt-8 flex justify-center lg:hidden">
+                    <div class="bg-slate-800 p-1.5 rounded-xl border border-slate-700 inline-flex gap-1">
+                        <button id="view-both-btn" onclick="setMobileView('both')" class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg bg-slate-700 text-white shadow-sm transition" data-i18n="btn_compare_both">
+                            Compare Both
+                        </button>
+                        <button id="view-texas-btn" onclick="setMobileView('texas')" class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg text-slate-300 hover:text-white transition" data-i18n="btn_trip_a_short">
+                            🌵 Trip A (TX & NM)
+                        </button>
+                        <button id="view-sicily-btn" onclick="setMobileView('sicily')" class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg text-slate-300 hover:text-white transition" data-i18n="btn_trip_b_short">
+                            🏛️ Trip B (Sicily)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 mb-16 flex-grow relative z-20 w-full">
+
+        <!-- Overview Cards -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            
+            <!-- Trip 1 Overview Card -->
+            <div id="overview-texas" class="bg-white rounded-2xl shadow-xl border border-amber-100 overflow-hidden flex flex-col justify-between">
+                <div class="bg-gradient-to-r from-amber-700 to-amber-800 p-6 text-white">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="px-3 py-1 rounded-full bg-amber-900/70 text-amber-200 text-xs font-bold uppercase tracking-wider" data-i18n="trip_a_tag">Option A • One-Way Road Trip</span>
+                        <span class="text-amber-200 text-xs font-semibold"><i class="fa-solid fa-plane"></i> AUS in ✈️ ELP out</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold font-serif" data-i18n="trip_a_title">Texas & New Mexico</h2>
+                    <p class="text-amber-100 text-sm mt-1" data-i18n="trip_a_route">Austin (AUS) → Big Bend National Park → White Sands National Park → El Paso (ELP)</p>
+                </div>
+
+                <div class="p-6 grid grid-cols-2 gap-4 bg-amber-50/30 text-sm border-b border-amber-100">
+                    <div>
+                        <span class="text-xs text-slate-500 block font-medium" data-i18n="meta_flights">Flight Routing</span>
+                        <span class="font-semibold text-slate-800" data-i18n="trip_a_flights">Fly into Austin (AUS), Out of El Paso (ELP)</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-500 block font-medium" data-i18n="meta_transit">Ground Transit</span>
+                        <span class="font-semibold text-slate-800"><i class="fa-solid fa-car text-amber-700"></i> ~850 Mi Driving (One-Way)</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-500 block font-medium" data-i18n="meta_weather">Dec Weather</span>
+                        <span class="font-semibold text-slate-800" data-i18n="trip_a_weather">Sunny Desert (35°–65°F / 2°–18°C)</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-500 block font-medium" data-i18n="meta_vibe">Vibe & Style</span>
+                        <span class="font-semibold text-slate-800" data-i18n="trip_a_vibe">Craft BBQ & Rugged Nature</span>
+                    </div>
+                </div>
+
+                <!-- Prominent Key Highlights Image Gallery -->
+                <div class="p-6">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4" data-i18n="highlights_title">Featured Highlights & Scenery</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="relative group rounded-xl overflow-hidden h-40 bg-slate-100 shadow-sm border border-slate-200">
+                            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Austin Texas BBQ" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/d97706/ffffff?text=Austin+BBQ'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3 flex flex-col justify-end">
+                                <span class="text-xs font-bold text-white" data-i18n="img_austin_bbq">Austin Craft BBQ</span>
+                                <span class="text-[10px] text-amber-200" data-i18n="img_austin_sub">Central Texas Brisket</span>
+                            </div>
+                        </div>
+                        <div class="relative group rounded-xl overflow-hidden h-40 bg-slate-100 shadow-sm border border-slate-200">
+                            <img src="https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=600&q=80" alt="Santa Elena Canyon Big Bend" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/b45309/ffffff?text=Big+Bend+NP'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3 flex flex-col justify-end">
+                                <span class="text-xs font-bold text-white" data-i18n="img_big_bend">Santa Elena Canyon</span>
+                                <span class="text-[10px] text-amber-200" data-i18n="img_big_bend_sub">Big Bend National Park</span>
+                            </div>
+                        </div>
+                        <div class="relative group rounded-xl overflow-hidden h-40 bg-slate-100 shadow-sm border border-slate-200">
+                            <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80" alt="White Sands National Park" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/92400e/ffffff?text=White+Sands'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3 flex flex-col justify-end">
+                                <span class="text-xs font-bold text-white" data-i18n="img_white_sands">Gypsum Sand Dunes</span>
+                                <span class="text-[10px] text-amber-200" data-i18n="img_white_sands_sub">White Sands NP (NM)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trip 2 Overview Card -->
+            <div id="overview-sicily" class="bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden flex flex-col justify-between">
+                <div class="bg-gradient-to-r from-sky-800 to-sky-900 p-6 text-white">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="px-3 py-1 rounded-full bg-sky-950/70 text-sky-200 text-xs font-bold uppercase tracking-wider" data-i18n="trip_b_tag">Option B • Island Loop</span>
+                        <span class="text-sky-200 text-xs font-semibold"><i class="fa-solid fa-bus"></i> Flights & Intercity Bus</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold font-serif" data-i18n="trip_b_title">Sicily, Italy</h2>
+                    <p class="text-sky-100 text-sm mt-1" data-i18n="trip_b_route">Palermo (PMO) Round-trip • Express Bus to/from Catania & Mount Etna</p>
+                </div>
+
+                <div class="p-6 grid grid-cols-2 gap-4 bg-sky-50/30 text-sm border-b border-sky-100">
+                    <div>
+                        <span class="text-xs text-slate-500 block font-medium" data-i18n="meta_flights">Flight Routing</span>
+                        <span class="font-semibold text-slate-800" data-i18n="trip_b_flights">Round-trip into/out of Palermo (PMO)</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-500 block font-medium" data-i18n="meta_transit">Ground Transit</span>
+                        <span class="font-semibold text-slate-800"><i class="fa-solid fa-bus-simple text-sky-700"></i> Express Bus (~2.5h each way)</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-500 block font-medium" data-i18n="meta_weather">Dec Weather</span>
+                        <span class="font-semibold text-slate-800" data-i18n="trip_b_weather">Mild Coastal (50°–60°F / 10°–16°C)</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-500 block font-medium" data-i18n="meta_vibe">Vibe & Style</span>
+                        <span class="font-semibold text-slate-800" data-i18n="trip_b_vibe">Ancient History & Volcano Wine</span>
+                    </div>
+                </div>
+
+                <!-- Prominent Key Highlights Image Gallery -->
+                <div class="p-6">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4" data-i18n="highlights_title">Featured Highlights & Scenery</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="relative group rounded-xl overflow-hidden h-40 bg-slate-100 shadow-sm border border-slate-200">
+                            <img src="https://images.unsplash.com/photo-1541370976299-4d24ebbc9077?auto=format&fit=crop&w=600&q=80" alt="Palermo Cathedral" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/0284c7/ffffff?text=Palermo'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3 flex flex-col justify-end">
+                                <span class="text-xs font-bold text-white" data-i18n="img_palermo">Palermo Cathedral</span>
+                                <span class="text-[10px] text-sky-200" data-i18n="img_palermo_sub">Norman Architecture & Markets</span>
+                            </div>
+                        </div>
+                        <div class="relative group rounded-xl overflow-hidden h-40 bg-slate-100 shadow-sm border border-slate-200">
+                            <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=600&q=80" alt="Mount Etna Volcano" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/0369a1/ffffff?text=Mount+Etna'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3 flex flex-col justify-end">
+                                <span class="text-xs font-bold text-white" data-i18n="img_etna">Mount Etna</span>
+                                <span class="text-[10px] text-sky-200" data-i18n="img_etna_sub">Active Volcano & Vineyards</span>
+                            </div>
+                        </div>
+                        <div class="relative group rounded-xl overflow-hidden h-40 bg-slate-100 shadow-sm border border-slate-200">
+                            <img src="https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=600&q=80" alt="Taormina Greek Theatre" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/075985/ffffff?text=Taormina'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3 flex flex-col justify-end">
+                                <span class="text-xs font-bold text-white" data-i18n="img_taormina">Taormina Greek Theatre</span>
+                                <span class="text-[10px] text-sky-200" data-i18n="img_taormina_sub">Cliffside Ancient Ruins</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Pros & Cons Comparison Section -->
+        <section class="mb-12">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold font-serif text-slate-900" data-i18n="procon_section_title">Pros & Cons Breakdown</h2>
+                <p class="text-slate-500 text-sm" data-i18n="procon_section_sub">Key tradeoffs to evaluate before deciding</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Texas Pros & Cons -->
+                <div id="procon-texas" class="bg-white rounded-2xl p-6 shadow-md border border-amber-100">
+                    <h3 class="text-lg font-bold text-amber-900 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-hat-cowboy text-amber-600"></i> <span data-i18n="trip_a_title">Texas & New Mexico</span>
+                    </h3>
+                    
+                    <div class="mb-6">
+                        <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check"></i> <span data-i18n="pros_heading">Advantages (Pros)</span>
+                        </h4>
+                        <ul class="space-y-2.5 text-sm text-slate-600">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                                <span data-i18n="tx_pro_1">Efficient one-way routing (AUS in, ELP out) eliminates ~600 miles of stressful backtrack driving.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                                <span data-i18n="tx_pro_2">Unmatched natural contrast: from Austin's music & food scene to Big Bend's canyons and White Sands' snow-white gypsum dunes.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                                <span data-i18n="tx_pro_3">Optimal winter weather with crisp, sunny daytime hiking temperatures in West Texas desert parks.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                                <span data-i18n="tx_pro_4">Authentic culinary experience with world-famous Texas brisket, Tex-Mex, and craft brews in Austin and Marfa.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                                <span data-i18n="tx_pro_5">World-class stargazing at Big Bend National Park, an official International Dark Sky Reserve with exceptionally clear December night skies.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs font-bold text-rose-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-xmark"></i> <span data-i18n="cons_heading">Drawbacks (Cons)</span>
+                        </h4>
+                        <ul class="space-y-2.5 text-sm text-slate-600">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                                <span data-i18n="tx_con_1">Still involves substantial highway driving (~850 miles total) and one-way car rental drop-off fee.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                                <span data-i18n="tx_con_2">West Texas desert nights get quite cold (frequently dropping near freezing in Dec).</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                                <span data-i18n="tx_con_3">Remote stretches in Big Bend have patchy cell service and long distances between gas stations.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                                <span data-i18n="tx_con_4">Popular national park accommodations (Chisos Basin, Terlingua) require advance booking.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                                <span data-i18n="tx_con_5">Extreme desert diurnal temperature swings require packing heavy multi-layer cold weather gear alongside light daytime clothing.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Sicily Pros & Cons -->
+                <div id="procon-sicily" class="bg-white rounded-2xl p-6 shadow-md border border-sky-100">
+                    <h3 class="text-lg font-bold text-sky-900 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-landmark text-sky-600"></i> <span data-i18n="trip_b_title">Sicily, Italy</span>
+                    </h3>
+                    
+                    <div class="mb-6">
+                        <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check"></i> <span data-i18n="pros_heading">Advantages (Pros)</span>
+                        </h4>
+                        <ul class="space-y-2.5 text-sm text-slate-600">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                                <span data-i18n="sic_pro_1">No car rental necessary; comfortable express buses connect Palermo and Catania directly across the island.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                                <span data-i18n="sic_pro_2">Rich European cultural experience with millennial history, Greek theaters, and UNESCO cathedral mosaics.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                                <span data-i18n="sic_pro_3">Unforgettable Sicilian gastronomy: Arancini, fresh seafood, Mount Etna volcanic wines, and cannoli.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                                <span data-i18n="sic_pro_4">Low winter tourist crowds and festive Italian Christmas market atmosphere in Palermo & Catania.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                                <span data-i18n="sic_pro_5">Substantially lower off-season rates for boutique hotels, guided excursions, and dining compared to summer peak.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs font-bold text-rose-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-xmark"></i> <span data-i18n="cons_heading">Drawbacks (Cons)</span>
+                        </h4>
+                        <ul class="space-y-2.5 text-sm text-slate-600">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                                <span data-i18n="sic_con_1">Longer transatlantic flight time and jet lag impact on a 9-day break.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                                <span data-i18n="sic_con_2">Shorter winter daylight hours and chance of rain/cooler Mediterranean winds.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                                <span data-i18n="sic_con_3">Bus schedules dictate arrival times, requiring sticking to set intercity timetables.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                                <span data-i18n="sic_con_4">Some coastal beach venues and tourist shops operate on reduced off-season winter hours.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                                <span data-i18n="sic_con_5">Higher elevation activities like Mount Etna cable cars can be subject to weather closures or snow/wind shutdowns in December.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Day-by-Day Schedule Section with Visuals -->
+        <section class="mb-12">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold font-serif text-slate-900" data-i18n="itinerary_section_title">Day-by-Day Visual Itineraries</h2>
+                    <p class="text-slate-500 text-sm" data-i18n="itinerary_section_sub">Side-by-side comparison with key attractions for each day</p>
+                </div>
+                <!-- Day filter buttons -->
+                <div class="flex items-center gap-1 overflow-x-auto pb-2 sm:pb-0 custom-scrollbar">
+                    <span class="text-xs text-slate-400 font-semibold mr-2 uppercase" data-i18n="filter_jump">Filter:</span>
+                    <button onclick="filterDay('all')" class="day-filter-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white shrink-0" data-i18n="filter_all">All Days</button>
+                    <button onclick="filterDay(1)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 5</button>
+                    <button onclick="filterDay(2)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 6</button>
+                    <button onclick="filterDay(3)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 7</button>
+                    <button onclick="filterDay(4)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 8</button>
+                    <button onclick="filterDay(5)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 9</button>
+                    <button onclick="filterDay(6)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 10</button>
+                    <button onclick="filterDay(7)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 11</button>
+                    <button onclick="filterDay(8)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 12</button>
+                    <button onclick="filterDay(9)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 13</button>
+                </div>
+            </div>
+
+            <!-- Day-by-day Comparative List -->
+            <div id="itinerary-list" class="space-y-6">
+
+                <!-- Day 1 -->
+                <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="1">
+                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
+                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d1_header">Day 1 • Saturday, Dec 5, 2026</span></span>
+                        <span class="text-xs text-slate-300" data-i18n="d1_sub">Arrival & Evening Vibe</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                        <!-- Texas -->
+                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d1_tx_title">Arrive Austin (AUS) & BBQ Feast</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d1_tx_desc">Fly into Austin-Bergstrom (AUS). Pick up rental car and head straight to legendary Terry Black's BBQ for smoked brisket. Night walk along Rainey Street music district.</p>
+                            </div>
+                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1532635241-17e820acc59f?auto=format&fit=crop&w=600&q=80" alt="Austin Skyline" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/d97706/ffffff?text=Austin+Skyline'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_austin">Austin Downtown & Lady Bird Lake</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sicily -->
+                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d1_sic_title">Arrive Palermo (PMO) & Night Markets</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d1_sic_desc">Fly into Palermo Airport (PMO), taxi/bus into city center. Check in and sample initial Sicilian street food (Arancini, Panelle) near historic Quattro Canti plaza.</p>
+                            </div>
+                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1541370976299-4d24ebbc9077?auto=format&fit=crop&w=600&q=80" alt="Palermo Night" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0284c7/ffffff?text=Palermo+City'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_palermo">Quattro Canti & Palermo Streets</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="2">
+                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
+                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d2_header">Day 2 • Sunday, Dec 6, 2026</span></span>
+                        <span class="text-xs text-slate-300" data-i18n="d2_sub">City Exploration to Scenic Drive</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d2_tx_title">Austin Capitol & Drive to Marathon/Terlingua</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d2_tx_desc">Morning walk around Texas State Capitol & Barton Springs. Start drive west into West Texas canyon country (~6.5 hours). Stargazing overnight in Terlingua ghost town.</p>
+                            </div>
+                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=600&q=80" alt="Texas State Capitol" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/b45309/ffffff?text=Texas+Capitol'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_capitol">Texas State Capitol Building, Austin</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d2_sic_title">Palermo Royal Palace & Mosaics</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d2_sic_desc">Full day exploring Palermo's UNESCO masterpieces: Norman Palace, Cappella Palatina's gold mosaics, and bustling Ballarò street food market.</p>
+                            </div>
+                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1568084680786-a84f91d1153c?auto=format&fit=crop&w=600&q=80" alt="Cappella Palatina Mosaic" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0369a1/ffffff?text=Palermo+Palace'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_norman">Palermo Cathedral & Royal Mosaics</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="3">
+                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
+                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d3_header">Day 3 • Monday, Dec 7, 2026</span></span>
+                        <span class="text-xs text-slate-300" data-i18n="d3_sub">Deep Nature & Coastal Day Trip</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d3_tx_title">Big Bend NP: Santa Elena Canyon Trail</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d3_tx_desc">Hike into massive 1,500ft high cliff walls of Santa Elena Canyon along the Rio Grande border. Drive Ross Maxwell scenic highway in afternoon.</p>
+                            </div>
+                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=600&q=80" alt="Santa Elena Canyon" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/92400e/ffffff?text=Santa+Elena+Canyon'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_santa_elena">Santa Elena Canyon, Big Bend NP</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d3_sic_title">Cefalù Seaside Train Day Trip</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d3_sic_desc">45-min train trip to picturesque coastal Cefalù. Hike up La Rocca mountain for panoramic sea views and explore medieval cobblestone lanes.</p>
+                            </div>
+                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=600&q=80" alt="Cefalu Coastal Town" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/075985/ffffff?text=Cefalu+Sicily'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_cefalu">Cefalù Historic Coastal Village</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 4 -->
+                <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="4">
+                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
+                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d4_header">Day 4 • Tuesday, Dec 8, 2026</span></span>
+                        <span class="text-xs text-slate-300" data-i18n="d4_sub">Mountain Trails vs. Intercity Bus Transit</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d4_tx_title">Big Bend: Chisos Basin & Hot Springs</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d4_tx_desc">Hike Lost Mine Trail in Chisos Mountains basin for sweeping valley vistas. Soak in geothermal natural Rio Grande Hot Springs along border in late afternoon.</p>
+                            </div>
+                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Chisos Mountains" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/d97706/ffffff?text=Chisos+Basin'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_chisos">Chisos Mountains Basin, Big Bend</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d4_sic_title">Express Bus to Catania & Piazza Duomo</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d4_sic_desc">Board comfortable intercity express bus from Palermo across island interior to Catania (~2.5 hrs). Check into Catania, see Elephant Fountain & volcanic stone buildings.</p>
+                            </div>
+                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?auto=format&fit=crop&w=600&q=80" alt="Catania Piazza Duomo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0284c7/ffffff?text=Catania+City'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_catania">Catania Piazza Duomo & Volcanic Stone</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 5 -->
+                <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="5">
+                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
+                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d5_header">Day 5 • Wednesday, Dec 9, 2026</span></span>
+                        <span class="text-xs text-slate-300" data-i18n="d5_sub">Marfa Art to Dunes vs. Mt Etna Volcano</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d5_tx_title">Marfa Art Town to White Sands NP Sunset</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d5_tx_desc">Drive north through quirky arts town Marfa (Prada Marfa install). Continue into New Mexico for a breathtaking sunset over White Sands gypsum dunes.</p>
+                            </div>
+                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80" alt="White Sands Sunset" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/b45309/ffffff?text=White+Sands+Sunset'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_sunset_dunes">White Sands National Park Sunset</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d5_sic_title">Mount Etna Summit & Volcanic Winery</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d5_sic_desc">Guided 4x4 & cable car trip up Mount Etna's active volcanic craters. Afternoon wine tasting lunch at an organic vineyard on Etna's fertile slopes.</p>
+                            </div>
+                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=600&q=80" alt="Mount Etna" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0369a1/ffffff?text=Mount+Etna'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_etna">Mount Etna Craters & Volcanic Terraces</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 6 -->
+                <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="6">
+                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
+                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d6_header">Day 6 • Thursday, Dec 10, 2026</span></span>
+                        <span class="text-xs text-slate-300" data-i18n="d6_sub">Dune Sledding vs. Cliffside Ancient Ruins</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d6_tx_title">White Sands Sledding & Las Cruces</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d6_tx_desc">Morning plastic disk sledding on pure white sand dunes. Afternoon visit to historic Mesilla plaza in Las Cruces for authentic New Mexican chile cuisine.</p>
+                            </div>
+                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80" alt="White Sands Dune Sledding" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/92400e/ffffff?text=Dune+Sledding'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_sledding">Sledding White Sands Gypsum Dunes</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d6_sic_title">Taormina & Ancient Greek Theatre Day Trip</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d6_sic_desc">Short local bus up to cliffside Taormina. Visit 3rd-century BC Greco-Roman Theatre framed by Mount Etna and Ionian Sea. Stroll Corso Umberto boutiques.</p>
+                            </div>
+                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=600&q=80" alt="Taormina Greek Theatre" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/075985/ffffff?text=Taormina+Ruins'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_taormina">Taormina Ancient Theatre Overlooking Sea</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 7 -->
+                <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="7">
+                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
+                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d7_header">Day 7 • Friday, Dec 11, 2026</span></span>
+                        <span class="text-xs text-slate-300" data-i18n="d7_sub">El Paso Mountain Parks vs. Catania Fish Market</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d7_tx_title">El Paso: Franklin Mountains & Scenic Drive</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d7_tx_desc">Short 45-min drive to El Paso. Cable car ride/hike in Franklin Mountains State Park, drive Scenic Drive for views overlooking US-Mexico border.</p>
+                            </div>
+                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=600&q=80" alt="El Paso Mountain Drive" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/c85a32/ffffff?text=El+Paso+Mountains'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_el_paso">Franklin Mountains & El Paso Skyline</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d7_sic_title">Catania Fish Market & Return Bus to Palermo</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d7_sic_desc">Visit raw & authentic La Pescheria fish market in Catania. Take afternoon express bus back across Sicily to Palermo for final 2 nights.</p>
+                            </div>
+                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80" alt="Catania Seafood Market" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0369a1/ffffff?text=Catania+Market'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_pescheria">La Pescheria Fish Market, Catania</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 8 -->
+                <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="8">
+                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
+                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d8_header">Day 8 • Saturday, Dec 12, 2026</span></span>
+                        <span class="text-xs text-slate-300" data-i18n="d8_sub">Border Mission Trail vs. Monreale Golden Mosaics</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d8_tx_title">El Paso Historic Mission Trail & Tacos</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d8_tx_desc">Tour 17th-century Spanish adobe missions (YSleta & Socorro). Farewell dinner featuring authentic hand-made Mexican street tacos in El Paso.</p>
+                            </div>
+                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=600&q=80" alt="Tacos Mexican Cuisine" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/d97706/ffffff?text=Mexican+Tacos'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_tacos">Authentic El Paso Mexican Street Tacos</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d8_sic_title">Monreale Cathedral & Christmas Markets</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d8_sic_desc">Visit Monreale Cathedral overlooking Palermo to view 6,000 sq meters of shimmering gold glass mosaics. Evening walk through Palermo Christmas markets.</p>
+                            </div>
+                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=600&q=80" alt="Palermo Christmas Market" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0284c7/ffffff?text=Monreale+Cathedral'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_monreale">Monreale Cathedral & Holiday Illuminations</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 9 -->
+                <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="9">
+                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
+                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d9_header">Day 9 • Sunday, Dec 13, 2026</span></span>
+                        <span class="text-xs text-slate-300" data-i18n="d9_sub">Departure Day</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d9_tx_title">El Paso Airport (ELP) Flight Home</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d9_tx_desc">Drop off rental car at El Paso International Airport (ELP) and board your return flight home. No backtrack driving needed!</p>
+                            </div>
+                            <div class="relative h-32 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="Plane Takeoff" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/92400e/ffffff?text=ELP+Airport'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_fly_elp">Fly Out of El Paso Airport (ELP)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d9_sic_title">Palermo Airport (PMO) Flight Home</h4>
+                                </div>
+                                <p class="text-sm text-slate-600" data-i18n="d9_sic_desc">Enjoy final Italian espresso and fresh pistachio cannolo in Palermo before heading to Palermo Falcone-Borsellino Airport (PMO) for return flight.</p>
+                            </div>
+                            <div class="relative h-32 rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?auto=format&fit=crop&w=600&q=80" alt="Italian Cannoli & Coffee" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/075985/ffffff?text=Palermo+Cannolo'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
+                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_fly_pmo">Fly Out of Palermo Airport (PMO)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Quiz Decision Helper -->
+        <section class="bg-slate-900 rounded-2xl p-6 sm:p-10 text-white shadow-xl mb-12">
+            <div class="max-w-3xl mx-auto text-center">
+                <span class="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-2" data-i18n="quiz_tag">Interactive Decision Tool</span>
+                <h2 class="text-2xl sm:text-3xl font-bold font-serif mb-4" data-i18n="quiz_title">Which December Trip Fits You Best?</h2>
+                <p class="text-slate-300 text-sm sm:text-base mb-8" data-i18n="quiz_sub">Select your top travel preferences to get a personalized recommendation for Dec 5–13, 2026.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left mb-8">
+                    <!-- Q1 -->
+                    <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                        <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="q1_label">1. Transit Preference:</label>
+                        <select id="quiz-q1" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                            <option value="texas" data-i18n="q1_opt_a">One-way road trip & rental car</option>
+                            <option value="sicily" data-i18n="q1_opt_b">Relaxing intercity buses & walking</option>
+                        </select>
+                    </div>
+                    <!-- Q2 -->
+                    <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                        <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="q2_label">2. Primary Landscape:</label>
+                        <select id="quiz-q2" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                            <option value="texas" data-i18n="q2_opt_a">Desert canyons & white sand dunes</option>
+                            <option value="sicily" data-i18n="q2_opt_b">Volcanic slopes, coast & ancient ruins</option>
+                        </select>
+                    </div>
+                    <!-- Q3 -->
+                    <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                        <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="q3_label">3. Food & Ambiance:</label>
+                        <select id="quiz-q3" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                            <option value="texas" data-i18n="q3_opt_a">Texas BBQ brisket, tacos & craft beer</option>
+                            <option value="sicily" data-i18n="q3_opt_b">Seafood pasta, cannoli & Etna wine</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="calculateQuiz()" class="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 font-bold text-slate-900 text-sm shadow-lg transition transform active:scale-95" data-i18n="btn_calculate_quiz">
+                    Find My Best Match <i class="fa-solid fa-wand-magic-sparkles ml-1"></i>
+                </button>
+
+                <!-- Result Box -->
+                <div id="quiz-result" class="hidden mt-6 p-6 rounded-xl bg-slate-800 border border-amber-500/50 text-left">
+                    <h3 id="result-title" class="text-xl font-bold font-serif mb-2 text-amber-400"></h3>
+                    <p id="result-text" class="text-sm text-slate-300 mb-4"></p>
+                    <div class="flex gap-2">
+                        <span id="result-badge" class="px-3 py-1 rounded-full text-xs font-bold uppercase"></span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-xs py-8 text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="mb-2" data-i18n="footer_text_1">Itinerary Comparison Tool • Prepared for December 5–13, 2026 Travel Planning</p>
+            <p class="text-slate-500" data-i18n="footer_text_2">Trip A route: AUS in → Big Bend → White Sands → ELP out. Trip B route: PMO round-trip + bus to Catania.</p>
+        </div>
+    </footer>
+
+    <!-- Translation Dictionary & Interactive Logic -->
+    <script>
+        // Language Dictionary (English & Traditional Chinese)
+        const i18n = {
+            en: {
+                dates_badge: "Dec 5 – Dec 13, 2026 (9 Days)",
+                page_title: "December Travel Showdown",
+                page_subtitle: "Comparing two unique 9-day winter break itineraries: A Southwest US linear road trip (Austin in, El Paso out) vs. a Sicilian island loop (Palermo round-trip with bus to Catania).",
+                btn_compare_both: "Compare Both",
+                btn_trip_a_short: "🌵 Trip A (TX & NM)",
+                btn_trip_b_short: "🏛️ Trip B (Sicily)",
+                trip_a_tag: "Option A • One-Way Road Trip",
+                trip_a_title: "Texas & New Mexico",
+                trip_a_route: "Austin (AUS) → Big Bend National Park → White Sands National Park → El Paso (ELP)",
+                trip_b_tag: "Option B • Island Loop",
+                trip_b_title: "Sicily, Italy",
+                trip_b_route: "Palermo (PMO) Round-trip • Express Bus to/from Catania & Mount Etna",
+                meta_flights: "Flight Routing",
+                meta_transit: "Ground Transit",
+                meta_weather: "Dec Weather",
+                meta_vibe: "Vibe & Style",
+                trip_a_flights: "Fly into Austin (AUS), Out of El Paso (ELP)",
+                trip_a_weather: "Sunny Desert (35°–65°F / 2°–18°C)",
+                trip_a_vibe: "Craft BBQ & Rugged Nature",
+                trip_b_flights: "Round-trip into/out of Palermo (PMO)",
+                trip_b_weather: "Mild Coastal (50°–60°F / 10°–16°C)",
+                trip_b_vibe: "Ancient History & Volcano Wine",
+                highlights_title: "Featured Highlights & Scenery",
+                img_austin_bbq: "Austin Craft BBQ",
+                img_austin_sub: "Central Texas Brisket",
+                img_big_bend: "Santa Elena Canyon",
+                img_big_bend_sub: "Big Bend National Park",
+                img_white_sands: "Gypsum Sand Dunes",
+                img_white_sands_sub: "White Sands NP (NM)",
+                img_palermo: "Palermo Cathedral",
+                img_palermo_sub: "Norman Architecture & Markets",
+                img_etna: "Mount Etna",
+                img_etna_sub: "Active Volcano & Vineyards",
+                img_taormina: "Taormina Greek Theatre",
+                img_taormina_sub: "Cliffside Ancient Ruins",
+                procon_section_title: "Pros & Cons Breakdown",
+                procon_section_sub: "Key tradeoffs to evaluate before deciding",
+                pros_heading: "Advantages (Pros)",
+                cons_heading: "Drawbacks (Cons)",
+                tx_pro_1: "Efficient one-way routing (AUS in, ELP out) eliminates ~600 miles of stressful backtrack driving.",
+                tx_pro_2: "Unmatched natural contrast: from Austin's music & food scene to Big Bend's canyons and White Sands' snow-white gypsum dunes.",
+                tx_pro_3: "Optimal winter weather with crisp, sunny daytime hiking temperatures in West Texas desert parks.",
+                tx_pro_4: "Authentic culinary experience with world-famous Texas brisket, Tex-Mex, and craft brews in Austin and Marfa.",
+                tx_pro_5: "World-class stargazing at Big Bend National Park, an official International Dark Sky Reserve with exceptionally clear December night skies.",
+                tx_con_1: "Still involves substantial highway driving (~850 miles total) and one-way car rental drop-off fee.",
+                tx_con_2: "West Texas desert nights get quite cold (frequently dropping near freezing in Dec).",
+                tx_con_3: "Remote stretches in Big Bend have patchy cell service and long distances between gas stations.",
+                tx_con_4: "Popular national park accommodations (Chisos Basin, Terlingua) require advance booking.",
+                tx_con_5: "Extreme desert diurnal temperature swings require packing heavy multi-layer cold weather gear alongside light daytime clothing.",
+                sic_pro_1: "No car rental necessary; comfortable express buses connect Palermo and Catania directly across the island.",
+                sic_pro_2: "Rich European cultural experience with millennial history, Greek theaters, and UNESCO cathedral mosaics.",
+                sic_pro_3: "Unforgettable Sicilian gastronomy: Arancini, fresh seafood, Mount Etna volcanic wines, and cannoli.",
+                sic_pro_4: "Low winter tourist crowds and festive Italian Christmas market atmosphere in Palermo & Catania.",
+                sic_pro_5: "Substantially lower off-season rates for boutique hotels, guided excursions, and dining compared to summer peak.",
+                sic_con_1: "Longer transatlantic flight time and jet lag impact on a 9-day break.",
+                sic_con_2: "Shorter winter daylight hours and chance of rain/cooler Mediterranean winds.",
+                sic_con_3: "Bus schedules dictate arrival times, requiring sticking to set intercity timetables.",
+                sic_con_4: "Some coastal beach venues and tourist shops operate on reduced off-season winter hours.",
+                sic_con_5: "Higher elevation activities like Mount Etna cable cars can be subject to weather closures or snow/wind shutdowns in December.",
+                itinerary_section_title: "Day-by-Day Visual Itineraries",
+                itinerary_section_sub: "Side-by-side comparison with key attractions for each day",
+                filter_jump: "Filter:",
+                filter_all: "All Days",
+                d1_header: "Day 1 • Saturday, Dec 5, 2026",
+                d1_sub: "Arrival & Evening Vibe",
+                d1_tx_title: "Arrive Austin (AUS) & BBQ Feast",
+                d1_tx_desc: "Fly into Austin-Bergstrom (AUS). Pick up rental car and head straight to legendary Terry Black's BBQ for smoked brisket. Night walk along Rainey Street music district.",
+                img_caption_austin: "Austin Downtown & Lady Bird Lake",
+                d1_sic_title: "Arrive Palermo (PMO) & Night Markets",
+                d1_sic_desc: "Fly into Palermo Airport (PMO), taxi/bus into city center. Check in and sample initial Sicilian street food (Arancini, Panelle) near historic Quattro Canti plaza.",
+                img_caption_palermo: "Quattro Canti & Palermo Streets",
+                d2_header: "Day 2 • Sunday, Dec 6, 2026",
+                d2_sub: "City Exploration to Scenic Drive",
+                d2_tx_title: "Austin Capitol & Drive to Marathon/Terlingua",
+                d2_tx_desc: "Morning walk around Texas State Capitol & Barton Springs. Start drive west into West Texas canyon country (~6.5 hours). Stargazing overnight in Terlingua ghost town.",
+                img_caption_capitol: "Texas State Capitol Building, Austin",
+                d2_sic_title: "Palermo Royal Palace & Mosaics",
+                d2_sic_desc: "Full day exploring Palermo's UNESCO masterpieces: Norman Palace, Cappella Palatina's gold mosaics, and bustling Ballarò street food market.",
+                img_caption_norman: "Palermo Cathedral & Royal Mosaics",
+                d3_header: "Day 3 • Monday, Dec 7, 2026",
+                d3_sub: "Deep Nature & Coastal Day Trip",
+                d3_tx_title: "Big Bend NP: Santa Elena Canyon Trail",
+                d3_tx_desc: "Hike into massive 1,500ft high cliff walls of Santa Elena Canyon along the Rio Grande border. Drive Ross Maxwell scenic highway in afternoon.",
+                img_caption_santa_elena: "Santa Elena Canyon, Big Bend NP",
+                d3_sic_title: "Cefalù Seaside Train Day Trip",
+                d3_sic_desc: "45-min train trip to picturesque coastal Cefalù. Hike up La Rocca mountain for panoramic sea views and explore medieval cobblestone lanes.",
+                img_caption_cefalu: "Cefalù Historic Coastal Village",
+                d4_header: "Day 4 • Tuesday, Dec 8, 2026",
+                d4_sub: "Mountain Trails vs. Intercity Bus Transit",
+                d4_tx_title: "Big Bend: Chisos Basin & Hot Springs",
+                d4_tx_desc: "Hike Lost Mine Trail in Chisos Mountains basin for sweeping valley vistas. Soak in geothermal natural Rio Grande Hot Springs along border in late afternoon.",
+                img_caption_chisos: "Chisos Mountains Basin, Big Bend",
+                d4_sic_title: "Express Bus to Catania & Piazza Duomo",
+                d4_sic_desc: "Board comfortable intercity express bus from Palermo across island interior to Catania (~2.5 hrs). Check into Catania, see Elephant Fountain & volcanic stone buildings.",
+                img_caption_catania: "Catania Piazza Duomo & Volcanic Stone",
+                d5_header: "Day 5 • Wednesday, Dec 9, 2026",
+                d5_sub: "Marfa Art to Dunes vs. Mt Etna Volcano",
+                d5_tx_title: "Marfa Art Town to White Sands NP Sunset",
+                d5_tx_desc: "Drive north through quirky arts town Marfa (Prada Marfa install). Continue into New Mexico for a breathtaking sunset over White Sands gypsum dunes.",
+                img_caption_sunset_dunes: "White Sands National Park Sunset",
+                d5_sic_title: "Mount Etna Summit & Volcanic Winery",
+                d5_sic_desc: "Guided 4x4 & cable car trip up Mount Etna's active volcanic craters. Afternoon wine tasting lunch at an organic vineyard on Etna's fertile slopes.",
+                img_caption_etna: "Mount Etna Craters & Volcanic Terraces",
+                d6_header: "Day 6 • Thursday, Dec 10, 2026",
+                d6_sub: "Dune Sledding vs. Cliffside Ancient Ruins",
+                d6_tx_title: "White Sands Sledding & Las Cruces",
+                d6_tx_desc: "Morning plastic disk sledding on pure white sand dunes. Afternoon visit to historic Mesilla plaza in Las Cruces for authentic New Mexican chile cuisine.",
+                img_caption_sledding: "Sledding White Sands Gypsum Dunes",
+                d6_sic_title: "Taormina & Ancient Greek Theatre Day Trip",
+                d6_sic_desc: "Short local bus up to cliffside Taormina. Visit 3rd-century BC Greco-Roman Theatre framed by Mount Etna and Ionian Sea. Stroll Corso Umberto boutiques.",
+                img_caption_taormina: "Taormina Ancient Theatre Overlooking Sea",
+                d7_header: "Day 7 • Friday, Dec 11, 2026",
+                d7_sub: "El Paso Mountain Parks vs. Catania Fish Market",
+                d7_tx_title: "El Paso: Franklin Mountains & Scenic Drive",
+                d7_tx_desc: "Short 45-min drive to El Paso. Cable car ride/hike in Franklin Mountains State Park, drive Scenic Drive for views overlooking US-Mexico border.",
+                img_caption_el_paso: "Franklin Mountains & El Paso Skyline",
+                d7_sic_title: "Catania Fish Market & Return Bus to Palermo",
+                d7_sic_desc: "Visit raw & authentic La Pescheria fish market in Catania. Take afternoon express bus back across Sicily to Palermo for final 2 nights.",
+                img_caption_pescheria: "La Pescheria Fish Market, Catania",
+                d8_header: "Day 8 • Saturday, Dec 12, 2026",
+                d8_sub: "Border Mission Trail vs. Monreale Golden Mosaics",
+                d8_tx_title: "El Paso Historic Mission Trail & Tacos",
+                d8_tx_desc: "Tour 17th-century Spanish adobe missions (YSleta & Socorro). Farewell dinner featuring authentic hand-made Mexican street tacos in El Paso.",
+                img_caption_tacos: "Authentic El Paso Mexican Street Tacos",
+                d8_sic_title: "Monreale Cathedral & Christmas Markets",
+                d8_sic_desc: "Visit Monreale Cathedral overlooking Palermo to view 6,000 sq meters of shimmering gold glass mosaics. Evening walk through Palermo Christmas markets.",
+                img_caption_monreale: "Monreale Cathedral & Holiday Illuminations",
+                d9_header: "Day 9 • Sunday, Dec 13, 2026",
+                d9_sub: "Departure Day",
+                d9_tx_title: "El Paso Airport (ELP) Flight Home",
+                d9_tx_desc: "Drop off rental car at El Paso International Airport (ELP) and board your return flight home. No backtrack driving needed!",
+                img_caption_fly_elp: "Fly Out of El Paso Airport (ELP)",
+                d9_sic_title: "Palermo Airport (PMO) Flight Home",
+                d9_sic_desc: "Enjoy final Italian espresso and fresh pistachio cannolo in Palermo before heading to Palermo Falcone-Borsellino Airport (PMO) for return flight.",
+                img_caption_fly_pmo: "Fly Out of Palermo Airport (PMO)",
+                quiz_tag: "Interactive Decision Tool",
+                quiz_title: "Which December Trip Fits You Best?",
+                quiz_sub: "Select your top travel preferences to get a personalized recommendation for Dec 5–13, 2026.",
+                q1_label: "1. Transit Preference:",
+                q1_opt_a: "One-way road trip & rental car",
+                q1_opt_b: "Relaxing intercity buses & walking",
+                q2_label: "2. Primary Landscape:",
+                q2_opt_a: "Desert canyons & white sand dunes",
+                q2_opt_b: "Volcanic slopes, coast & ancient ruins",
+                q3_label: "3. Food & Ambiance:",
+                q3_opt_a: "Texas BBQ brisket, tacos & craft beer",
+                q3_opt_b: "Seafood pasta, cannoli & Etna wine",
+                btn_calculate_quiz: "Find My Best Match",
+                footer_text_1: "Itinerary Comparison Tool • Prepared for December 5–13, 2026 Travel Planning",
+                footer_text_2: "Trip A route: AUS in → Big Bend → White Sands → ELP out. Trip B route: PMO round-trip + bus to Catania."
+            },
+            zh: {
+                dates_badge: "2026年12月5日–13日（共9天）",
+                page_title: "十二月冬季行程大對決",
+                page_subtitle: "比較兩套獨特的9天冬季假期行程：美國西南部單向公路旅行（奧斯汀進、埃爾帕索出）對決義大利西西里島環島之旅（巴勒摩來回，搭乘城際巴士至卡塔尼亞）。",
+                btn_compare_both: "雙行程對比",
+                btn_trip_a_short: "🌵 行程 A (德州/新墨西哥)",
+                btn_trip_b_short: "🏛️ 行程 B (西西里島)",
+                trip_a_tag: "選項 A • 單向公路之旅",
+                trip_a_title: "德州與新墨西哥州",
+                trip_a_route: "奧斯汀 (AUS) → 大班德國家公園 → 白沙國家公園 → 埃爾帕索 (ELP)",
+                trip_b_tag: "選項 B • 義大利島嶼環遊",
+                trip_b_title: "義大利西西里島",
+                trip_b_route: "巴勒摩 (PMO) 機場來回 • 城際長途巴士往返卡塔尼亞與埃特納火山",
+                meta_flights: "航班規劃",
+                meta_transit: "地面交通",
+                meta_weather: "12月氣候",
+                meta_vibe: "行程風格",
+                trip_a_flights: "奧斯汀 (AUS) 飛入，埃爾帕索 (ELP) 飛出",
+                trip_a_weather: "晴朗沙漠 (2°–18°C / 35°–65°F)",
+                trip_a_vibe: "美式煙燻烤肉與壯麗峽谷",
+                trip_b_flights: "巴勒摩機場 (PMO) 原機來回",
+                trip_b_weather: "溫和地中海 (10°–16°C / 50°–60°F)",
+                trip_b_vibe: "千年古蹟歷史與火山美酒",
+                highlights_title: "行程精選景點視覺預覽",
+                img_austin_bbq: "奧斯汀正宗煙燻烤肉",
+                img_austin_sub: "德州中央牛胸肉",
+                img_big_bend: "聖埃列娜峽谷",
+                img_big_bend_sub: "大班德國家公園",
+                img_white_sands: "雪白石膏沙丘",
+                img_white_sands_sub: "新墨西哥州白沙國家公園",
+                img_palermo: "巴勒摩主教座堂",
+                img_palermo_sub: "諾曼式建築與傳統市場",
+                img_etna: "埃特納活火山",
+                img_etna_sub: "活火山地形與火山酒莊",
+                img_taormina: "陶爾米納希臘劇場",
+                img_taormina_sub: "懸崖古代劇場遺跡",
+                procon_section_title: "優缺點深入分析",
+                procon_section_sub: "決定前需評估的核心考量重點",
+                pros_heading: "行程優勢 (Pros)",
+                cons_heading: "潛在缺點 (Cons)",
+                tx_pro_1: "高效單向路線（AUS進、ELP出），完美省去約600英里（960公里）的回程重複拉車。",
+                tx_pro_2: "無與倫比的景觀對比：從奧斯汀音樂美食、大班德壯麗峽谷到白沙國家公園的雪白沙丘。",
+                tx_pro_3: "理想的冬季沙漠氣候：白天清爽宜人且陽光充足，非常適合進行國家公園徒步健行。",
+                tx_pro_4: "享用世界頂級的德州煙燻烤肉（Brisket）、正宗Tex-Mex墨西哥料理與精釀啤酒。",
+                tx_pro_5: "大班德國家公園擁有認證的世界級暗夜保護區，十二月夜空極為清晰，是頂級的觀星聖地。",
+                tx_con_1: "總長度仍有約850英里（1360公里）的長途公路駕駛，且需支付異地還車費。",
+                tx_con_2: "西德州沙漠夜晚氣溫驟降（12月夜間經常接近攝氏零度）。",
+                tx_con_3: "大班德偏遠區域手機訊號較弱，且加油站之間距離較遠。",
+                tx_con_4: "國家公園內及周邊熱門住宿（Chisos Basin、Terlingua）需提早數月預訂。",
+                tx_con_5: "沙漠日夜溫差極劇烈，除了白天輕便服飾外，還需額外準備與攜帶重型保暖禦寒衣物。",
+                sic_pro_1: "完全無需租車自駕；舒適的城際直達巴士輕鬆連接巴勒摩與卡塔尼亞。",
+                sic_pro_2: "深厚的歐洲文化體驗：千年希臘劇場、UNESCO黃金馬賽克教堂與古老街道。",
+                sic_pro_3: "令人難忘的西西里美食：炸燉飯球（Arancini）、新鮮海鮮、火山葡萄酒與開心果煎餅卷。",
+                sic_pro_4: "12月非旅遊旺季遊客稀少，且能體驗巴勒摩與卡塔尼亞濃厚的聖誕市集節慶氣氛。",
+                sic_pro_5: "冬季淡季飯店住宿、導覽行程與餐廳消費相比夏季旺季大幅降低，CP值高。",
+                sic_con_1: "跨大西洋國際航班飛行時間較長，9天假期中時差影響較大。",
+                sic_con_2: "冬季白晝時間較短，且有遇到地中海降雨或陰天的機率。",
+                sic_con_3: "城際巴士班次固定，每日行程需配合車班時刻表。",
+                sic_con_4: "部分沿海度假小鎮與旅遊店家在冬季非旺季期間可能縮短營業時間。",
+                sic_con_5: "埃特納火山等高海拔行程在12月易受積雪或強風影響，纜車與登頂導覽有因天候暫停營運的風險。",
+                itinerary_section_title: "每日詳細行程對照",
+                itinerary_section_sub: "左右雙欄對照每日重點活動與相片預覽",
+                filter_jump: "快速切換:",
+                filter_all: "全部天數",
+                d1_header: "第 1 天 • 2026年12月5日 (週六)",
+                d1_sub: "抵達與首夜體驗",
+                d1_tx_title: "抵達奧斯汀 (AUS) & 德州烤肉盛宴",
+                d1_tx_desc: "飛抵奧斯汀-伯格斯特龍機場 (AUS)，取租賃車後直奔 Terry Black's BBQ 享用正宗煙燻牛胸肉。晚上漫步 Rainey Street 音樂酒吧區。",
+                img_caption_austin: "奧斯汀市中心與伯德湖畔",
+                d1_sic_title: "抵達巴勒摩 (PMO) &  night 夜市街頭小吃",
+                d1_sic_desc: "飛抵巴勒摩機場 (PMO)，搭車前往市中心飯店。入住後至四角廣場周邊品嚐西西里炸飯球 (Arancini) 與傳統小吃。",
+                img_caption_palermo: "巴勒摩四角廣場夜景",
+                d2_header: "第 2 天 • 2026年12月6日 (週日)",
+                d2_sub: "城市巡禮與公路西行",
+                d2_tx_title: "奧斯汀議會大廈 & 開車前往馬拉松/特靈瓜",
+                d2_tx_desc: "早晨參觀德州州議會大廈與巴頓泉。中午開車西行穿越西德州前往峽谷地帶（車程約6.5小時），夜宿特靈瓜鬼鎮觀賞星空。",
+                img_caption_capitol: "奧斯汀德州州議會大廈",
+                d2_sic_title: "巴勒摩皇宮與諾曼金箔馬賽克",
+                d2_sic_desc: "全天探索巴勒摩UNESCO精華：諾曼皇宮、帕拉提那禮拜堂的金箔馬賽克，以及熱鬧的巴拉羅 (Ballarò) 傳統市場。",
+                img_caption_norman: "巴勒摩主教座堂與皇宮裝飾",
+                d3_header: "第 3 天 • 2026年12月7日 (週一)",
+                d3_sub: "自然壯景與海濱一日遊",
+                d3_tx_title: "大班德國家公園：聖埃列娜峽谷步道",
+                d3_tx_desc: "徒步深入高達1,500英呎峭壁的聖埃列娜峽谷，沿美墨邊界格蘭德河前行。下午開車遊覽羅斯麥斯韋爾景觀公路。",
+                img_caption_santa_elena: "大班德國家公園聖埃列娜峽谷",
+                d3_sic_title: "切法盧 (Cefalù) 海濱火車一日遊",
+                d3_sic_desc: "搭乘45分鐘火車前往風景如畫的海濱小鎮切法盧。登頂 La Rocca 巨岩俯瞰地中海海景，漫步中世紀石板老街。",
+                img_caption_cefalu: "切法盧歷史海濱古鎮",
+                d4_header: "第 4 天 • 2026年12月8日 (週二)",
+                d4_sub: "高山步道 vs 跨城巴士體驗",
+                d4_tx_title: "大班德：奇索斯盆地與野溪溫泉",
+                d4_tx_desc: "徒步奇索斯山脈 basin 的 Lost Mine 步道，遠眺壯麗山谷。傍晚前往美墨邊境的格蘭德河天然野溪溫泉泡湯放鬆。",
+                img_caption_chisos: "大班德國家公園奇索斯山脈盆地",
+                d4_sic_title: "直達巴士前往卡塔尼亞 & 大教堂廣場",
+                d4_sic_desc: "搭乘舒適城際直達巴士穿越島嶼中央前往卡塔尼亞（約2.5小時）。入住後參觀著名的黑火山石大象噴泉與古城。",
+                img_caption_catania: "卡塔尼亞大教堂廣場與火山石建築",
+                d5_header: "第 5 天 • 2026年12月9日 (週三)",
+                d5_sub: "藝術小鎮與白沙 vs 埃特納火山",
+                d5_tx_title: "瑪爾法藝術小鎮與白沙國家公園日落",
+                d5_tx_desc: "北上穿越沙漠中的藝術小鎮 Marfa（朝聖 Prada Marfa 裝置）。隨後進入新墨西哥州，欣賞白沙國家公園絕美的石膏沙丘日落。",
+                img_caption_sunset_dunes: "新墨西哥州白沙國家公園日落",
+                d5_sic_title: "埃特納火山登頂與火山酒莊品酒",
+                d5_sic_desc: "搭乘纜車與導覽越野車登上埃特納活火山火山口。下午至火山山麓的有機酒莊享用西西里料理與火山葡萄酒。",
+                img_caption_etna: "埃特納活火山火山口與梯田",
+                d6_header: "第 6 天 • 2026年12月10日 (週四)",
+                d6_sub: "沙丘滑沙 vs 懸崖希臘劇場",
+                d6_tx_title: "白沙滑沙體驗與拉斯克魯塞斯",
+                d6_tx_desc: "早晨在純白石膏沙丘體驗滑沙樂趣。下午前往 Las Cruces 歷史悠久的 Mesilla 廣場品嚐正宗新墨西哥州辣醬料理。",
+                img_caption_sledding: "白沙國家公園雪白沙丘滑沙",
+                d6_sic_title: "陶爾米納 (Taormina) 古希臘劇場一日遊",
+                d6_sic_desc: "搭乘短程巴士前往懸崖上的山城陶爾米納。參觀以埃特納火山與愛奧尼亞海為背景的西元前3世紀希臘羅馬劇場。",
+                img_caption_taormina: "陶爾米納古代劇場遠眺海景",
+                d7_header: "第 7 天 • 2026年12月11日 (週五)",
+                d7_sub: "山脈公路 vs 傳統海鮮市場",
+                d7_tx_title: "埃爾帕索：富蘭克林山脈與景觀公路",
+                d7_tx_desc: "45分鐘車程前往埃爾帕索。在富蘭克林山脈州立公園搭乘纜車健行，行駛 Scenic Drive 俯瞰美墨邊境兩國雙城全景。",
+                img_caption_el_paso: "埃爾帕索富蘭克林山脈天際線",
+                d7_sic_title: "卡塔尼亞魚市場 & 返回巴勒摩",
+                d7_sic_desc: "造訪卡塔尼亞最具生氣的 La Pescheria 傳統海鮮市場。下午搭乘直達巴士返回巴勒摩，準備迎接最後兩晚。",
+                img_caption_pescheria: "卡塔尼亞 La Pescheria 傳統海鮮市場",
+                d8_header: "第 8 天 • 2026年12月12日 (週六)",
+                d8_sub: "邊境傳教站 vs 蒙雷阿萊金箔馬賽克",
+                d8_tx_title: "埃爾帕索歷史傳教站步道與塔可美食",
+                d8_tx_desc: "參觀17世紀西班牙土坯建築傳教站（Ysleta 與 Socorro）。歡送晚餐享用埃爾帕索正宗手工墨西哥 Tacos。",
+                img_caption_tacos: "埃爾帕索正宗墨西哥塔可 (Tacos)",
+                d8_sic_title: "蒙雷阿萊大教堂與聖誕市集",
+                d8_sic_desc: "參觀俯瞰巴勒摩的蒙雷阿萊大教堂 (Monreale Cathedral)，欣賞6,000平方米金箔玻璃馬賽克。晚上漫步巴勒摩聖誕市集。",
+                img_caption_monreale: "蒙雷阿萊大教堂與聖誕節慶燈飾",
+                d9_header: "第 9 天 • 2026年12月13日 (週日)",
+                d9_sub: "賦歸返家",
+                d9_tx_title: "埃爾帕索機場 (ELP) 搭機返家",
+                d9_tx_desc: "於埃爾帕索國際機場 (ELP) 順暢歸還租賃車，搭乘航班返家。單向進出完美避免回程拉車！",
+                img_caption_fly_elp: "由埃爾帕索機場 (ELP) 搭機返程",
+                d9_sic_title: "巴勒摩機場 (PMO) 搭機返家",
+                d9_sic_desc: "在巴勒摩享用最後一杯義式濃縮咖啡與開心果卡諾里 (Cannolo)，隨後前往巴勒摩機場 (PMO) 搭機返家。",
+                img_caption_fly_pmo: "由巴勒摩機場 (PMO) 搭機返程",
+                quiz_tag: "互動決策小幫手",
+                quiz_title: "哪一套十二月行程最適合您？",
+                quiz_sub: "選擇您的旅行偏好，立即獲得針對2026年12月5-13日的個人化推薦。",
+                q1_label: "1. 偏好的交通方式：",
+                q1_opt_a: "單向公路自駕，享受自由拉車",
+                q1_opt_b: "搭乘舒適城際巴士，免自駕開車",
+                q2_label: "2. 最想看的自然景觀：",
+                q2_opt_a: "沙漠峽谷、怪石與雪白石膏沙丘",
+                q2_opt_b: "活火山、海岸懸崖與古希臘遺跡",
+                q3_label: "3. 美食與氛圍偏好：",
+                q3_opt_a: "德州煙燻牛胸肉、墨西哥 Tacos 與精釀啤酒",
+                q3_opt_b: "西西里海鮮義大利麵、Cannoli 與火山葡萄酒",
+                btn_calculate_quiz: "分析我的最佳行程",
+                footer_text_1: "行程對比規劃工具 • 專為 2026年12月5–13日 假期打造",
+                footer_text_2: "行程 A 路線：奧斯汀進 → 大班德 → 白沙 → 埃爾帕索出。行程 B 路線：巴勒摩原機來回 + 巴士往返卡塔尼亞。"
+            }
+        };
+
+        let currentLang = 'en';
+
+        // Set Language Function
+        function setLanguage(lang) {
+            currentLang = lang;
+            const langEnBtn = document.getElementById('lang-en-btn');
+            const langZhBtn = document.getElementById('lang-zh-btn');
+
+            if (lang === 'zh') {
+                langZhBtn.className = "px-5 py-2.5 rounded-xl text-sm font-black transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-sky-400 to-sky-500 text-slate-950 shadow-lg scale-105";
+                langEnBtn.className = "px-5 py-2.5 rounded-xl text-sm font-black transition-all duration-300 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800";
+            } else {
+                langEnBtn.className = "px-5 py-2.5 rounded-xl text-sm font-black transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow-lg scale-105";
+                langZhBtn.className = "px-5 py-2.5 rounded-xl text-sm font-black transition-all duration-300 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800";
+            }
+
+            // Update all DOM elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[lang] && i18n[lang][key]) {
+                    el.innerText = i18n[lang][key];
+                }
+            });
+
+            // Update Quiz options text if quiz result is open
+            const resultDiv = document.getElementById('quiz-result');
+            if (!resultDiv.classList.contains('hidden')) {
+                calculateQuiz();
+            }
+        }
+
+        // Filter Day Function
+        function filterDay(day) {
+            const cards = document.querySelectorAll('.day-card');
+            const buttons = document.querySelectorAll('.day-filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-slate-900', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-600');
+            });
+            event.target.classList.remove('bg-white', 'text-slate-600');
+            event.target.classList.add('bg-slate-900', 'text-white');
+
+            cards.forEach(card => {
+                if (day === 'all' || card.getAttribute('data-day') == day) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Mobile View Toggle
+        function setMobileView(view) {
+            const overviewTexas = document.getElementById('overview-texas');
+            const overviewSicily = document.getElementById('overview-sicily');
+            const proconTexas = document.getElementById('procon-texas');
+            const proconSicily = document.getElementById('procon-sicily');
+            const dayTexas = document.querySelectorAll('.day-texas');
+            const daySicily = document.querySelectorAll('.day-sicily');
+
+            const btnBoth = document.getElementById('view-both-btn');
+            const btnTexas = document.getElementById('view-texas-btn');
+            const btnSicily = document.getElementById('view-sicily-btn');
+
+            [btnBoth, btnTexas, btnSicily].forEach(btn => {
+                btn.className = "px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg text-slate-300 hover:text-white transition";
+            });
+
+            if (view === 'texas') {
+                btnTexas.className = "px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg bg-amber-600 text-white shadow-sm transition";
+                overviewTexas.style.display = 'flex';
+                overviewSicily.style.display = 'none';
+                proconTexas.style.display = 'block';
+                proconSicily.style.display = 'none';
+                dayTexas.forEach(el => el.style.display = 'flex');
+                daySicily.forEach(el => el.style.display = 'none');
+            } else if (view === 'sicily') {
+                btnSicily.className = "px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg bg-sky-600 text-white shadow-sm transition";
+                overviewTexas.style.display = 'none';
+                overviewSicily.style.display = 'flex';
+                proconTexas.style.display = 'none';
+                proconSicily.style.display = 'block';
+                dayTexas.forEach(el => el.style.display = 'none');
+                daySicily.forEach(el => el.style.display = 'flex');
+            } else {
+                btnBoth.className = "px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg bg-slate-700 text-white shadow-sm transition";
+                overviewTexas.style.display = 'flex';
+                overviewSicily.style.display = 'flex';
+                proconTexas.style.display = 'block';
+                proconSicily.style.display = 'block';
+                dayTexas.forEach(el => el.style.display = 'flex');
+                daySicily.forEach(el => el.style.display = 'flex');
+            }
+        }
+
+        // Calculate Quiz Recommendation
+        function calculateQuiz() {
+            const q1 = document.getElementById('quiz-q1').value;
+            const q2 = document.getElementById('quiz-q2').value;
+            const q3 = document.getElementById('quiz-q3').value;
+
+            let texasScore = 0;
+            let sicilyScore = 0;
+
+            [q1, q2, q3].forEach(val => {
+                if (val === 'texas') texasScore++;
+                if (val === 'sicily') sicilyScore++;
+            });
+
+            const resultDiv = document.getElementById('quiz-result');
+            const resultTitle = document.getElementById('result-title');
+            const resultText = document.getElementById('result-text');
+            const resultBadge = document.getElementById('result-badge');
+
+            resultDiv.classList.remove('hidden');
+
+            if (texasScore > sicilyScore) {
+                if (currentLang === 'zh') {
+                    resultTitle.innerHTML = "🌵 您的最佳推薦行程：德州與新墨西哥州公路之旅";
+                    resultText.innerText = "您非常適合這趟美國西南單向公路之旅！從奧斯汀飛入（享用正宗煙燻烤肉）到埃爾帕索飛出，完美避免重複拉車。沿途可欣賞大班德巨石峽谷與白沙國家公園的雪白沙丘日落！";
+                    resultBadge.innerText = "匹配度：推薦德州與新墨西哥州 (Trip A)";
+                } else {
+                    resultTitle.innerHTML = "🌵 Your Recommended Trip: Texas & New Mexico";
+                    resultText.innerText = "You are a perfect fit for the Southwest American road trip! Flying into Austin (for world-class craft BBQ) and out of El Paso optimizes your transit without backtracking. Enjoy canyon hikes in Big Bend and dune sledding in White Sands!";
+                    resultBadge.innerText = "Match Score: Texas & New Mexico (Trip A)";
+                }
+                resultBadge.className = "px-3 py-1 rounded-full text-xs font-bold uppercase bg-amber-500 text-slate-900";
+            } else {
+                if (currentLang === 'zh') {
+                    resultTitle.innerHTML = "🏛️ 您的最佳推薦行程：義大利西西里島島嶼環遊";
+                    resultText.innerText = "您非常適合西西里島悠閒度假之旅！完全無需開車，搭乘城際直達巴士輕鬆穿梭巴勒摩與卡塔尼亞。您能體驗深厚的千年古蹟、巴勒摩聖誕市集、埃特納火山品酒與正宗地中海海鮮料理！";
+                    resultBadge.innerText = "匹配度：推薦義大利西西里島 (Trip B)";
+                } else {
+                    resultTitle.innerHTML = "🏛️ Your Recommended Trip: Sicily, Italy";
+                    resultText.innerText = "You are ideally suited for a Sicilian island escape! No car rental needed—comfortable express buses carry you between Palermo and Catania. Experience millennia of Mediterranean history, Mount Etna volcano tours, and festive holiday markets!";
+                    resultBadge.innerText = "Match Score: Sicily, Italy (Trip B)";
+                }
+                resultBadge.className = "px-3 py-1 rounded-full text-xs font-bold uppercase bg-sky-500 text-white";
+            }
+
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
 </body>
 </html>
