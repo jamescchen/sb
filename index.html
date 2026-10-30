@@ -61,14 +61,11 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
-        .tab-transition {
-            transition: all 0.25s ease-in-out;
-        }
 
-        /* Dedicated typography scaling and enhancements for Traditional Chinese */
+        /* Dedicated typography scaling for Traditional Chinese */
         html[lang="zh"] body {
-            font-size: 1.075rem; /* ~17px base size for Chinese text */
-            line-height: 1.75;    /* Relaxed leading for CJK legibility */
+            font-size: 1.075rem;
+            line-height: 1.75;
             letter-spacing: 0.02em;
         }
         html[lang="zh"] p, 
@@ -76,32 +73,32 @@
         html[lang="zh"] span, 
         html[lang="zh"] select, 
         html[lang="zh"] button {
-            font-weight: 500;     /* Enhance font weight for crisp CJK rendering */
+            font-weight: 500;
         }
-        html[lang="zh"] .text-xs { font-size: 0.875rem !important; line-height: 1.5 !important; }  /* Upgrade 12px to 14px */
-        html[lang="zh"] .text-sm { font-size: 1rem !important; line-height: 1.625 !important; }     /* Upgrade 14px to 16px */
-        html[lang="zh"] .text-base { font-size: 1.125rem !important; line-height: 1.75 !important; }/* Upgrade 16px to 18px */
-        html[lang="zh"] .text-lg { font-size: 1.25rem !important; line-height: 1.75 !important; }  /* Upgrade 18px to 20px */
+        html[lang="zh"] .text-xs { font-size: 0.875rem !important; line-height: 1.5 !important; }
+        html[lang="zh"] .text-sm { font-size: 1rem !important; line-height: 1.625 !important; }
+        html[lang="zh"] .text-base { font-size: 1.125rem !important; line-height: 1.75 !important; }
+        html[lang="zh"] .text-lg { font-size: 1.25rem !important; line-height: 1.75 !important; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans text-base sm:text-lg antialiased selection:bg-amber-100 selection:text-amber-900 min-h-screen flex flex-col">
 
     <!-- Header Section -->
     <header class="bg-slate-900 text-white pt-6 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <!-- Background mesh -->
+        <!-- Background Ambient Glow -->
         <div class="absolute inset-0 opacity-20 pointer-events-none">
             <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-amber-600 blur-3xl"></div>
             <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-sky-600 blur-3xl"></div>
         </div>
 
         <div class="max-w-7xl mx-auto relative z-10">
-            <!-- Top Bar: Dates Badge & Large High-Visibility Language Toggle -->
+            <!-- Top Bar: Dates & High-Contrast Large Language Switcher -->
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-slate-800 pb-6 mb-6">
                 <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-800/90 border border-slate-700 text-amber-400 text-base sm:text-lg font-extrabold tracking-wide uppercase shadow-md">
                     <i class="fa-regular fa-calendar-days text-xl"></i> <span data-i18n="dates_badge">Dec 5 – Dec 13, 2026 (9 Days)</span>
                 </div>
 
-                <!-- Prominent, High-Contrast Large Language Switcher -->
+                <!-- Language Toggle Switcher -->
                 <div class="flex items-center bg-slate-950/90 border-2 border-amber-400/80 rounded-2xl p-2 shadow-2xl ring-4 ring-amber-500/20">
                     <div class="px-3 text-amber-400 text-lg font-black flex items-center gap-2 hidden md:flex">
                         <i class="fa-solid fa-globe text-xl animate-pulse"></i>
@@ -124,7 +121,7 @@
                     Comparing two unique 9-day winter break itineraries: A Southwest US linear road trip (Austin in, El Paso out) vs. a Sicilian island loop (Palermo round-trip with bus to Catania).
                 </p>
 
-                <!-- Mobile View Toggle Controls -->
+                <!-- Mobile Filter View -->
                 <div class="mt-8 flex justify-center lg:hidden">
                     <div class="bg-slate-800 p-2 rounded-xl border border-slate-700 inline-flex gap-2">
                         <button id="view-both-btn" onclick="setMobileView('both')" class="px-4 py-2.5 text-sm sm:text-base font-bold rounded-lg bg-slate-700 text-white shadow-sm transition" data-i18n="btn_compare_both">
@@ -145,7 +142,7 @@
     <!-- Main Content Area -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 mb-16 flex-grow relative z-20 w-full">
 
-        <!-- Overview Cards -->
+        <!-- Overview Cards Section -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
             
             <!-- Trip 1 Overview Card -->
@@ -159,7 +156,7 @@
                     <p class="text-amber-100 text-base sm:text-lg mt-2 font-medium" data-i18n="trip_a_route">Austin (AUS) → Big Bend National Park → White Sands National Park → El Paso (ELP)</p>
                 </div>
 
-                <!-- Independent Flight Cost Banner (Trip A) -->
+                <!-- Flight Cost Banner (Trip A) -->
                 <div class="m-6 mb-0 p-4 rounded-xl bg-amber-500/10 border-2 border-amber-500/40 flex items-center gap-4 shadow-sm">
                     <div class="w-12 h-12 rounded-xl bg-amber-600 text-white flex items-center justify-center shrink-0 text-xl shadow-md">
                         <i class="fa-solid fa-plane-departure"></i>
@@ -189,31 +186,25 @@
                     </div>
                 </div>
 
-                <!-- Prominent Key Highlights Image Gallery -->
+                <!-- Google Image Search Links replacing embedded photos -->
                 <div class="p-6">
-                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4" data-i18n="highlights_title">Featured Highlights & Scenery</h3>
+                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4" data-i18n="highlights_title">Explore Visuals & Photo Galleries</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div class="relative group rounded-xl overflow-hidden h-48 bg-slate-100 shadow-sm border border-slate-200">
-                            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Austin Texas BBQ" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/d97706/ffffff?text=Austin+BBQ'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3.5 flex flex-col justify-end">
-                                <span class="text-sm sm:text-base font-bold text-white" data-i18n="img_austin_bbq">Austin Craft BBQ</span>
-                                <span class="text-xs sm:text-sm text-amber-200" data-i18n="img_austin_sub">Central Texas Brisket</span>
-                            </div>
-                        </div>
-                        <div class="relative group rounded-xl overflow-hidden h-48 bg-slate-100 shadow-sm border border-slate-200">
-                            <img src="https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=600&q=80" alt="Santa Elena Canyon Big Bend" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/b45309/ffffff?text=Big+Bend+NP'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3.5 flex flex-col justify-end">
-                                <span class="text-sm sm:text-base font-bold text-white" data-i18n="img_big_bend">Santa Elena Canyon</span>
-                                <span class="text-xs sm:text-sm text-amber-200" data-i18n="img_big_bend_sub">Big Bend National Park</span>
-                            </div>
-                        </div>
-                        <div class="relative group rounded-xl overflow-hidden h-48 bg-slate-100 shadow-sm border border-slate-200">
-                            <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80" alt="White Sands National Park" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/92400e/ffffff?text=White+Sands'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3.5 flex flex-col justify-end">
-                                <span class="text-sm sm:text-base font-bold text-white" data-i18n="img_white_sands">Gypsum Sand Dunes</span>
-                                <span class="text-xs sm:text-sm text-amber-200" data-i18n="img_white_sands_sub">White Sands NP (NM)</span>
-                            </div>
-                        </div>
+                        <a href="https://www.google.com/search?tbm=isch&q=Austin+Texas+BBQ+and+downtown" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 flex flex-col items-center justify-center text-center group transition shadow-sm hover:shadow-md">
+                            <i class="fa-solid fa-images text-2xl text-amber-700 mb-2 group-hover:scale-110 transition"></i>
+                            <span class="text-sm font-bold text-slate-900" data-i18n="img_austin_bbq">Austin Craft BBQ & City</span>
+                            <span class="text-xs text-amber-800 mt-1 font-semibold flex items-center gap-1"><span data-i18n="btn_google_img">Google Images</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></span>
+                        </a>
+                        <a href="https://www.google.com/search?tbm=isch&q=Big+Bend+National+Park" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 flex flex-col items-center justify-center text-center group transition shadow-sm hover:shadow-md">
+                            <i class="fa-solid fa-mountain-sun text-2xl text-amber-700 mb-2 group-hover:scale-110 transition"></i>
+                            <span class="text-sm font-bold text-slate-900" data-i18n="img_big_bend">Big Bend National Park</span>
+                            <span class="text-xs text-amber-800 mt-1 font-semibold flex items-center gap-1"><span data-i18n="btn_google_img">Google Images</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></span>
+                        </a>
+                        <a href="https://www.google.com/search?tbm=isch&q=White+Sands+National+Park+New+Mexico" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 flex flex-col items-center justify-center text-center group transition shadow-sm hover:shadow-md">
+                            <i class="fa-solid fa-hill-rockslide text-2xl text-amber-700 mb-2 group-hover:scale-110 transition"></i>
+                            <span class="text-sm font-bold text-slate-900" data-i18n="img_white_sands">White Sands NP (NM)</span>
+                            <span class="text-xs text-amber-800 mt-1 font-semibold flex items-center gap-1"><span data-i18n="btn_google_img">Google Images</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -229,7 +220,7 @@
                     <p class="text-sky-100 text-base sm:text-lg mt-2 font-medium" data-i18n="trip_b_route">Palermo (PMO) Round-trip • Express Bus to/from Catania & Mount Etna</p>
                 </div>
 
-                <!-- Independent Flight Cost Banner (Trip B) -->
+                <!-- Flight Cost Banner (Trip B) -->
                 <div class="m-6 mb-0 p-4 rounded-xl bg-sky-500/10 border-2 border-sky-500/40 flex items-center gap-4 shadow-sm">
                     <div class="w-12 h-12 rounded-xl bg-sky-600 text-white flex items-center justify-center shrink-0 text-xl shadow-md">
                         <i class="fa-solid fa-plane-departure"></i>
@@ -259,31 +250,20 @@
                     </div>
                 </div>
 
-                <!-- Prominent Key Highlights Image Gallery -->
+                <!-- Google Image Search Links replacing embedded photos -->
                 <div class="p-6">
-                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4" data-i18n="highlights_title">Featured Highlights & Scenery</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div class="relative group rounded-xl overflow-hidden h-48 bg-slate-100 shadow-sm border border-slate-200">
-                            <img src="https://images.unsplash.com/photo-1541370976299-4d24ebbc9077?auto=format&fit=crop&w=600&q=80" alt="Palermo Cathedral" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/0284c7/ffffff?text=Palermo'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3.5 flex flex-col justify-end">
-                                <span class="text-sm sm:text-base font-bold text-white" data-i18n="img_palermo">Palermo Cathedral</span>
-                                <span class="text-xs sm:text-sm text-sky-200" data-i18n="img_palermo_sub">Norman Architecture & Markets</span>
-                            </div>
-                        </div>
-                        <div class="relative group rounded-xl overflow-hidden h-48 bg-slate-100 shadow-sm border border-slate-200">
-                            <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=600&q=80" alt="Mount Etna Volcano" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/0369a1/ffffff?text=Mount+Etna'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3.5 flex flex-col justify-end">
-                                <span class="text-sm sm:text-base font-bold text-white" data-i18n="img_etna">Mount Etna</span>
-                                <span class="text-xs sm:text-sm text-sky-200" data-i18n="img_etna_sub">Active Volcano & Vineyards</span>
-                            </div>
-                        </div>
-                        <div class="relative group rounded-xl overflow-hidden h-48 bg-slate-100 shadow-sm border border-slate-200">
-                            <img src="https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=600&q=80" alt="Taormina Greek Theatre" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/075985/ffffff?text=Taormina'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3.5 flex flex-col justify-end">
-                                <span class="text-sm sm:text-base font-bold text-white" data-i18n="img_taormina">Taormina Greek Theatre</span>
-                                <span class="text-xs sm:text-sm text-sky-200" data-i18n="img_taormina_sub">Cliffside Ancient Ruins</span>
-                            </div>
-                        </div>
+                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4" data-i18n="highlights_title">Explore Visuals & Photo Galleries</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <a href="https://www.google.com/search?tbm=isch&q=Palermo+Sicily+architecture+and+markets" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-sky-50 hover:bg-sky-100 border border-sky-200 flex flex-col items-center justify-center text-center group transition shadow-sm hover:shadow-md">
+                            <i class="fa-solid fa-camera-retro text-2xl text-sky-700 mb-2 group-hover:scale-110 transition"></i>
+                            <span class="text-sm font-bold text-slate-900" data-i18n="img_palermo">Palermo Architecture & Markets</span>
+                            <span class="text-xs text-sky-800 mt-1 font-semibold flex items-center gap-1"><span data-i18n="btn_google_img">Google Images</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></span>
+                        </a>
+                        <a href="https://www.google.com/search?tbm=isch&q=Catania+and+Mount+Etna+Sicily" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-sky-50 hover:bg-sky-100 border border-sky-200 flex flex-col items-center justify-center text-center group transition shadow-sm hover:shadow-md">
+                            <i class="fa-solid fa-volcano text-2xl text-sky-700 mb-2 group-hover:scale-110 transition"></i>
+                            <span class="text-sm font-bold text-slate-900" data-i18n="img_etna">Catania & Mount Etna</span>
+                            <span class="text-xs text-sky-800 mt-1 font-semibold flex items-center gap-1"><span data-i18n="btn_google_img">Google Images</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -426,14 +406,14 @@
             </div>
         </section>
 
-        <!-- Detailed Day-by-Day Schedule Section with Visuals -->
+        <!-- Day-by-Day Comparative Itinerary -->
         <section class="mb-12">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
                 <div>
                     <h2 class="text-3xl font-bold font-serif text-slate-900" data-i18n="itinerary_section_title">Day-by-Day Visual Itineraries</h2>
                     <p class="text-slate-600 text-base sm:text-lg mt-1" data-i18n="itinerary_section_sub">Side-by-side comparison with key attractions for each day</p>
                 </div>
-                <!-- Day filter buttons -->
+                <!-- Day Filter Buttons -->
                 <div class="flex items-center gap-1.5 overflow-x-auto pb-2 sm:pb-0 custom-scrollbar">
                     <span class="text-sm text-slate-500 font-bold mr-2 uppercase" data-i18n="filter_jump">Filter:</span>
                     <button onclick="filterDay('all')" class="day-filter-btn active px-4 py-2 rounded-lg text-sm font-bold bg-slate-900 text-white shrink-0" data-i18n="filter_all">All Days</button>
@@ -449,7 +429,7 @@
                 </div>
             </div>
 
-            <!-- Day-by-day Comparative List -->
+            <!-- Day-by-Day List -->
             <div id="itinerary-list" class="space-y-8">
 
                 <!-- Day 1 -->
@@ -459,7 +439,6 @@
                         <span class="text-xs sm:text-sm text-slate-300 font-semibold" data-i18n="d1_sub">Arrival & Evening Vibe</span>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
-                        <!-- Texas -->
                         <div class="p-6 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
                             <div class="mb-5">
                                 <div class="flex items-center gap-2 mb-3">
@@ -468,14 +447,11 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d1_tx_desc">Fly into Austin-Bergstrom (AUS). Pick up rental car and head straight to legendary Terry Black's BBQ for smoked brisket. Night walk along Rainey Street music district.</p>
                             </div>
-                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1532635241-17e820acc59f?auto=format&fit=crop&w=600&q=80" alt="Austin Skyline" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/d97706/ffffff?text=Austin+Skyline'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_austin">Austin Downtown & Lady Bird Lake</span>
-                                </div>
-                            </div>
+                            <a href="https://www.google.com/search?tbm=isch&q=Austin+Texas+BBQ+and+downtown" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between p-3 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-bold text-sm transition">
+                                <span><i class="fa-solid fa-magnifying-glass-location mr-2 text-amber-700"></i><span data-i18n="img_caption_austin">Austin Downtown & BBQ Photos</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-amber-700"></i>
+                            </a>
                         </div>
-                        <!-- Sicily -->
                         <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
                             <div class="mb-5">
                                 <div class="flex items-center gap-2 mb-3">
@@ -484,12 +460,10 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d1_sic_desc">Fly into Palermo Airport (PMO), taxi/bus into city center. Check in and sample initial Sicilian street food (Arancini, Panelle) near historic Quattro Canti plaza.</p>
                             </div>
-                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1541370976299-4d24ebbc9077?auto=format&fit=crop&w=600&q=80" alt="Palermo Night" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0284c7/ffffff?text=Palermo+City'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_palermo">Quattro Canti & Palermo Streets</span>
-                                </div>
-                            </div>
+                            <a href="https://www.google.com/search?tbm=isch&q=Palermo+Sicily+architecture+and+markets" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between p-3 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 font-bold text-sm transition">
+                                <span><i class="fa-solid fa-magnifying-glass-location mr-2 text-sky-700"></i><span data-i18n="img_caption_palermo">Palermo Architecture & Markets Photos</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-sky-700"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -509,12 +483,10 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d2_tx_desc">Morning walk around Texas State Capitol & Barton Springs. Start drive west into West Texas canyon country (~6.5 hours). Stargazing overnight in Terlingua ghost town.</p>
                             </div>
-                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=600&q=80" alt="Texas State Capitol" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/b45309/ffffff?text=Texas+Capitol'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_capitol">Texas State Capitol Building, Austin</span>
-                                </div>
-                            </div>
+                            <a href="https://www.google.com/search?tbm=isch&q=Austin+Texas+Capitol+and+Terlingua" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between p-3 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-bold text-sm transition">
+                                <span><i class="fa-solid fa-magnifying-glass-location mr-2 text-amber-700"></i><span data-i18n="img_caption_capitol">Texas Capitol & West Texas Highway Photos</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-amber-700"></i>
+                            </a>
                         </div>
                         <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
                             <div class="mb-5">
@@ -524,12 +496,10 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d2_sic_desc">Full day exploring Palermo's UNESCO masterpieces: Norman Palace, Cappella Palatina's gold mosaics, and bustling Ballarò street food market.</p>
                             </div>
-                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1568084680786-a84f91d1153c?auto=format&fit=crop&w=600&q=80" alt="Cappella Palatina Mosaic" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0369a1/ffffff?text=Palermo+Palace'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_norman">Palermo Cathedral & Royal Mosaics</span>
-                                </div>
-                            </div>
+                            <a href="https://www.google.com/search?tbm=isch&q=Palermo+Sicily+architecture+and+markets" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between p-3 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 font-bold text-sm transition">
+                                <span><i class="fa-solid fa-magnifying-glass-location mr-2 text-sky-700"></i><span data-i18n="img_caption_norman">Norman Palace & Cappella Palatina Mosaics</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-sky-700"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -549,12 +519,10 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d3_tx_desc">Hike into massive 1,500ft high cliff walls of Santa Elena Canyon along the Rio Grande border. Drive Ross Maxwell scenic highway in afternoon.</p>
                             </div>
-                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=600&q=80" alt="Santa Elena Canyon" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/92400e/ffffff?text=Santa+Elena+Canyon'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_santa_elena">Santa Elena Canyon, Big Bend NP</span>
-                                </div>
-                            </div>
+                            <a href="https://www.google.com/search?tbm=isch&q=Big+Bend+National+Park" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between p-3 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-bold text-sm transition">
+                                <span><i class="fa-solid fa-magnifying-glass-location mr-2 text-amber-700"></i><span data-i18n="img_caption_santa_elena">Santa Elena Canyon Photos</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-amber-700"></i>
+                            </a>
                         </div>
                         <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
                             <div class="mb-5">
@@ -564,12 +532,10 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d3_sic_desc">45-min train trip to picturesque coastal Cefalù. Hike up La Rocca mountain for panoramic sea views and explore medieval cobblestone lanes.</p>
                             </div>
-                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=600&q=80" alt="Cefalu Coastal Town" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/075985/ffffff?text=Cefalu+Sicily'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_cefalu">Cefalù Historic Coastal Village</span>
-                                </div>
-                            </div>
+                            <a href="https://www.google.com/search?tbm=isch&q=Palermo+Sicily+architecture+and+markets" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between p-3 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 font-bold text-sm transition">
+                                <span><i class="fa-solid fa-magnifying-glass-location mr-2 text-sky-700"></i><span data-i18n="img_caption_cefalu">Cefalù Seaside Coastal Village Photos</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-sky-700"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -589,12 +555,10 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d4_tx_desc">Hike Lost Mine Trail in Chisos Mountains basin for sweeping valley vistas. Soak in geothermal natural Rio Grande Hot Springs along border in late afternoon.</p>
                             </div>
-                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Chisos Mountains" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/d97706/ffffff?text=Chisos+Basin'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_chisos">Chisos Mountains Basin, Big Bend</span>
-                                </div>
-                            </div>
+                            <a href="https://www.google.com/search?tbm=isch&q=Big+Bend+National+Park" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between p-3 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-bold text-sm transition">
+                                <span><i class="fa-solid fa-magnifying-glass-location mr-2 text-amber-700"></i><span data-i18n="img_caption_chisos">Chisos Basin & Rio Grande Hot Springs Photos</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-amber-700"></i>
+                            </a>
                         </div>
                         <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
                             <div class="mb-5">
@@ -604,12 +568,10 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d4_sic_desc">Board comfortable intercity express bus from Palermo across island interior to Catania (~2.5 hrs). Check into Catania, see Elephant Fountain & volcanic stone buildings.</p>
                             </div>
-                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?auto=format&fit=crop&w=600&q=80" alt="Catania Piazza Duomo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0284c7/ffffff?text=Catania+City'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_catania">Catania Piazza Duomo & Volcanic Stone</span>
-                                </div>
-                            </div>
+                            <a href="https://www.google.com/search?tbm=isch&q=Catania+and+Mount+Etna+Sicily" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between p-3 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 font-bold text-sm transition">
+                                <span><i class="fa-solid fa-magnifying-glass-location mr-2 text-sky-700"></i><span data-i18n="img_caption_catania">Catania Piazza Duomo Photos</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-sky-700"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -629,12 +591,10 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d5_tx_desc">Drive north through quirky arts town Marfa (Prada Marfa install). Continue into New Mexico for a breathtaking sunset over White Sands gypsum dunes.</p>
                             </div>
-                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80" alt="White Sands Sunset" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/b45309/ffffff?text=White+Sands+Sunset'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_sunset_dunes">White Sands National Park Sunset</span>
-                                </div>
-                            </div>
+                            <a href="https://www.google.com/search?tbm=isch&q=White+Sands+National+Park+New+Mexico" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between p-3 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-bold text-sm transition">
+                                <span><i class="fa-solid fa-magnifying-glass-location mr-2 text-amber-700"></i><span data-i18n="img_caption_sunset_dunes">White Sands Sunset Photos</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-amber-700"></i>
+                            </a>
                         </div>
                         <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
                             <div class="mb-5">
@@ -644,12 +604,10 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d5_sic_desc">Guided 4x4 & cable car trip up Mount Etna's active volcanic craters. Afternoon wine tasting lunch at an organic vineyard on Etna's fertile slopes.</p>
                             </div>
-                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=600&q=80" alt="Mount Etna" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0369a1/ffffff?text=Mount+Etna'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_etna">Mount Etna Craters & Volcanic Terraces</span>
-                                </div>
-                            </div>
+                            <a href="https://www.google.com/search?tbm=isch&q=Catania+and+Mount+Etna+Sicily" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between p-3 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 font-bold text-sm transition">
+                                <span><i class="fa-solid fa-magnifying-glass-location mr-2 text-sky-700"></i><span data-i18n="img_caption_etna">Mount Etna Volcanic Craters Photos</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-sky-700"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -669,12 +627,10 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d6_tx_desc">Morning plastic disk sledding on pure white sand dunes. Afternoon visit to historic Mesilla plaza in Las Cruces for authentic New Mexican chile cuisine.</p>
                             </div>
-                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80" alt="White Sands Dune Sledding" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/92400e/ffffff?text=Dune+Sledding'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_sledding">Sledding White Sands Gypsum Dunes</span>
-                                </div>
-                            </div>
+                            <a href="https://www.google.com/search?tbm=isch&q=White+Sands+National+Park+New+Mexico" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between p-3 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-bold text-sm transition">
+                                <span><i class="fa-solid fa-magnifying-glass-location mr-2 text-amber-700"></i><span data-i18n="img_caption_sledding">White Sands Sledding Photos</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-amber-700"></i>
+                            </a>
                         </div>
                         <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
                             <div class="mb-5">
@@ -684,12 +640,10 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d6_sic_desc">Short local bus up to cliffside Taormina. Visit 3rd-century BC Greco-Roman Theatre framed by Mount Etna and Ionian Sea. Stroll Corso Umberto boutiques.</p>
                             </div>
-                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=600&q=80" alt="Taormina Greek Theatre" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/075985/ffffff?text=Taormina+Ruins'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_taormina">Taormina Ancient Theatre Overlooking Sea</span>
-                                </div>
-                            </div>
+                            <a href="https://www.google.com/search?tbm=isch&q=Catania+and+Mount+Etna+Sicily" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between p-3 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 font-bold text-sm transition">
+                                <span><i class="fa-solid fa-magnifying-glass-location mr-2 text-sky-700"></i><span data-i18n="img_caption_taormina">Taormina Greek Theatre Photos</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-sky-700"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -709,12 +663,10 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d7_tx_desc">Short 45-min drive to El Paso. Cable car ride/hike in Franklin Mountains State Park, drive Scenic Drive for views overlooking US-Mexico border.</p>
                             </div>
-                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=600&q=80" alt="El Paso Mountain Drive" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/c85a32/ffffff?text=El+Paso+Mountains'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_el_paso">Franklin Mountains & El Paso Skyline</span>
-                                </div>
-                            </div>
+                            <a href="https://www.google.com/search?tbm=isch&q=Austin+Texas+BBQ+and+downtown" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between p-3 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-bold text-sm transition">
+                                <span><i class="fa-solid fa-magnifying-glass-location mr-2 text-amber-700"></i><span data-i18n="img_caption_el_paso">Franklin Mountains & El Paso Photos</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-amber-700"></i>
+                            </a>
                         </div>
                         <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
                             <div class="mb-5">
@@ -724,12 +676,10 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d7_sic_desc">Visit raw & authentic La Pescheria fish market in Catania. Take afternoon express bus back across Sicily to Palermo for final 2 nights.</p>
                             </div>
-                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80" alt="Catania Seafood Market" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0369a1/ffffff?text=Catania+Market'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_pescheria">La Pescheria Fish Market, Catania</span>
-                                </div>
-                            </div>
+                            <a href="https://www.google.com/search?tbm=isch&q=Catania+and+Mount+Etna+Sicily" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between p-3 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 font-bold text-sm transition">
+                                <span><i class="fa-solid fa-magnifying-glass-location mr-2 text-sky-700"></i><span data-i18n="img_caption_pescheria">La Pescheria Fish Market Photos</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-sky-700"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -749,12 +699,10 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d8_tx_desc">Tour 17th-century Spanish adobe missions (Ysleta & Socorro). Farewell dinner featuring authentic hand-made Mexican street tacos in El Paso.</p>
                             </div>
-                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=600&q=80" alt="Tacos Mexican Cuisine" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/d97706/ffffff?text=Mexican+Tacos'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_tacos">Authentic El Paso Mexican Street Tacos</span>
-                                </div>
-                            </div>
+                            <a href="https://www.google.com/search?tbm=isch&q=Austin+Texas+BBQ+and+downtown" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between p-3 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-bold text-sm transition">
+                                <span><i class="fa-solid fa-magnifying-glass-location mr-2 text-amber-700"></i><span data-i18n="img_caption_tacos">El Paso Mission Trail & Tacos Photos</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-amber-700"></i>
+                            </a>
                         </div>
                         <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
                             <div class="mb-5">
@@ -764,12 +712,10 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d8_sic_desc">Visit Monreale Cathedral overlooking Palermo to view 6,000 sq meters of shimmering gold glass mosaics. Evening walk through Palermo Christmas markets.</p>
                             </div>
-                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=600&q=80" alt="Palermo Christmas Market" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0284c7/ffffff?text=Monreale+Cathedral'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_monreale">Monreale Cathedral & Holiday Illuminations</span>
-                                </div>
-                            </div>
+                            <a href="https://www.google.com/search?tbm=isch&q=Palermo+Sicily+architecture+and+markets" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between p-3 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 font-bold text-sm transition">
+                                <span><i class="fa-solid fa-magnifying-glass-location mr-2 text-sky-700"></i><span data-i18n="img_caption_monreale">Monreale Gold Mosaics & Christmas Market Photos</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-sky-700"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -789,12 +735,6 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d9_tx_desc">Drop off rental car at El Paso International Airport (ELP) and board your return flight home. No backtrack driving needed!</p>
                             </div>
-                            <div class="relative h-40 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="Plane Takeoff" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/92400e/ffffff?text=ELP+Airport'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_fly_elp">Fly Out of El Paso Airport (ELP)</span>
-                                </div>
-                            </div>
                         </div>
                         <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
                             <div class="mb-5">
@@ -804,12 +744,6 @@
                                 </div>
                                 <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d9_sic_desc">Enjoy final Italian espresso and fresh pistachio cannolo in Palermo before heading to Palermo Falcone-Borsellino Airport (PMO) for return flight.</p>
                             </div>
-                            <div class="relative h-40 rounded-xl overflow-hidden shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?auto=format&fit=crop&w=600&q=80" alt="Italian Cannoli & Coffee" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/075985/ffffff?text=Palermo+Cannolo'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
-                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_fly_pmo">Fly Out of Palermo Airport (PMO)</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -817,7 +751,7 @@
             </div>
         </section>
 
-        <!-- Quiz Decision Helper -->
+        <!-- Quiz Decision Tool -->
         <section class="bg-slate-900 rounded-2xl p-6 sm:p-10 text-white shadow-xl mb-12">
             <div class="max-w-3xl mx-auto text-center">
                 <span class="text-sm font-bold text-amber-400 uppercase tracking-widest block mb-2" data-i18n="quiz_tag">Interactive Decision Tool</span>
@@ -879,10 +813,10 @@
 
     <!-- Translation Dictionary & Interactive Logic -->
     <script>
-        // Language Dictionary (English & Traditional Chinese)
         const i18n = {
             en: {
                 dates_badge: "Dec 5 – Dec 13, 2026 (9 Days)",
+                btn_google_img: "Google Images Search",
                 page_title: "December Travel Showdown",
                 page_subtitle: "Comparing two unique 9-day winter break itineraries: A Southwest US linear road trip (Austin in, El Paso out) vs. a Sicilian island loop (Palermo round-trip with bus to Catania).",
                 btn_compare_both: "Compare Both",
@@ -1007,7 +941,7 @@
                 d8_header: "Day 8 • Saturday, Dec 12, 2026",
                 d8_sub: "Border Mission Trail vs. Monreale Golden Mosaics",
                 d8_tx_title: "El Paso Historic Mission Trail & Tacos",
-                d8_tx_desc: "Tour 17th-century Spanish adobe missions (YSleta & Socorro). Farewell dinner featuring authentic hand-made Mexican street tacos in El Paso.",
+                d8_tx_desc: "Tour 17th-century Spanish adobe missions (Ysleta & Socorro). Farewell dinner featuring authentic hand-made Mexican street tacos in El Paso.",
                 img_caption_tacos: "Authentic El Paso Mexican Street Tacos",
                 d8_sic_title: "Monreale Cathedral & Christmas Markets",
                 d8_sic_desc: "Visit Monreale Cathedral overlooking Palermo to view 6,000 sq meters of shimmering gold glass mosaics. Evening walk through Palermo Christmas markets.",
@@ -1038,6 +972,7 @@
             },
             zh: {
                 dates_badge: "2026年12月5日–13日（共9天）",
+                btn_google_img: "Google 圖片搜尋",
                 page_title: "十二月冬季行程大對決",
                 page_subtitle: "比較兩套獨特的9天冬季假期行程：美國西南部單向公路旅行（奧斯汀進、埃爾帕索出）對決義大利西西里島環島之旅（巴勒摩來回，搭乘城際巴士至卡塔尼亞）。",
                 btn_compare_both: "雙行程對比",
@@ -1195,7 +1130,6 @@
 
         let currentLang = 'en';
 
-        // Set Language Function
         function setLanguage(lang) {
             currentLang = lang;
             document.documentElement.setAttribute('lang', lang);
@@ -1211,7 +1145,6 @@
                 langZhBtn.className = "px-6 py-3 rounded-xl text-base font-black transition-all duration-300 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800";
             }
 
-            // Update all DOM elements with data-i18n attribute
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (i18n[lang] && i18n[lang][key]) {
@@ -1219,14 +1152,12 @@
                 }
             });
 
-            // Update Quiz options text if quiz result is open
             const resultDiv = document.getElementById('quiz-result');
             if (!resultDiv.classList.contains('hidden')) {
                 calculateQuiz();
             }
         }
 
-        // Filter Day Function
         function filterDay(day) {
             const cards = document.querySelectorAll('.day-card');
             const buttons = document.querySelectorAll('.day-filter-btn');
@@ -1247,7 +1178,6 @@
             });
         }
 
-        // Mobile View Toggle
         function setMobileView(view) {
             const overviewTexas = document.getElementById('overview-texas');
             const overviewSicily = document.getElementById('overview-sicily');
@@ -1291,7 +1221,6 @@
             }
         }
 
-        // Calculate Quiz Recommendation
         function calculateQuiz() {
             const q1 = document.getElementById('quiz-q1').value;
             const q2 = document.getElementById('quiz-q2').value;
