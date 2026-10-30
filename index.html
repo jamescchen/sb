@@ -64,9 +64,27 @@
         .tab-transition {
             transition: all 0.25s ease-in-out;
         }
+
+        /* Dedicated typography scaling and enhancements for Traditional Chinese */
+        html[lang="zh"] body {
+            font-size: 1.075rem; /* ~17px base size for Chinese text */
+            line-height: 1.75;    /* Relaxed leading for CJK legibility */
+            letter-spacing: 0.02em;
+        }
+        html[lang="zh"] p, 
+        html[lang="zh"] li, 
+        html[lang="zh"] span, 
+        html[lang="zh"] select, 
+        html[lang="zh"] button {
+            font-weight: 500;     /* Enhance font weight for crisp CJK rendering */
+        }
+        html[lang="zh"] .text-xs { font-size: 0.875rem !important; line-height: 1.5 !important; }  /* Upgrade 12px to 14px */
+        html[lang="zh"] .text-sm { font-size: 1rem !important; line-height: 1.625 !important; }     /* Upgrade 14px to 16px */
+        html[lang="zh"] .text-base { font-size: 1.125rem !important; line-height: 1.75 !important; }/* Upgrade 16px to 18px */
+        html[lang="zh"] .text-lg { font-size: 1.25rem !important; line-height: 1.75 !important; }  /* Upgrade 18px to 20px */
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-amber-100 selection:text-amber-900 min-h-screen flex flex-col">
+<body class="bg-slate-50 text-slate-800 font-sans text-base sm:text-lg antialiased selection:bg-amber-100 selection:text-amber-900 min-h-screen flex flex-col">
 
     <!-- Header Section -->
     <header class="bg-slate-900 text-white pt-6 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -79,43 +97,43 @@
         <div class="max-w-7xl mx-auto relative z-10">
             <!-- Top Bar: Dates Badge & Large High-Visibility Language Toggle -->
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-slate-800 pb-6 mb-6">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/90 border border-slate-700 text-amber-400 text-sm font-bold tracking-wide uppercase shadow-md">
-                    <i class="fa-regular fa-calendar-days text-base"></i> <span data-i18n="dates_badge">Dec 5 – Dec 13, 2026 (9 Days)</span>
+                <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-800/90 border border-slate-700 text-amber-400 text-base sm:text-lg font-extrabold tracking-wide uppercase shadow-md">
+                    <i class="fa-regular fa-calendar-days text-xl"></i> <span data-i18n="dates_badge">Dec 5 – Dec 13, 2026 (9 Days)</span>
                 </div>
 
                 <!-- Prominent, High-Contrast Large Language Switcher -->
-                <div class="flex items-center bg-slate-950/90 border-2 border-amber-400/80 rounded-2xl p-1.5 shadow-2xl ring-4 ring-amber-500/20">
-                    <div class="px-3 text-amber-400 text-base font-extrabold flex items-center gap-1.5 hidden md:flex">
-                        <i class="fa-solid fa-globe text-lg animate-pulse"></i>
+                <div class="flex items-center bg-slate-950/90 border-2 border-amber-400/80 rounded-2xl p-2 shadow-2xl ring-4 ring-amber-500/20">
+                    <div class="px-3 text-amber-400 text-lg font-black flex items-center gap-2 hidden md:flex">
+                        <i class="fa-solid fa-globe text-xl animate-pulse"></i>
                         <span class="text-xs uppercase tracking-wider text-slate-300">Language:</span>
                     </div>
-                    <button id="lang-en-btn" onclick="setLanguage('en')" class="px-5 py-2.5 rounded-xl text-sm font-black transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow-lg scale-105">
-                        <span class="text-lg">🇺🇸</span> English
+                    <button id="lang-en-btn" onclick="setLanguage('en')" class="px-6 py-3 rounded-xl text-base font-black transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow-lg scale-105">
+                        <span class="text-xl">🇺🇸</span> English
                     </button>
-                    <button id="lang-zh-btn" onclick="setLanguage('zh')" class="px-5 py-2.5 rounded-xl text-sm font-black transition-all duration-300 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800">
-                        <span class="text-lg">🇹🇼</span> 繁體中文
+                    <button id="lang-zh-btn" onclick="setLanguage('zh')" class="px-6 py-3 rounded-xl text-base font-black transition-all duration-300 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800">
+                        <span class="text-xl">🇹🇼</span> 繁體中文
                     </button>
                 </div>
             </div>
 
             <div class="text-center max-w-3xl mx-auto">
-                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-serif text-white mb-4" data-i18n="page_title">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-serif text-white mb-4" data-i18n="page_title">
                     December Travel Showdown
                 </h1>
-                <p class="text-slate-300 text-base sm:text-lg" data-i18n="page_subtitle">
+                <p class="text-slate-200 text-lg sm:text-xl lg:text-2xl leading-relaxed" data-i18n="page_subtitle">
                     Comparing two unique 9-day winter break itineraries: A Southwest US linear road trip (Austin in, El Paso out) vs. a Sicilian island loop (Palermo round-trip with bus to Catania).
                 </p>
 
                 <!-- Mobile View Toggle Controls -->
                 <div class="mt-8 flex justify-center lg:hidden">
-                    <div class="bg-slate-800 p-1.5 rounded-xl border border-slate-700 inline-flex gap-1">
-                        <button id="view-both-btn" onclick="setMobileView('both')" class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg bg-slate-700 text-white shadow-sm transition" data-i18n="btn_compare_both">
+                    <div class="bg-slate-800 p-2 rounded-xl border border-slate-700 inline-flex gap-2">
+                        <button id="view-both-btn" onclick="setMobileView('both')" class="px-4 py-2.5 text-sm sm:text-base font-bold rounded-lg bg-slate-700 text-white shadow-sm transition" data-i18n="btn_compare_both">
                             Compare Both
                         </button>
-                        <button id="view-texas-btn" onclick="setMobileView('texas')" class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg text-slate-300 hover:text-white transition" data-i18n="btn_trip_a_short">
+                        <button id="view-texas-btn" onclick="setMobileView('texas')" class="px-4 py-2.5 text-sm sm:text-base font-bold rounded-lg text-slate-300 hover:text-white transition" data-i18n="btn_trip_a_short">
                             🌵 Trip A (TX & NM)
                         </button>
-                        <button id="view-sicily-btn" onclick="setMobileView('sicily')" class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg text-slate-300 hover:text-white transition" data-i18n="btn_trip_b_short">
+                        <button id="view-sicily-btn" onclick="setMobileView('sicily')" class="px-4 py-2.5 text-sm sm:text-base font-bold rounded-lg text-slate-300 hover:text-white transition" data-i18n="btn_trip_b_short">
                             🏛️ Trip B (Sicily)
                         </button>
                     </div>
@@ -134,55 +152,55 @@
             <div id="overview-texas" class="bg-white rounded-2xl shadow-xl border border-amber-100 overflow-hidden flex flex-col justify-between">
                 <div class="bg-gradient-to-r from-amber-700 to-amber-800 p-6 text-white">
                     <div class="flex justify-between items-start mb-2">
-                        <span class="px-3 py-1 rounded-full bg-amber-900/70 text-amber-200 text-xs font-bold uppercase tracking-wider" data-i18n="trip_a_tag">Option A • One-Way Road Trip</span>
-                        <span class="text-amber-200 text-xs font-semibold"><i class="fa-solid fa-plane"></i> AUS in ✈️ ELP out</span>
+                        <span class="px-3.5 py-1.5 rounded-full bg-amber-900/80 text-amber-200 text-sm font-bold uppercase tracking-wider" data-i18n="trip_a_tag">Option A • One-Way Road Trip</span>
+                        <span class="text-amber-100 text-sm font-bold"><i class="fa-solid fa-plane"></i> AUS in ✈️ ELP out</span>
                     </div>
-                    <h2 class="text-2xl sm:text-3xl font-bold font-serif" data-i18n="trip_a_title">Texas & New Mexico</h2>
-                    <p class="text-amber-100 text-sm mt-1" data-i18n="trip_a_route">Austin (AUS) → Big Bend National Park → White Sands National Park → El Paso (ELP)</p>
+                    <h2 class="text-3xl sm:text-4xl font-bold font-serif" data-i18n="trip_a_title">Texas & New Mexico</h2>
+                    <p class="text-amber-100 text-base sm:text-lg mt-2 font-medium" data-i18n="trip_a_route">Austin (AUS) → Big Bend National Park → White Sands National Park → El Paso (ELP)</p>
                 </div>
 
-                <div class="p-6 grid grid-cols-2 gap-4 bg-amber-50/30 text-sm border-b border-amber-100">
+                <div class="p-6 grid grid-cols-2 gap-5 bg-amber-50/30 text-base border-b border-amber-100">
                     <div>
-                        <span class="text-xs text-slate-500 block font-medium" data-i18n="meta_flights">Flight Routing</span>
-                        <span class="font-semibold text-slate-800" data-i18n="trip_a_flights">Fly into Austin (AUS), Out of El Paso (ELP)</span>
+                        <span class="text-sm text-slate-500 block font-semibold" data-i18n="meta_flights">Flight Routing</span>
+                        <span class="font-bold text-slate-900" data-i18n="trip_a_flights">Fly into Austin (AUS), Out of El Paso (ELP)</span>
                     </div>
                     <div>
-                        <span class="text-xs text-slate-500 block font-medium" data-i18n="meta_transit">Ground Transit</span>
-                        <span class="font-semibold text-slate-800"><i class="fa-solid fa-car text-amber-700"></i> ~850 Mi Driving (One-Way)</span>
+                        <span class="text-sm text-slate-500 block font-semibold" data-i18n="meta_transit">Ground Transit</span>
+                        <span class="font-bold text-slate-900"><i class="fa-solid fa-car text-amber-700"></i> ~850 Mi Driving (One-Way)</span>
                     </div>
                     <div>
-                        <span class="text-xs text-slate-500 block font-medium" data-i18n="meta_weather">Dec Weather</span>
-                        <span class="font-semibold text-slate-800" data-i18n="trip_a_weather">Sunny Desert (35°–65°F / 2°–18°C)</span>
+                        <span class="text-sm text-slate-500 block font-semibold" data-i18n="meta_weather">Dec Weather</span>
+                        <span class="font-bold text-slate-900" data-i18n="trip_a_weather">Sunny Desert (35°–65°F / 2°–18°C)</span>
                     </div>
                     <div>
-                        <span class="text-xs text-slate-500 block font-medium" data-i18n="meta_vibe">Vibe & Style</span>
-                        <span class="font-semibold text-slate-800" data-i18n="trip_a_vibe">Craft BBQ & Rugged Nature</span>
+                        <span class="text-sm text-slate-500 block font-semibold" data-i18n="meta_vibe">Vibe & Style</span>
+                        <span class="font-bold text-slate-900" data-i18n="trip_a_vibe">Craft BBQ & Rugged Nature</span>
                     </div>
                 </div>
 
                 <!-- Prominent Key Highlights Image Gallery -->
                 <div class="p-6">
-                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4" data-i18n="highlights_title">Featured Highlights & Scenery</h3>
+                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4" data-i18n="highlights_title">Featured Highlights & Scenery</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div class="relative group rounded-xl overflow-hidden h-40 bg-slate-100 shadow-sm border border-slate-200">
+                        <div class="relative group rounded-xl overflow-hidden h-48 bg-slate-100 shadow-sm border border-slate-200">
                             <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Austin Texas BBQ" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/d97706/ffffff?text=Austin+BBQ'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3 flex flex-col justify-end">
-                                <span class="text-xs font-bold text-white" data-i18n="img_austin_bbq">Austin Craft BBQ</span>
-                                <span class="text-[10px] text-amber-200" data-i18n="img_austin_sub">Central Texas Brisket</span>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3.5 flex flex-col justify-end">
+                                <span class="text-sm sm:text-base font-bold text-white" data-i18n="img_austin_bbq">Austin Craft BBQ</span>
+                                <span class="text-xs sm:text-sm text-amber-200" data-i18n="img_austin_sub">Central Texas Brisket</span>
                             </div>
                         </div>
-                        <div class="relative group rounded-xl overflow-hidden h-40 bg-slate-100 shadow-sm border border-slate-200">
+                        <div class="relative group rounded-xl overflow-hidden h-48 bg-slate-100 shadow-sm border border-slate-200">
                             <img src="https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=600&q=80" alt="Santa Elena Canyon Big Bend" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/b45309/ffffff?text=Big+Bend+NP'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3 flex flex-col justify-end">
-                                <span class="text-xs font-bold text-white" data-i18n="img_big_bend">Santa Elena Canyon</span>
-                                <span class="text-[10px] text-amber-200" data-i18n="img_big_bend_sub">Big Bend National Park</span>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3.5 flex flex-col justify-end">
+                                <span class="text-sm sm:text-base font-bold text-white" data-i18n="img_big_bend">Santa Elena Canyon</span>
+                                <span class="text-xs sm:text-sm text-amber-200" data-i18n="img_big_bend_sub">Big Bend National Park</span>
                             </div>
                         </div>
-                        <div class="relative group rounded-xl overflow-hidden h-40 bg-slate-100 shadow-sm border border-slate-200">
+                        <div class="relative group rounded-xl overflow-hidden h-48 bg-slate-100 shadow-sm border border-slate-200">
                             <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80" alt="White Sands National Park" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/92400e/ffffff?text=White+Sands'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3 flex flex-col justify-end">
-                                <span class="text-xs font-bold text-white" data-i18n="img_white_sands">Gypsum Sand Dunes</span>
-                                <span class="text-[10px] text-amber-200" data-i18n="img_white_sands_sub">White Sands NP (NM)</span>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3.5 flex flex-col justify-end">
+                                <span class="text-sm sm:text-base font-bold text-white" data-i18n="img_white_sands">Gypsum Sand Dunes</span>
+                                <span class="text-xs sm:text-sm text-amber-200" data-i18n="img_white_sands_sub">White Sands NP (NM)</span>
                             </div>
                         </div>
                     </div>
@@ -193,55 +211,55 @@
             <div id="overview-sicily" class="bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden flex flex-col justify-between">
                 <div class="bg-gradient-to-r from-sky-800 to-sky-900 p-6 text-white">
                     <div class="flex justify-between items-start mb-2">
-                        <span class="px-3 py-1 rounded-full bg-sky-950/70 text-sky-200 text-xs font-bold uppercase tracking-wider" data-i18n="trip_b_tag">Option B • Island Loop</span>
-                        <span class="text-sky-200 text-xs font-semibold"><i class="fa-solid fa-bus"></i> Flights & Intercity Bus</span>
+                        <span class="px-3.5 py-1.5 rounded-full bg-sky-950/80 text-sky-200 text-sm font-bold uppercase tracking-wider" data-i18n="trip_b_tag">Option B • Island Loop</span>
+                        <span class="text-sky-100 text-sm font-bold"><i class="fa-solid fa-bus"></i> Flights & Intercity Bus</span>
                     </div>
-                    <h2 class="text-2xl sm:text-3xl font-bold font-serif" data-i18n="trip_b_title">Sicily, Italy</h2>
-                    <p class="text-sky-100 text-sm mt-1" data-i18n="trip_b_route">Palermo (PMO) Round-trip • Express Bus to/from Catania & Mount Etna</p>
+                    <h2 class="text-3xl sm:text-4xl font-bold font-serif" data-i18n="trip_b_title">Sicily, Italy</h2>
+                    <p class="text-sky-100 text-base sm:text-lg mt-2 font-medium" data-i18n="trip_b_route">Palermo (PMO) Round-trip • Express Bus to/from Catania & Mount Etna</p>
                 </div>
 
-                <div class="p-6 grid grid-cols-2 gap-4 bg-sky-50/30 text-sm border-b border-sky-100">
+                <div class="p-6 grid grid-cols-2 gap-5 bg-sky-50/30 text-base border-b border-sky-100">
                     <div>
-                        <span class="text-xs text-slate-500 block font-medium" data-i18n="meta_flights">Flight Routing</span>
-                        <span class="font-semibold text-slate-800" data-i18n="trip_b_flights">Round-trip into/out of Palermo (PMO)</span>
+                        <span class="text-sm text-slate-500 block font-semibold" data-i18n="meta_flights">Flight Routing</span>
+                        <span class="font-bold text-slate-900" data-i18n="trip_b_flights">Round-trip into/out of Palermo (PMO)</span>
                     </div>
                     <div>
-                        <span class="text-xs text-slate-500 block font-medium" data-i18n="meta_transit">Ground Transit</span>
-                        <span class="font-semibold text-slate-800"><i class="fa-solid fa-bus-simple text-sky-700"></i> Express Bus (~2.5h each way)</span>
+                        <span class="text-sm text-slate-500 block font-semibold" data-i18n="meta_transit">Ground Transit</span>
+                        <span class="font-bold text-slate-900"><i class="fa-solid fa-bus-simple text-sky-700"></i> Express Bus (~2.5h each way)</span>
                     </div>
                     <div>
-                        <span class="text-xs text-slate-500 block font-medium" data-i18n="meta_weather">Dec Weather</span>
-                        <span class="font-semibold text-slate-800" data-i18n="trip_b_weather">Mild Coastal (50°–60°F / 10°–16°C)</span>
+                        <span class="text-sm text-slate-500 block font-semibold" data-i18n="meta_weather">Dec Weather</span>
+                        <span class="font-bold text-slate-900" data-i18n="trip_b_weather">Mild Coastal (50°–60°F / 10°–16°C)</span>
                     </div>
                     <div>
-                        <span class="text-xs text-slate-500 block font-medium" data-i18n="meta_vibe">Vibe & Style</span>
-                        <span class="font-semibold text-slate-800" data-i18n="trip_b_vibe">Ancient History & Volcano Wine</span>
+                        <span class="text-sm text-slate-500 block font-semibold" data-i18n="meta_vibe">Vibe & Style</span>
+                        <span class="font-bold text-slate-900" data-i18n="trip_b_vibe">Ancient History & Volcano Wine</span>
                     </div>
                 </div>
 
                 <!-- Prominent Key Highlights Image Gallery -->
                 <div class="p-6">
-                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4" data-i18n="highlights_title">Featured Highlights & Scenery</h3>
+                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4" data-i18n="highlights_title">Featured Highlights & Scenery</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div class="relative group rounded-xl overflow-hidden h-40 bg-slate-100 shadow-sm border border-slate-200">
+                        <div class="relative group rounded-xl overflow-hidden h-48 bg-slate-100 shadow-sm border border-slate-200">
                             <img src="https://images.unsplash.com/photo-1541370976299-4d24ebbc9077?auto=format&fit=crop&w=600&q=80" alt="Palermo Cathedral" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/0284c7/ffffff?text=Palermo'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3 flex flex-col justify-end">
-                                <span class="text-xs font-bold text-white" data-i18n="img_palermo">Palermo Cathedral</span>
-                                <span class="text-[10px] text-sky-200" data-i18n="img_palermo_sub">Norman Architecture & Markets</span>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3.5 flex flex-col justify-end">
+                                <span class="text-sm sm:text-base font-bold text-white" data-i18n="img_palermo">Palermo Cathedral</span>
+                                <span class="text-xs sm:text-sm text-sky-200" data-i18n="img_palermo_sub">Norman Architecture & Markets</span>
                             </div>
                         </div>
-                        <div class="relative group rounded-xl overflow-hidden h-40 bg-slate-100 shadow-sm border border-slate-200">
+                        <div class="relative group rounded-xl overflow-hidden h-48 bg-slate-100 shadow-sm border border-slate-200">
                             <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=600&q=80" alt="Mount Etna Volcano" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/0369a1/ffffff?text=Mount+Etna'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3 flex flex-col justify-end">
-                                <span class="text-xs font-bold text-white" data-i18n="img_etna">Mount Etna</span>
-                                <span class="text-[10px] text-sky-200" data-i18n="img_etna_sub">Active Volcano & Vineyards</span>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3.5 flex flex-col justify-end">
+                                <span class="text-sm sm:text-base font-bold text-white" data-i18n="img_etna">Mount Etna</span>
+                                <span class="text-xs sm:text-sm text-sky-200" data-i18n="img_etna_sub">Active Volcano & Vineyards</span>
                             </div>
                         </div>
-                        <div class="relative group rounded-xl overflow-hidden h-40 bg-slate-100 shadow-sm border border-slate-200">
+                        <div class="relative group rounded-xl overflow-hidden h-48 bg-slate-100 shadow-sm border border-slate-200">
                             <img src="https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=600&q=80" alt="Taormina Greek Theatre" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/075985/ffffff?text=Taormina'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3 flex flex-col justify-end">
-                                <span class="text-xs font-bold text-white" data-i18n="img_taormina">Taormina Greek Theatre</span>
-                                <span class="text-[10px] text-sky-200" data-i18n="img_taormina_sub">Cliffside Ancient Ruins</span>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3.5 flex flex-col justify-end">
+                                <span class="text-sm sm:text-base font-bold text-white" data-i18n="img_taormina">Taormina Greek Theatre</span>
+                                <span class="text-xs sm:text-sm text-sky-200" data-i18n="img_taormina_sub">Cliffside Ancient Ruins</span>
                             </div>
                         </div>
                     </div>
@@ -252,69 +270,69 @@
 
         <!-- Pros & Cons Comparison Section -->
         <section class="mb-12">
-            <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold font-serif text-slate-900" data-i18n="procon_section_title">Pros & Cons Breakdown</h2>
-                <p class="text-slate-500 text-sm" data-i18n="procon_section_sub">Key tradeoffs to evaluate before deciding</p>
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold font-serif text-slate-900" data-i18n="procon_section_title">Pros & Cons Breakdown</h2>
+                <p class="text-slate-600 text-base sm:text-lg mt-1" data-i18n="procon_section_sub">Key tradeoffs to evaluate before deciding</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Texas Pros & Cons -->
-                <div id="procon-texas" class="bg-white rounded-2xl p-6 shadow-md border border-amber-100">
-                    <h3 class="text-lg font-bold text-amber-900 mb-4 flex items-center gap-2">
+                <div id="procon-texas" class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-amber-100">
+                    <h3 class="text-2xl font-bold text-amber-900 mb-6 flex items-center gap-2">
                         <i class="fa-solid fa-hat-cowboy text-amber-600"></i> <span data-i18n="trip_a_title">Texas & New Mexico</span>
                     </h3>
                     
-                    <div class="mb-6">
-                        <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-check"></i> <span data-i18n="pros_heading">Advantages (Pros)</span>
+                    <div class="mb-8">
+                        <h4 class="text-sm sm:text-base font-extrabold text-emerald-800 uppercase tracking-wider mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-lg"></i> <span data-i18n="pros_heading">Advantages (Pros)</span>
                         </h4>
-                        <ul class="space-y-2.5 text-sm text-slate-600">
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                        <ul class="space-y-3.5 text-base sm:text-lg text-slate-700 leading-relaxed">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-emerald-600 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="tx_pro_1">Efficient one-way routing (AUS in, ELP out) eliminates ~600 miles of stressful backtrack driving.</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-emerald-600 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="tx_pro_2">Unmatched natural contrast: from Austin's music & food scene to Big Bend's canyons and White Sands' snow-white gypsum dunes.</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-emerald-600 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="tx_pro_3">Optimal winter weather with crisp, sunny daytime hiking temperatures in West Texas desert parks.</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-emerald-600 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="tx_pro_4">Authentic culinary experience with world-famous Texas brisket, Tex-Mex, and craft brews in Austin and Marfa.</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-emerald-600 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="tx_pro_5">World-class stargazing at Big Bend National Park, an official International Dark Sky Reserve with exceptionally clear December night skies.</span>
                             </li>
                         </ul>
                     </div>
 
                     <div>
-                        <h4 class="text-xs font-bold text-rose-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-xmark"></i> <span data-i18n="cons_heading">Drawbacks (Cons)</span>
+                        <h4 class="text-sm sm:text-base font-extrabold text-rose-800 uppercase tracking-wider mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-xmark text-lg"></i> <span data-i18n="cons_heading">Drawbacks (Cons)</span>
                         </h4>
-                        <ul class="space-y-2.5 text-sm text-slate-600">
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                        <ul class="space-y-3.5 text-base sm:text-lg text-slate-700 leading-relaxed">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-xmark text-rose-500 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="tx_con_1">Still involves substantial highway driving (~850 miles total) and one-way car rental drop-off fee.</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-xmark text-rose-500 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="tx_con_2">West Texas desert nights get quite cold (frequently dropping near freezing in Dec).</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-xmark text-rose-500 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="tx_con_3">Remote stretches in Big Bend have patchy cell service and long distances between gas stations.</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-xmark text-rose-500 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="tx_con_4">Popular national park accommodations (Chisos Basin, Terlingua) require advance booking.</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-xmark text-rose-500 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="tx_con_5">Extreme desert diurnal temperature swings require packing heavy multi-layer cold weather gear alongside light daytime clothing.</span>
                             </li>
                         </ul>
@@ -322,62 +340,62 @@
                 </div>
 
                 <!-- Sicily Pros & Cons -->
-                <div id="procon-sicily" class="bg-white rounded-2xl p-6 shadow-md border border-sky-100">
-                    <h3 class="text-lg font-bold text-sky-900 mb-4 flex items-center gap-2">
+                <div id="procon-sicily" class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-sky-100">
+                    <h3 class="text-2xl font-bold text-sky-900 mb-6 flex items-center gap-2">
                         <i class="fa-solid fa-landmark text-sky-600"></i> <span data-i18n="trip_b_title">Sicily, Italy</span>
                     </h3>
                     
-                    <div class="mb-6">
-                        <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-check"></i> <span data-i18n="pros_heading">Advantages (Pros)</span>
+                    <div class="mb-8">
+                        <h4 class="text-sm sm:text-base font-extrabold text-emerald-800 uppercase tracking-wider mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-lg"></i> <span data-i18n="pros_heading">Advantages (Pros)</span>
                         </h4>
-                        <ul class="space-y-2.5 text-sm text-slate-600">
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                        <ul class="space-y-3.5 text-base sm:text-lg text-slate-700 leading-relaxed">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-emerald-600 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="sic_pro_1">No car rental necessary; comfortable express buses connect Palermo and Catania directly across the island.</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-emerald-600 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="sic_pro_2">Rich European cultural experience with millennial history, Greek theaters, and UNESCO cathedral mosaics.</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-emerald-600 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="sic_pro_3">Unforgettable Sicilian gastronomy: Arancini, fresh seafood, Mount Etna volcanic wines, and cannoli.</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-emerald-600 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="sic_pro_4">Low winter tourist crowds and festive Italian Christmas market atmosphere in Palermo & Catania.</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-emerald-500 mt-1 shrink-0"></i>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-emerald-600 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="sic_pro_5">Substantially lower off-season rates for boutique hotels, guided excursions, and dining compared to summer peak.</span>
                             </li>
                         </ul>
                     </div>
 
                     <div>
-                        <h4 class="text-xs font-bold text-rose-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-xmark"></i> <span data-i18n="cons_heading">Drawbacks (Cons)</span>
+                        <h4 class="text-sm sm:text-base font-extrabold text-rose-800 uppercase tracking-wider mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-xmark text-lg"></i> <span data-i18n="cons_heading">Drawbacks (Cons)</span>
                         </h4>
-                        <ul class="space-y-2.5 text-sm text-slate-600">
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                        <ul class="space-y-3.5 text-base sm:text-lg text-slate-700 leading-relaxed">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-xmark text-rose-500 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="sic_con_1">Longer transatlantic flight time and jet lag impact on a 9-day break.</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-xmark text-rose-500 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="sic_con_2">Shorter winter daylight hours and chance of rain/cooler Mediterranean winds.</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-xmark text-rose-500 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="sic_con_3">Bus schedules dictate arrival times, requiring sticking to set intercity timetables.</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-xmark text-rose-500 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="sic_con_4">Some coastal beach venues and tourist shops operate on reduced off-season winter hours.</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-xmark text-rose-400 mt-1 shrink-0"></i>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-xmark text-rose-500 mt-1 shrink-0 text-lg"></i>
                                 <span data-i18n="sic_con_5">Higher elevation activities like Mount Etna cable cars can be subject to weather closures or snow/wind shutdowns in December.</span>
                             </li>
                         </ul>
@@ -388,66 +406,66 @@
 
         <!-- Detailed Day-by-Day Schedule Section with Visuals -->
         <section class="mb-12">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
                 <div>
-                    <h2 class="text-2xl font-bold font-serif text-slate-900" data-i18n="itinerary_section_title">Day-by-Day Visual Itineraries</h2>
-                    <p class="text-slate-500 text-sm" data-i18n="itinerary_section_sub">Side-by-side comparison with key attractions for each day</p>
+                    <h2 class="text-3xl font-bold font-serif text-slate-900" data-i18n="itinerary_section_title">Day-by-Day Visual Itineraries</h2>
+                    <p class="text-slate-600 text-base sm:text-lg mt-1" data-i18n="itinerary_section_sub">Side-by-side comparison with key attractions for each day</p>
                 </div>
                 <!-- Day filter buttons -->
-                <div class="flex items-center gap-1 overflow-x-auto pb-2 sm:pb-0 custom-scrollbar">
-                    <span class="text-xs text-slate-400 font-semibold mr-2 uppercase" data-i18n="filter_jump">Filter:</span>
-                    <button onclick="filterDay('all')" class="day-filter-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white shrink-0" data-i18n="filter_all">All Days</button>
-                    <button onclick="filterDay(1)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 5</button>
-                    <button onclick="filterDay(2)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 6</button>
-                    <button onclick="filterDay(3)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 7</button>
-                    <button onclick="filterDay(4)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 8</button>
-                    <button onclick="filterDay(5)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 9</button>
-                    <button onclick="filterDay(6)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 10</button>
-                    <button onclick="filterDay(7)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 11</button>
-                    <button onclick="filterDay(8)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 12</button>
-                    <button onclick="filterDay(9)" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 13</button>
+                <div class="flex items-center gap-1.5 overflow-x-auto pb-2 sm:pb-0 custom-scrollbar">
+                    <span class="text-sm text-slate-500 font-bold mr-2 uppercase" data-i18n="filter_jump">Filter:</span>
+                    <button onclick="filterDay('all')" class="day-filter-btn active px-4 py-2 rounded-lg text-sm font-bold bg-slate-900 text-white shrink-0" data-i18n="filter_all">All Days</button>
+                    <button onclick="filterDay(1)" class="day-filter-btn px-4 py-2 rounded-lg text-sm font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 5</button>
+                    <button onclick="filterDay(2)" class="day-filter-btn px-4 py-2 rounded-lg text-sm font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 6</button>
+                    <button onclick="filterDay(3)" class="day-filter-btn px-4 py-2 rounded-lg text-sm font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 7</button>
+                    <button onclick="filterDay(4)" class="day-filter-btn px-4 py-2 rounded-lg text-sm font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 8</button>
+                    <button onclick="filterDay(5)" class="day-filter-btn px-4 py-2 rounded-lg text-sm font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 9</button>
+                    <button onclick="filterDay(6)" class="day-filter-btn px-4 py-2 rounded-lg text-sm font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 10</button>
+                    <button onclick="filterDay(7)" class="day-filter-btn px-4 py-2 rounded-lg text-sm font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 11</button>
+                    <button onclick="filterDay(8)" class="day-filter-btn px-4 py-2 rounded-lg text-sm font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 12</button>
+                    <button onclick="filterDay(9)" class="day-filter-btn px-4 py-2 rounded-lg text-sm font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shrink-0">Dec 13</button>
                 </div>
             </div>
 
             <!-- Day-by-day Comparative List -->
-            <div id="itinerary-list" class="space-y-6">
+            <div id="itinerary-list" class="space-y-8">
 
                 <!-- Day 1 -->
                 <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="1">
-                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
-                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d1_header">Day 1 • Saturday, Dec 5, 2026</span></span>
-                        <span class="text-xs text-slate-300" data-i18n="d1_sub">Arrival & Evening Vibe</span>
+                    <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center">
+                        <span class="text-sm sm:text-base font-extrabold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400 text-lg"></i><span data-i18n="d1_header">Day 1 • Saturday, Dec 5, 2026</span></span>
+                        <span class="text-xs sm:text-sm text-slate-300 font-semibold" data-i18n="d1_sub">Arrival & Evening Vibe</span>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
                         <!-- Texas -->
-                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d1_tx_title">Arrive Austin (AUS) & BBQ Feast</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d1_tx_title">Arrive Austin (AUS) & BBQ Feast</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d1_tx_desc">Fly into Austin-Bergstrom (AUS). Pick up rental car and head straight to legendary Terry Black's BBQ for smoked brisket. Night walk along Rainey Street music district.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d1_tx_desc">Fly into Austin-Bergstrom (AUS). Pick up rental car and head straight to legendary Terry Black's BBQ for smoked brisket. Night walk along Rainey Street music district.</p>
                             </div>
-                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1532635241-17e820acc59f?auto=format&fit=crop&w=600&q=80" alt="Austin Skyline" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/d97706/ffffff?text=Austin+Skyline'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_austin">Austin Downtown & Lady Bird Lake</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_austin">Austin Downtown & Lady Bird Lake</span>
                                 </div>
                             </div>
                         </div>
                         <!-- Sicily -->
-                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d1_sic_title">Arrive Palermo (PMO) & Night Markets</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d1_sic_title">Arrive Palermo (PMO) & Night Markets</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d1_sic_desc">Fly into Palermo Airport (PMO), taxi/bus into city center. Check in and sample initial Sicilian street food (Arancini, Panelle) near historic Quattro Canti plaza.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d1_sic_desc">Fly into Palermo Airport (PMO), taxi/bus into city center. Check in and sample initial Sicilian street food (Arancini, Panelle) near historic Quattro Canti plaza.</p>
                             </div>
-                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1541370976299-4d24ebbc9077?auto=format&fit=crop&w=600&q=80" alt="Palermo Night" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0284c7/ffffff?text=Palermo+City'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_palermo">Quattro Canti & Palermo Streets</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_palermo">Quattro Canti & Palermo Streets</span>
                                 </div>
                             </div>
                         </div>
@@ -456,38 +474,38 @@
 
                 <!-- Day 2 -->
                 <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="2">
-                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
-                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d2_header">Day 2 • Sunday, Dec 6, 2026</span></span>
-                        <span class="text-xs text-slate-300" data-i18n="d2_sub">City Exploration to Scenic Drive</span>
+                    <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center">
+                        <span class="text-sm sm:text-base font-extrabold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400 text-lg"></i><span data-i18n="d2_header">Day 2 • Sunday, Dec 6, 2026</span></span>
+                        <span class="text-xs sm:text-sm text-slate-300 font-semibold" data-i18n="d2_sub">City Exploration to Scenic Drive</span>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
-                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d2_tx_title">Austin Capitol & Drive to Marathon/Terlingua</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d2_tx_title">Austin Capitol & Drive to Marathon/Terlingua</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d2_tx_desc">Morning walk around Texas State Capitol & Barton Springs. Start drive west into West Texas canyon country (~6.5 hours). Stargazing overnight in Terlingua ghost town.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d2_tx_desc">Morning walk around Texas State Capitol & Barton Springs. Start drive west into West Texas canyon country (~6.5 hours). Stargazing overnight in Terlingua ghost town.</p>
                             </div>
-                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=600&q=80" alt="Texas State Capitol" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/b45309/ffffff?text=Texas+Capitol'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_capitol">Texas State Capitol Building, Austin</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_capitol">Texas State Capitol Building, Austin</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d2_sic_title">Palermo Royal Palace & Mosaics</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d2_sic_title">Palermo Royal Palace & Mosaics</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d2_sic_desc">Full day exploring Palermo's UNESCO masterpieces: Norman Palace, Cappella Palatina's gold mosaics, and bustling Ballarò street food market.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d2_sic_desc">Full day exploring Palermo's UNESCO masterpieces: Norman Palace, Cappella Palatina's gold mosaics, and bustling Ballarò street food market.</p>
                             </div>
-                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1568084680786-a84f91d1153c?auto=format&fit=crop&w=600&q=80" alt="Cappella Palatina Mosaic" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0369a1/ffffff?text=Palermo+Palace'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_norman">Palermo Cathedral & Royal Mosaics</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_norman">Palermo Cathedral & Royal Mosaics</span>
                                 </div>
                             </div>
                         </div>
@@ -496,38 +514,38 @@
 
                 <!-- Day 3 -->
                 <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="3">
-                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
-                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d3_header">Day 3 • Monday, Dec 7, 2026</span></span>
-                        <span class="text-xs text-slate-300" data-i18n="d3_sub">Deep Nature & Coastal Day Trip</span>
+                    <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center">
+                        <span class="text-sm sm:text-base font-extrabold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400 text-lg"></i><span data-i18n="d3_header">Day 3 • Monday, Dec 7, 2026</span></span>
+                        <span class="text-xs sm:text-sm text-slate-300 font-semibold" data-i18n="d3_sub">Deep Nature & Coastal Day Trip</span>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
-                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d3_tx_title">Big Bend NP: Santa Elena Canyon Trail</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d3_tx_title">Big Bend NP: Santa Elena Canyon Trail</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d3_tx_desc">Hike into massive 1,500ft high cliff walls of Santa Elena Canyon along the Rio Grande border. Drive Ross Maxwell scenic highway in afternoon.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d3_tx_desc">Hike into massive 1,500ft high cliff walls of Santa Elena Canyon along the Rio Grande border. Drive Ross Maxwell scenic highway in afternoon.</p>
                             </div>
-                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=600&q=80" alt="Santa Elena Canyon" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/92400e/ffffff?text=Santa+Elena+Canyon'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_santa_elena">Santa Elena Canyon, Big Bend NP</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_santa_elena">Santa Elena Canyon, Big Bend NP</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d3_sic_title">Cefalù Seaside Train Day Trip</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d3_sic_title">Cefalù Seaside Train Day Trip</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d3_sic_desc">45-min train trip to picturesque coastal Cefalù. Hike up La Rocca mountain for panoramic sea views and explore medieval cobblestone lanes.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d3_sic_desc">45-min train trip to picturesque coastal Cefalù. Hike up La Rocca mountain for panoramic sea views and explore medieval cobblestone lanes.</p>
                             </div>
-                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=600&q=80" alt="Cefalu Coastal Town" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/075985/ffffff?text=Cefalu+Sicily'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_cefalu">Cefalù Historic Coastal Village</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_cefalu">Cefalù Historic Coastal Village</span>
                                 </div>
                             </div>
                         </div>
@@ -536,38 +554,38 @@
 
                 <!-- Day 4 -->
                 <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="4">
-                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
-                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d4_header">Day 4 • Tuesday, Dec 8, 2026</span></span>
-                        <span class="text-xs text-slate-300" data-i18n="d4_sub">Mountain Trails vs. Intercity Bus Transit</span>
+                    <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center">
+                        <span class="text-sm sm:text-base font-extrabold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400 text-lg"></i><span data-i18n="d4_header">Day 4 • Tuesday, Dec 8, 2026</span></span>
+                        <span class="text-xs sm:text-sm text-slate-300 font-semibold" data-i18n="d4_sub">Mountain Trails vs. Intercity Bus Transit</span>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
-                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d4_tx_title">Big Bend: Chisos Basin & Hot Springs</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d4_tx_title">Big Bend: Chisos Basin & Hot Springs</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d4_tx_desc">Hike Lost Mine Trail in Chisos Mountains basin for sweeping valley vistas. Soak in geothermal natural Rio Grande Hot Springs along border in late afternoon.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d4_tx_desc">Hike Lost Mine Trail in Chisos Mountains basin for sweeping valley vistas. Soak in geothermal natural Rio Grande Hot Springs along border in late afternoon.</p>
                             </div>
-                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Chisos Mountains" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/d97706/ffffff?text=Chisos+Basin'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_chisos">Chisos Mountains Basin, Big Bend</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_chisos">Chisos Mountains Basin, Big Bend</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d4_sic_title">Express Bus to Catania & Piazza Duomo</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d4_sic_title">Express Bus to Catania & Piazza Duomo</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d4_sic_desc">Board comfortable intercity express bus from Palermo across island interior to Catania (~2.5 hrs). Check into Catania, see Elephant Fountain & volcanic stone buildings.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d4_sic_desc">Board comfortable intercity express bus from Palermo across island interior to Catania (~2.5 hrs). Check into Catania, see Elephant Fountain & volcanic stone buildings.</p>
                             </div>
-                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?auto=format&fit=crop&w=600&q=80" alt="Catania Piazza Duomo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0284c7/ffffff?text=Catania+City'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_catania">Catania Piazza Duomo & Volcanic Stone</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_catania">Catania Piazza Duomo & Volcanic Stone</span>
                                 </div>
                             </div>
                         </div>
@@ -576,38 +594,38 @@
 
                 <!-- Day 5 -->
                 <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="5">
-                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
-                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d5_header">Day 5 • Wednesday, Dec 9, 2026</span></span>
-                        <span class="text-xs text-slate-300" data-i18n="d5_sub">Marfa Art to Dunes vs. Mt Etna Volcano</span>
+                    <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center">
+                        <span class="text-sm sm:text-base font-extrabold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400 text-lg"></i><span data-i18n="d5_header">Day 5 • Wednesday, Dec 9, 2026</span></span>
+                        <span class="text-xs sm:text-sm text-slate-300 font-semibold" data-i18n="d5_sub">Marfa Art to Dunes vs. Mt Etna Volcano</span>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
-                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d5_tx_title">Marfa Art Town to White Sands NP Sunset</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d5_tx_title">Marfa Art Town to White Sands NP Sunset</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d5_tx_desc">Drive north through quirky arts town Marfa (Prada Marfa install). Continue into New Mexico for a breathtaking sunset over White Sands gypsum dunes.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d5_tx_desc">Drive north through quirky arts town Marfa (Prada Marfa install). Continue into New Mexico for a breathtaking sunset over White Sands gypsum dunes.</p>
                             </div>
-                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80" alt="White Sands Sunset" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/b45309/ffffff?text=White+Sands+Sunset'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_sunset_dunes">White Sands National Park Sunset</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_sunset_dunes">White Sands National Park Sunset</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d5_sic_title">Mount Etna Summit & Volcanic Winery</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d5_sic_title">Mount Etna Summit & Volcanic Winery</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d5_sic_desc">Guided 4x4 & cable car trip up Mount Etna's active volcanic craters. Afternoon wine tasting lunch at an organic vineyard on Etna's fertile slopes.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d5_sic_desc">Guided 4x4 & cable car trip up Mount Etna's active volcanic craters. Afternoon wine tasting lunch at an organic vineyard on Etna's fertile slopes.</p>
                             </div>
-                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=600&q=80" alt="Mount Etna" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0369a1/ffffff?text=Mount+Etna'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_etna">Mount Etna Craters & Volcanic Terraces</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_etna">Mount Etna Craters & Volcanic Terraces</span>
                                 </div>
                             </div>
                         </div>
@@ -616,38 +634,38 @@
 
                 <!-- Day 6 -->
                 <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="6">
-                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
-                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d6_header">Day 6 • Thursday, Dec 10, 2026</span></span>
-                        <span class="text-xs text-slate-300" data-i18n="d6_sub">Dune Sledding vs. Cliffside Ancient Ruins</span>
+                    <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center">
+                        <span class="text-sm sm:text-base font-extrabold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400 text-lg"></i><span data-i18n="d6_header">Day 6 • Thursday, Dec 10, 2026</span></span>
+                        <span class="text-xs sm:text-sm text-slate-300 font-semibold" data-i18n="d6_sub">Dune Sledding vs. Cliffside Ancient Ruins</span>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
-                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d6_tx_title">White Sands Sledding & Las Cruces</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d6_tx_title">White Sands Sledding & Las Cruces</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d6_tx_desc">Morning plastic disk sledding on pure white sand dunes. Afternoon visit to historic Mesilla plaza in Las Cruces for authentic New Mexican chile cuisine.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d6_tx_desc">Morning plastic disk sledding on pure white sand dunes. Afternoon visit to historic Mesilla plaza in Las Cruces for authentic New Mexican chile cuisine.</p>
                             </div>
-                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80" alt="White Sands Dune Sledding" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/92400e/ffffff?text=Dune+Sledding'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_sledding">Sledding White Sands Gypsum Dunes</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_sledding">Sledding White Sands Gypsum Dunes</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d6_sic_title">Taormina & Ancient Greek Theatre Day Trip</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d6_sic_title">Taormina & Ancient Greek Theatre Day Trip</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d6_sic_desc">Short local bus up to cliffside Taormina. Visit 3rd-century BC Greco-Roman Theatre framed by Mount Etna and Ionian Sea. Stroll Corso Umberto boutiques.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d6_sic_desc">Short local bus up to cliffside Taormina. Visit 3rd-century BC Greco-Roman Theatre framed by Mount Etna and Ionian Sea. Stroll Corso Umberto boutiques.</p>
                             </div>
-                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=600&q=80" alt="Taormina Greek Theatre" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/075985/ffffff?text=Taormina+Ruins'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_taormina">Taormina Ancient Theatre Overlooking Sea</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_taormina">Taormina Ancient Theatre Overlooking Sea</span>
                                 </div>
                             </div>
                         </div>
@@ -656,38 +674,38 @@
 
                 <!-- Day 7 -->
                 <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="7">
-                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
-                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d7_header">Day 7 • Friday, Dec 11, 2026</span></span>
-                        <span class="text-xs text-slate-300" data-i18n="d7_sub">El Paso Mountain Parks vs. Catania Fish Market</span>
+                    <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center">
+                        <span class="text-sm sm:text-base font-extrabold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400 text-lg"></i><span data-i18n="d7_header">Day 7 • Friday, Dec 11, 2026</span></span>
+                        <span class="text-xs sm:text-sm text-slate-300 font-semibold" data-i18n="d7_sub">El Paso Mountain Parks vs. Catania Fish Market</span>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
-                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d7_tx_title">El Paso: Franklin Mountains & Scenic Drive</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d7_tx_title">El Paso: Franklin Mountains & Scenic Drive</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d7_tx_desc">Short 45-min drive to El Paso. Cable car ride/hike in Franklin Mountains State Park, drive Scenic Drive for views overlooking US-Mexico border.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d7_tx_desc">Short 45-min drive to El Paso. Cable car ride/hike in Franklin Mountains State Park, drive Scenic Drive for views overlooking US-Mexico border.</p>
                             </div>
-                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=600&q=80" alt="El Paso Mountain Drive" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/c85a32/ffffff?text=El+Paso+Mountains'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_el_paso">Franklin Mountains & El Paso Skyline</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_el_paso">Franklin Mountains & El Paso Skyline</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d7_sic_title">Catania Fish Market & Return Bus to Palermo</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d7_sic_title">Catania Fish Market & Return Bus to Palermo</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d7_sic_desc">Visit raw & authentic La Pescheria fish market in Catania. Take afternoon express bus back across Sicily to Palermo for final 2 nights.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d7_sic_desc">Visit raw & authentic La Pescheria fish market in Catania. Take afternoon express bus back across Sicily to Palermo for final 2 nights.</p>
                             </div>
-                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80" alt="Catania Seafood Market" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0369a1/ffffff?text=Catania+Market'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_pescheria">La Pescheria Fish Market, Catania</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_pescheria">La Pescheria Fish Market, Catania</span>
                                 </div>
                             </div>
                         </div>
@@ -696,38 +714,38 @@
 
                 <!-- Day 8 -->
                 <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="8">
-                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
-                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d8_header">Day 8 • Saturday, Dec 12, 2026</span></span>
-                        <span class="text-xs text-slate-300" data-i18n="d8_sub">Border Mission Trail vs. Monreale Golden Mosaics</span>
+                    <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center">
+                        <span class="text-sm sm:text-base font-extrabold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400 text-lg"></i><span data-i18n="d8_header">Day 8 • Saturday, Dec 12, 2026</span></span>
+                        <span class="text-xs sm:text-sm text-slate-300 font-semibold" data-i18n="d8_sub">Border Mission Trail vs. Monreale Golden Mosaics</span>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
-                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d8_tx_title">El Paso Historic Mission Trail & Tacos</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d8_tx_title">El Paso Historic Mission Trail & Tacos</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d8_tx_desc">Tour 17th-century Spanish adobe missions (YSleta & Socorro). Farewell dinner featuring authentic hand-made Mexican street tacos in El Paso.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d8_tx_desc">Tour 17th-century Spanish adobe missions (Ysleta & Socorro). Farewell dinner featuring authentic hand-made Mexican street tacos in El Paso.</p>
                             </div>
-                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=600&q=80" alt="Tacos Mexican Cuisine" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/d97706/ffffff?text=Mexican+Tacos'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_tacos">Authentic El Paso Mexican Street Tacos</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_tacos">Authentic El Paso Mexican Street Tacos</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d8_sic_title">Monreale Cathedral & Christmas Markets</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d8_sic_title">Monreale Cathedral & Christmas Markets</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d8_sic_desc">Visit Monreale Cathedral overlooking Palermo to view 6,000 sq meters of shimmering gold glass mosaics. Evening walk through Palermo Christmas markets.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d8_sic_desc">Visit Monreale Cathedral overlooking Palermo to view 6,000 sq meters of shimmering gold glass mosaics. Evening walk through Palermo Christmas markets.</p>
                             </div>
-                            <div class="relative h-44 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-48 sm:h-52 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=600&q=80" alt="Palermo Christmas Market" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/0284c7/ffffff?text=Monreale+Cathedral'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_monreale">Monreale Cathedral & Holiday Illuminations</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_monreale">Monreale Cathedral & Holiday Illuminations</span>
                                 </div>
                             </div>
                         </div>
@@ -736,38 +754,38 @@
 
                 <!-- Day 9 -->
                 <div class="day-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" data-day="9">
-                    <div class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center">
-                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400"></i><span data-i18n="d9_header">Day 9 • Sunday, Dec 13, 2026</span></span>
-                        <span class="text-xs text-slate-300" data-i18n="d9_sub">Departure Day</span>
+                    <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center">
+                        <span class="text-sm sm:text-base font-extrabold uppercase tracking-wider"><i class="fa-regular fa-calendar mr-2 text-amber-400 text-lg"></i><span data-i18n="d9_header">Day 9 • Sunday, Dec 13, 2026</span></span>
+                        <span class="text-xs sm:text-sm text-slate-300 font-semibold" data-i18n="d9_sub">Departure Day</span>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
-                        <div class="p-5 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d9_tx_title">El Paso Airport (ELP) Flight Home</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-amber-50/20 transition day-texas">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-amber-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d9_tx_title">El Paso Airport (ELP) Flight Home</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d9_tx_desc">Drop off rental car at El Paso International Airport (ELP) and board your return flight home. No backtrack driving needed!</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d9_tx_desc">Drop off rental car at El Paso International Airport (ELP) and board your return flight home. No backtrack driving needed!</p>
                             </div>
-                            <div class="relative h-32 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-40 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="Plane Takeoff" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/92400e/ffffff?text=ELP+Airport'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_fly_elp">Fly Out of El Paso Airport (ELP)</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_fly_elp">Fly Out of El Paso Airport (ELP)</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="p-5 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
-                            <div class="mb-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
-                                    <h4 class="font-bold text-slate-800 text-base" data-i18n="d9_sic_title">Palermo Airport (PMO) Flight Home</h4>
+                        <div class="p-6 flex flex-col justify-between hover:bg-sky-50/20 transition day-sicily">
+                            <div class="mb-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-sky-600"></span>
+                                    <h4 class="font-bold text-slate-900 text-lg sm:text-xl" data-i18n="d9_sic_title">Palermo Airport (PMO) Flight Home</h4>
                                 </div>
-                                <p class="text-sm text-slate-600" data-i18n="d9_sic_desc">Enjoy final Italian espresso and fresh pistachio cannolo in Palermo before heading to Palermo Falcone-Borsellino Airport (PMO) for return flight.</p>
+                                <p class="text-base sm:text-lg text-slate-700 leading-relaxed" data-i18n="d9_sic_desc">Enjoy final Italian espresso and fresh pistachio cannolo in Palermo before heading to Palermo Falcone-Borsellino Airport (PMO) for return flight.</p>
                             </div>
-                            <div class="relative h-32 rounded-xl overflow-hidden shadow-sm">
+                            <div class="relative h-40 rounded-xl overflow-hidden shadow-sm">
                                 <img src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?auto=format&fit=crop&w=600&q=80" alt="Italian Cannoli & Coffee" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/075985/ffffff?text=Palermo+Cannolo'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent p-2 flex items-end">
-                                    <span class="text-xs text-white font-medium" data-i18n="img_caption_fly_pmo">Fly Out of Palermo Airport (PMO)</span>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-3 flex items-end">
+                                    <span class="text-sm text-white font-semibold" data-i18n="img_caption_fly_pmo">Fly Out of Palermo Airport (PMO)</span>
                                 </div>
                             </div>
                         </div>
@@ -780,47 +798,47 @@
         <!-- Quiz Decision Helper -->
         <section class="bg-slate-900 rounded-2xl p-6 sm:p-10 text-white shadow-xl mb-12">
             <div class="max-w-3xl mx-auto text-center">
-                <span class="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-2" data-i18n="quiz_tag">Interactive Decision Tool</span>
-                <h2 class="text-2xl sm:text-3xl font-bold font-serif mb-4" data-i18n="quiz_title">Which December Trip Fits You Best?</h2>
-                <p class="text-slate-300 text-sm sm:text-base mb-8" data-i18n="quiz_sub">Select your top travel preferences to get a personalized recommendation for Dec 5–13, 2026.</p>
+                <span class="text-sm font-bold text-amber-400 uppercase tracking-widest block mb-2" data-i18n="quiz_tag">Interactive Decision Tool</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-serif mb-4" data-i18n="quiz_title">Which December Trip Fits You Best?</h2>
+                <p class="text-slate-300 text-base sm:text-lg mb-8" data-i18n="quiz_sub">Select your top travel preferences to get a personalized recommendation for Dec 5–13, 2026.</p>
 
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left mb-8">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 text-left mb-8">
                     <!-- Q1 -->
-                    <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
-                        <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="q1_label">1. Transit Preference:</label>
-                        <select id="quiz-q1" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    <div class="bg-slate-800/80 p-5 rounded-xl border border-slate-700">
+                        <label class="block text-sm font-bold text-slate-200 mb-2" data-i18n="q1_label">1. Transit Preference:</label>
+                        <select id="quiz-q1" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
                             <option value="texas" data-i18n="q1_opt_a">One-way road trip & rental car</option>
                             <option value="sicily" data-i18n="q1_opt_b">Relaxing intercity buses & walking</option>
                         </select>
                     </div>
                     <!-- Q2 -->
-                    <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
-                        <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="q2_label">2. Primary Landscape:</label>
-                        <select id="quiz-q2" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    <div class="bg-slate-800/80 p-5 rounded-xl border border-slate-700">
+                        <label class="block text-sm font-bold text-slate-200 mb-2" data-i18n="q2_label">2. Primary Landscape:</label>
+                        <select id="quiz-q2" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
                             <option value="texas" data-i18n="q2_opt_a">Desert canyons & white sand dunes</option>
                             <option value="sicily" data-i18n="q2_opt_b">Volcanic slopes, coast & ancient ruins</option>
                         </select>
                     </div>
                     <!-- Q3 -->
-                    <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
-                        <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="q3_label">3. Food & Ambiance:</label>
-                        <select id="quiz-q3" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    <div class="bg-slate-800/80 p-5 rounded-xl border border-slate-700">
+                        <label class="block text-sm font-bold text-slate-200 mb-2" data-i18n="q3_label">3. Food & Ambiance:</label>
+                        <select id="quiz-q3" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
                             <option value="texas" data-i18n="q3_opt_a">Texas BBQ brisket, tacos & craft beer</option>
                             <option value="sicily" data-i18n="q3_opt_b">Seafood pasta, cannoli & Etna wine</option>
                         </select>
                     </div>
                 </div>
 
-                <button onclick="calculateQuiz()" class="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 font-bold text-slate-900 text-sm shadow-lg transition transform active:scale-95" data-i18n="btn_calculate_quiz">
+                <button onclick="calculateQuiz()" class="px-8 py-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 font-extrabold text-slate-900 text-base shadow-lg transition transform active:scale-95" data-i18n="btn_calculate_quiz">
                     Find My Best Match <i class="fa-solid fa-wand-magic-sparkles ml-1"></i>
                 </button>
 
                 <!-- Result Box -->
-                <div id="quiz-result" class="hidden mt-6 p-6 rounded-xl bg-slate-800 border border-amber-500/50 text-left">
-                    <h3 id="result-title" class="text-xl font-bold font-serif mb-2 text-amber-400"></h3>
-                    <p id="result-text" class="text-sm text-slate-300 mb-4"></p>
+                <div id="quiz-result" class="hidden mt-6 p-6 sm:p-8 rounded-xl bg-slate-800 border border-amber-500/50 text-left">
+                    <h3 id="result-title" class="text-2xl font-bold font-serif mb-3 text-amber-400"></h3>
+                    <p id="result-text" class="text-base sm:text-lg text-slate-200 mb-4 leading-relaxed"></p>
                     <div class="flex gap-2">
-                        <span id="result-badge" class="px-3 py-1 rounded-full text-xs font-bold uppercase"></span>
+                        <span id="result-badge" class="px-4 py-1.5 rounded-full text-sm font-bold uppercase"></span>
                     </div>
                 </div>
 
@@ -830,10 +848,10 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-xs py-8 text-center">
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-sm py-8 text-center">
         <div class="max-w-7xl mx-auto px-4">
-            <p class="mb-2" data-i18n="footer_text_1">Itinerary Comparison Tool • Prepared for December 5–13, 2026 Travel Planning</p>
-            <p class="text-slate-500" data-i18n="footer_text_2">Trip A route: AUS in → Big Bend → White Sands → ELP out. Trip B route: PMO round-trip + bus to Catania.</p>
+            <p class="mb-2 font-medium" data-i18n="footer_text_1">Itinerary Comparison Tool • Prepared for December 5–13, 2026 Travel Planning</p>
+            <p class="text-slate-500 text-xs sm:text-sm" data-i18n="footer_text_2">Trip A route: AUS in → Big Bend → White Sands → ELP out. Trip B route: PMO round-trip + bus to Catania.</p>
         </div>
     </footer>
 
@@ -1152,15 +1170,17 @@
         // Set Language Function
         function setLanguage(lang) {
             currentLang = lang;
+            document.documentElement.setAttribute('lang', lang);
+
             const langEnBtn = document.getElementById('lang-en-btn');
             const langZhBtn = document.getElementById('lang-zh-btn');
 
             if (lang === 'zh') {
-                langZhBtn.className = "px-5 py-2.5 rounded-xl text-sm font-black transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-sky-400 to-sky-500 text-slate-950 shadow-lg scale-105";
-                langEnBtn.className = "px-5 py-2.5 rounded-xl text-sm font-black transition-all duration-300 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800";
+                langZhBtn.className = "px-6 py-3 rounded-xl text-base font-black transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-sky-400 to-sky-500 text-slate-950 shadow-lg scale-105";
+                langEnBtn.className = "px-6 py-3 rounded-xl text-base font-black transition-all duration-300 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800";
             } else {
-                langEnBtn.className = "px-5 py-2.5 rounded-xl text-sm font-black transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow-lg scale-105";
-                langZhBtn.className = "px-5 py-2.5 rounded-xl text-sm font-black transition-all duration-300 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800";
+                langEnBtn.className = "px-6 py-3 rounded-xl text-base font-black transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow-lg scale-105";
+                langZhBtn.className = "px-6 py-3 rounded-xl text-base font-black transition-all duration-300 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800";
             }
 
             // Update all DOM elements with data-i18n attribute
